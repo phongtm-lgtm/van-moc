@@ -1,0 +1,229 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Montserrat", sans-serif;
+  --font-display: "Agbalumo", serif;
+  --color-cream: #fff8e7;
+  --color-ink: #ab2124;
+  --color-gold: #c9973a;
+  --color-burgundy: #7b1c2e;
+  --color-sand: #d4b896;
+  --color-muted: #c9b99a;
+}
+
+*,
+::before,
+::after {
+  font-family: var(--font-sans);
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+h1,
+h2,
+.font-display,
+h1 *,
+h2 *,
+.font-display * {
+  font-family: var(--font-display);
+  font-style: normal !important;
+  font-weight: 400 !important;
+}
+
+.text-title-gradient {
+  -webkit-text-fill-color: transparent;
+  background-image: linear-gradient(180deg, #4a160d 0%, #7a2c14 55%, #8b4518 100%);
+  background-clip: text;
+}
+
+/* Readable type on paper textures */
+.text-ink {
+  color: #3a140e;
+}
+.text-ink-body {
+  color: #3d281c;
+}
+.text-ink-muted {
+  color: #5c3d2e;
+}
+.text-ink-soft {
+  color: #6b4a36;
+}
+.text-accent-gold {
+  color: #9a6b1f;
+}
+
+/* Handmade paper — unique crop/flip per section to avoid repeating motifs */
+.bg-paper-cream,
+.bg-paper-warm,
+.bg-paper-sand,
+.bg-paper-mist,
+.bg-paper-grain,
+.bg-paper-soft,
+.bg-paper-wine {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.bg-paper-cream::before,
+.bg-paper-warm::before,
+.bg-paper-sand::before,
+.bg-paper-mist::before,
+.bg-paper-grain::before,
+.bg-paper-soft::before {
+  content: '';
+  position: absolute;
+  inset: -8%;
+  z-index: 0;
+  pointer-events: none;
+  background-repeat: no-repeat;
+}
+
+/* Products — craft motifs, natural crop */
+.bg-paper-cream {
+  background-color: #fff8e7;
+}
+.bg-paper-cream::before {
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(255, 248, 231, 0.45) 0%,
+      rgba(255, 248, 231, 0.28) 50%,
+      rgba(247, 237, 217, 0.4) 100%
+    ),
+    url('/image/textures/van-moc-paper-craft-bg.png');
+  background-size: cover;
+  background-position: 20% 35%;
+}
+
+/* Brand values / reviews — flipped + warmer */
+.bg-paper-warm {
+  background-color: #f7edd9;
+}
+.bg-paper-warm::before {
+  background-image:
+    linear-gradient(
+      165deg,
+      rgba(247, 237, 217, 0.55) 0%,
+      rgba(243, 230, 208, 0.35) 55%,
+      rgba(232, 213, 183, 0.42) 100%
+    ),
+    url('/image/textures/van-moc-paper-craft-bg.png');
+  background-size: 115% auto;
+  background-position: 85% 60%;
+  transform: scaleX(-1);
+}
+
+/* Product values — botanical paper (different image) */
+.bg-paper-sand {
+  background-color: #f3e6d0;
+}
+.bg-paper-sand::before {
+  background-image:
+    linear-gradient(
+      20deg,
+      rgba(243, 230, 208, 0.5) 0%,
+      rgba(255, 242, 220, 0.32) 50%,
+      rgba(212, 184, 150, 0.3) 100%
+    ),
+    url('/image/textures/van-moc-paper-bg.png');
+  background-size: cover;
+  background-position: 70% 20%;
+}
+
+/* Craft process — zoomed + shifted, botanical flipped */
+.bg-paper-mist {
+  background-color: #faf3e4;
+}
+.bg-paper-mist::before {
+  background-image:
+    linear-gradient(
+      195deg,
+      rgba(255, 248, 231, 0.5) 0%,
+      rgba(247, 237, 217, 0.3) 100%
+    ),
+    url('/image/textures/van-moc-paper-bg.png');
+  background-size: 130% auto;
+  background-position: 10% 80%;
+  transform: scaleY(-1);
+}
+
+/* Reviews — craft zoom top-left */
+.bg-paper-grain {
+  background-color: #f6ebda;
+}
+.bg-paper-grain::before {
+  background-image:
+    linear-gradient(
+      140deg,
+      rgba(247, 237, 217, 0.52) 0%,
+      rgba(255, 242, 220, 0.34) 100%
+    ),
+    url('/image/textures/van-moc-paper-craft-bg.png');
+  background-size: 125% auto;
+  background-position: 5% 15%;
+  transform: scaleX(-1) scaleY(-1);
+}
+
+/* Partners — soft botanical, lower contrast */
+.bg-paper-soft {
+  background-color: #fff8e7;
+}
+.bg-paper-soft::before {
+  background-image:
+    linear-gradient(
+      180deg,
+      rgba(255, 248, 231, 0.62) 0%,
+      rgba(255, 248, 231, 0.48) 100%
+    ),
+    url('/image/textures/van-moc-paper-bg.png');
+  background-size: cover;
+  background-position: 50% 90%;
+  opacity: 0.85;
+}
+
+.bg-paper-wine {
+  background-color: #591d10;
+  background-image:
+    radial-gradient(ellipse 70% 55% at 15% 20%, rgba(201, 151, 58, 0.14), transparent 55%),
+    radial-gradient(ellipse 60% 50% at 90% 85%, rgba(255, 242, 220, 0.06), transparent 50%),
+    linear-gradient(145deg, rgba(74, 22, 13, 0.5) 0%, transparent 40%, rgba(42, 12, 8, 0.35) 100%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.85 0 0 0 0 0.7 0 0 0 0 0.4 0 0 0 0.22 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-blend-mode: soft-light, soft-light, multiply, overlay;
+}
+
+.reveal {
+  opacity: 0;
+  transition:
+    opacity 0.6s ease-out,
+    transform 0.6s ease-out;
+  transform: translateY(28px);
+}
+
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal.delay-75 {
+  transition-delay: 75ms;
+}
+.reveal.delay-150 {
+  transition-delay: 150ms;
+}
+.reveal.delay-225 {
+  transition-delay: 225ms;
+}
+.reveal.delay-300 {
+  transition-delay: 300ms;
+}
+.reveal.delay-400 {
+  transition-delay: 400ms;
+}
