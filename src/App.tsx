@@ -7,7 +7,6 @@ function Placeholder({ title }: { title: string }) {
   return (
     <div className="container mx-auto px-6 py-24 text-center">
       <h1 className="text-3xl text-[#ab2124] text-title-gradient">{title}</h1>
-      <p className="mt-3 text-sm text-[#ab2124]/70">Trang này sẽ được clone ở bước tiếp theo.</p>
     </div>
   )
 }
