@@ -199,6 +199,167 @@ h2 *,
   background-blend-mode: soft-light, soft-light, multiply, overlay;
 }
 
+/* A lightly layered craft frame for the village-story image. */
+.heritage-frame {
+  position: relative;
+  margin: 0 0.75rem 1.5rem 0;
+  isolation: isolate;
+}
+
+.heritage-frame__backdrop {
+  position: absolute;
+  inset: 0.65rem -0.75rem -0.75rem 0.65rem;
+  z-index: -1;
+  border: 1px solid rgba(122, 74, 31, 0.2);
+  border-radius: 1.25rem 0.75rem 1.4rem 0.85rem;
+  background:
+    linear-gradient(135deg, rgba(255, 248, 231, 0.82), rgba(209, 174, 111, 0.3)),
+    url('/image/textures/van-moc-paper-bg.png') 48% 52% / 135% auto;
+  box-shadow: 0 18px 35px rgba(67, 35, 18, 0.13);
+  transform: rotate(1.15deg);
+}
+
+.heritage-frame__body {
+  position: relative;
+  padding: 0.5rem;
+  border: 1px solid rgba(92, 47, 23, 0.55);
+  border-radius: 1.05rem 0.65rem 1.15rem 0.72rem;
+  background: linear-gradient(145deg, #f9ecd3, #ead2a9 52%, #f7e7c8);
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 248, 231, 0.64),
+    inset 0 0 0 4px rgba(154, 107, 31, 0.22),
+    0 8px 20px rgba(71, 34, 16, 0.08);
+}
+
+.heritage-frame__image-wrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid rgba(89, 29, 16, 0.42);
+  border-radius: 0.65rem 0.35rem 0.75rem 0.4rem;
+  background: #d4b896;
+}
+
+.heritage-frame__image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border: 1px solid rgba(255, 235, 190, 0.38);
+  border-radius: inherit;
+  box-shadow: inset 0 0 22px rgba(61, 29, 14, 0.13);
+}
+
+.heritage-frame__grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  stroke: rgba(255, 224, 161, 0.22);
+  stroke-width: 1.1;
+  mix-blend-mode: screen;
+}
+
+.heritage-frame__corner {
+  position: absolute;
+  z-index: 2;
+  width: 3.75rem;
+  color: #8a5926;
+  stroke: currentColor;
+  stroke-width: 1.15;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 0 rgba(255, 246, 222, 0.7));
+}
+
+.heritage-frame__corner--top {
+  top: -0.18rem;
+  left: -0.18rem;
+}
+
+.heritage-frame__corner--bottom {
+  right: -0.18rem;
+  bottom: -0.18rem;
+  transform: rotate(180deg);
+}
+
+.heritage-frame__caption {
+  position: absolute;
+  bottom: -1.25rem;
+  left: 1.35rem;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid rgba(114, 67, 27, 0.38);
+  border-radius: 0.25rem 0.75rem 0.25rem 0.65rem;
+  background: rgba(249, 236, 211, 0.96);
+  box-shadow: 0 5px 12px rgba(64, 31, 14, 0.1);
+  color: #5c311b;
+  font-size: 0.63rem;
+  font-weight: 600;
+  letter-spacing: 0.17em;
+  text-transform: uppercase;
+}
+
+.heritage-frame__caption-mark {
+  width: 1.25rem;
+  height: 1px;
+  background: #ad792c;
+}
+
+.heritage-frame__seal {
+  position: absolute;
+  right: -1rem;
+  bottom: -1.6rem;
+  z-index: 4;
+  display: grid;
+  width: 3.9rem;
+  height: 3.9rem;
+  place-items: center;
+  border: 1px solid rgba(104, 51, 24, 0.5);
+  border-radius: 48% 52% 45% 55%;
+  background: linear-gradient(145deg, #f8e7c4, #dfbd80);
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 244, 216, 0.65),
+    0 7px 14px rgba(74, 34, 15, 0.16);
+  color: #71351f;
+  transform: rotate(-7deg);
+}
+
+.heritage-frame__seal svg {
+  width: 2.7rem;
+  stroke: currentColor;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 480px) {
+  .heritage-frame {
+    margin-right: 0.4rem;
+  }
+
+  .heritage-frame__caption {
+    left: 0.8rem;
+    padding-inline: 0.75rem;
+    letter-spacing: 0.11em;
+  }
+
+  .heritage-frame__seal {
+    right: -0.6rem;
+    width: 3.4rem;
+    height: 3.4rem;
+  }
+
+  .heritage-frame__seal svg {
+    width: 2.35rem;
+  }
+}
+
 .reveal {
   opacity: 0;
   transition:

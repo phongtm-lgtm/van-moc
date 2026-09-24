@@ -322,12 +322,70 @@ export function HomePage() {
           </Reveal>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            <Reveal className="overflow-hidden max-w-xl mx-auto lg:mx-0 lg:max-w-none w-full">
-              <img
-                src="/image/nghe-nhan-che-tac.jpg"
-                alt="Nghệ nhân đang chế tác sừng thủ công"
-                className="w-full aspect-[16/10] object-cover"
-              />
+            <Reveal className="mx-auto w-full max-w-xl px-3 py-4 lg:mx-0 lg:max-w-none">
+              <figure className="heritage-frame">
+                <div className="heritage-frame__backdrop" aria-hidden />
+                <div className="heritage-frame__body">
+                  <svg
+                    className="heritage-frame__corner heritage-frame__corner--top"
+                    viewBox="0 0 72 72"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <path d="M4 52V15C4 9 9 4 15 4h37" />
+                    <path d="M11 42V20c0-5 4-9 9-9h22" />
+                    <path d="M4 30c13 0 24-11 24-24" />
+                    <path d="M17 17c8 2 13 7 15 15" />
+                    <path d="M11 11l6 6-6 6-6-6 6-6Z" />
+                  </svg>
+
+                  <div className="heritage-frame__image-wrap">
+                    <img
+                      src="/image/nghe-nhan-che-tac.jpg"
+                      alt="Gian hàng sản phẩm sừng thủ công của làng nghề Thụy Ứng"
+                      className="size-full object-cover"
+                    />
+                    <svg
+                      className="heritage-frame__grain"
+                      viewBox="0 0 800 500"
+                      preserveAspectRatio="none"
+                      fill="none"
+                      aria-hidden
+                    >
+                      <path d="M-30 84C128 25 223 133 379 76s264 42 451-18" />
+                      <path d="M-40 132c142-54 267 50 408-8s279 29 472-31" />
+                      <path d="M-25 405c169-72 261 47 422-18s261 32 441-27" />
+                    </svg>
+                  </div>
+
+                  <svg
+                    className="heritage-frame__corner heritage-frame__corner--bottom"
+                    viewBox="0 0 72 72"
+                    fill="none"
+                    aria-hidden
+                  >
+                    <path d="M4 52V15C4 9 9 4 15 4h37" />
+                    <path d="M11 42V20c0-5 4-9 9-9h22" />
+                    <path d="M4 30c13 0 24-11 24-24" />
+                    <path d="M17 17c8 2 13 7 15 15" />
+                    <path d="M11 11l6 6-6 6-6-6 6-6Z" />
+                  </svg>
+                </div>
+
+                <figcaption className="heritage-frame__caption">
+                  <span>Làng nghề Thụy Ứng</span>
+                  <span className="heritage-frame__caption-mark" aria-hidden />
+                </figcaption>
+
+                <div className="heritage-frame__seal" aria-hidden>
+                  <svg viewBox="0 0 64 64" fill="none">
+                    <path d="M13 37c3-14 12-23 28-25 6-1 10 2 11 7l1 7c1 4-2 7-6 7H24" />
+                    <path d="M17 36 12 52M23 35l-3 18M29 34l-1 19M35 34l1 18M41 33l3 17" />
+                    <path d="M19 31c7-10 16-14 29-14" />
+                    <path d="M24 27c5-5 12-8 21-8" />
+                  </svg>
+                </div>
+              </figure>
             </Reveal>
 
             <Reveal className="space-y-0 delay-150">
