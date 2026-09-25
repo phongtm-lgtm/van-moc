@@ -1,12 +1,17 @@
 import { Route, Routes } from 'react-router-dom'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
+import { CartPage } from './pages/CartPage'
+import { CheckoutPage } from './pages/CheckoutPage'
 import { HomePage } from './pages/HomePage'
+import { OrderHistoryPage } from './pages/OrderHistoryPage'
+import { ProductDetailPage } from './pages/ProductDetailPage'
+import { ProductPage } from './pages/ProductPage'
 
 function Placeholder({ title }: { title: string }) {
   return (
     <div className="container mx-auto px-6 py-24 text-center">
-      <h1 className="text-3xl text-[#ab2124] text-title-gradient">{title}</h1>
+      <h1 className="text-3xl text-[#3f2a1a] text-title-gradient">{title}</h1>
     </div>
   )
 }
@@ -18,7 +23,11 @@ export default function App() {
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="/shop" element={<Placeholder title="Sản phẩm" />} />
+          <Route path="/shop" element={<ProductPage />} />
+          <Route path="/shop/:id" element={<ProductDetailPage />} />
+          <Route path="/cart" element={<CartPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
+          <Route path="/account/orders" element={<OrderHistoryPage />} />
           <Route path="/villages" element={<Placeholder title="Câu Chuyện" />} />
           <Route path="/gioi-thieu" element={<Placeholder title="Về chúng tôi" />} />
           <Route path="/quy-dinh" element={<Placeholder title="Chính sách" />} />

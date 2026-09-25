@@ -1,41 +1,44 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, Search, ShoppingBag, X } from 'lucide-react'
+import { Menu, Search, ShoppingCart, UserRound, X } from 'lucide-react'
+import { useCart } from '../hooks/useCart'
 
 const NAV = [
   { label: 'Trang chủ', href: '/' },
-  { label: 'Sản phẩm', href: '/shop' },
   { label: 'Câu Chuyện', href: '/villages' },
+  { label: 'Sản phẩm', href: '/shop' },
+  { label: 'Chế tác riêng', href: '/custom-order' },
   { label: 'Về chúng tôi', href: '/gioi-thieu' },
   { label: 'Chính sách', href: '/quy-dinh' },
 ]
 
 export function Header() {
   const { pathname } = useLocation()
+  const { itemCount } = useCart()
   const [open, setOpen] = useState(false)
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-[#591d10]/95 backdrop-blur-xl border-b border-[#f2ddbd]/20 shadow-[0_4px_20px_rgba(45,15,8,0.18)]">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-8 flex items-center h-16 md:h-20">
-        <Link to="/" className="flex items-center shrink-0" aria-label="Vân Mộc">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-[#7a5138]/15 bg-[#f7ebdd]/92 backdrop-blur-xl shadow-[0_2px_18px_rgba(58,33,22,0.055)]">
+      <div className="mx-auto flex h-16 max-w-[1400px] items-center px-4 md:h-20 md:px-8">
+        <Link to="/" className="flex shrink-0 items-center" aria-label="Vân Mộc">
           <img
             alt="Vân Mộc"
-            className="h-10 md:h-12 w-auto max-w-[180px] md:max-w-[220px] object-contain brightness-0 invert sepia-[.15]"
-            src="/assets/van-moc-logo-transparent.png"
+            className="h-9 w-auto max-w-[160px] object-contain md:h-12 md:max-w-[240px]"
+            src="/assets/van-moc-logo-dark.png"
           />
         </Link>
 
-        <nav className="hidden md:flex flex-1 items-center justify-center gap-1">
+        <nav className="hidden flex-1 items-center justify-center gap-1 md:flex">
           {NAV.map((item) => {
             const active = pathname === item.href
             return (
               <Link
                 key={item.href}
                 to={item.href}
-                className={`relative px-4 py-2 text-[15px] font-medium transition-colors after:absolute after:left-4 after:right-4 after:bottom-0 after:h-px after:origin-left after:bg-[#f3ddbd] after:transition-transform ${
+                className={`relative px-4 py-2 text-base font-medium transition-colors after:absolute after:left-4 after:right-4 after:bottom-0 after:h-px after:origin-left after:bg-[#a84a32] after:transition-transform ${
                   active
-                    ? 'text-[#fff2dc] after:scale-x-100'
-                    : 'text-[#f3ddbd]/80 hover:text-[#fff2dc] after:scale-x-0 hover:after:scale-x-100'
+                    ? 'text-[#4a2a1a] after:scale-x-100'
+                    : 'text-[#5a4033] after:scale-x-0 hover:text-[#3a2116] hover:after:scale-x-100'
                 }`}
               >
                 {item.label}
@@ -44,65 +47,83 @@ export function Header() {
           })}
         </nav>
 
-        <div className="hidden md:flex items-center gap-4 shrink-0 ml-auto pl-5 border-l border-[#f3ddbd]/20">
+        <div className="ml-auto hidden shrink-0 items-center gap-4 border-l border-[#7a5138]/15 pl-5 md:flex">
           <Link
             to="/login"
-            className="inline-flex items-center gap-2 rounded-full border border-[#f3ddbd]/45 px-4 py-2 text-sm font-medium text-[#fff2dc] transition-colors hover:border-[#fff2dc] hover:bg-white/10"
+            className="inline-flex items-center gap-2 text-sm font-medium text-[#5a4033] transition-colors hover:text-[#3a2116]"
           >
-            <span className="flex size-5 items-center justify-center rounded-full bg-white font-sans text-xs font-bold text-[#4285f4]">
-              G
-            </span>
+            <UserRound size={19} strokeWidth={1.5} />
             Đăng nhập
           </Link>
-          <button type="button" aria-label="Tìm kiếm" className="text-[#f3ddbd]/90 hover:text-white transition-colors cursor-pointer">
-            <Search size={22} strokeWidth={1.5} />
-          </button>
-          <button type="button" aria-label="Giỏ hàng" className="text-[#f3ddbd]/90 hover:text-white transition-colors cursor-pointer">
-            <ShoppingBag size={22} strokeWidth={1.5} />
-          </button>
-        </div>
-
-        <div className="md:hidden flex items-center gap-3 ml-auto">
-          <button type="button" aria-label="Tìm kiếm" className="text-[#f3ddbd]/90 hover:text-white transition-colors cursor-pointer">
-            <Search size={19} strokeWidth={1.5} />
-          </button>
-          <button type="button" aria-label="Giỏ hàng" className="relative text-[#f3ddbd]/90 hover:text-white transition-colors cursor-pointer">
-            <ShoppingBag size={18} strokeWidth={1.5} />
-          </button>
           <button
             type="button"
-            className="text-[#f3ddbd]/90 hover:text-white cursor-pointer"
+            aria-label="Tìm kiếm"
+            className="cursor-pointer text-[#5a4033] transition-colors hover:text-[#3a2116]"
+          >
+            <Search size={22} strokeWidth={1.5} />
+          </button>
+          <Link
+            to="/cart"
+            aria-label="Giỏ hàng"
+            className="header-cart"
+          >
+            <ShoppingCart size={20} strokeWidth={1.5} />
+            {itemCount > 0 && <span>{itemCount > 99 ? '99+' : itemCount}</span>}
+          </Link>
+        </div>
+
+        <div className="ml-auto flex items-center gap-3 md:hidden">
+          <button
+            type="button"
+            aria-label="Tìm kiếm"
+            className="cursor-pointer text-[#5a4033] transition-colors hover:text-[#3a2116]"
+          >
+            <Search size={20} strokeWidth={1.5} />
+          </button>
+          <Link
+            to="/cart"
+            aria-label="Giỏ hàng"
+            className="header-cart header-cart--mobile"
+          >
+            <ShoppingCart size={18} strokeWidth={1.5} />
+            {itemCount > 0 && <span>{itemCount > 99 ? '99+' : itemCount}</span>}
+          </Link>
+          <button
+            type="button"
+            className="cursor-pointer text-[#5a4033] hover:text-[#3a2116]"
             onClick={() => setOpen((v) => !v)}
             aria-label="Menu"
+            aria-expanded={open}
+            aria-controls="mobile-navigation"
           >
-            {open ? <X size={18} strokeWidth={2} /> : <Menu size={18} strokeWidth={2} />}
+            {open ? <X size={20} strokeWidth={2} /> : <Menu size={20} strokeWidth={2} />}
           </button>
         </div>
       </div>
 
       {open && (
-        <div className="md:hidden border-t border-[#f3ddbd]/15 bg-[#591d10] px-4 py-4 space-y-1 shadow-lg">
+        <div id="mobile-navigation" className="border-t border-[#7a5138]/12 bg-[#f7ebdd] px-4 pb-6 pt-3 shadow-[0_20px_40px_rgba(58,33,22,0.14)] md:hidden">
+          <p className="mb-3 px-3 pt-1 text-[9px] font-semibold uppercase tracking-[0.24em] text-[#9a6a32]">Khám phá Vân Mộc</p>
           {NAV.map((item) => (
             <Link
               key={item.href}
               to={item.href}
               onClick={() => setOpen(false)}
-              className={`block px-3 py-2.5 rounded-lg text-sm ${
-                pathname === item.href ? 'bg-white/10 text-[#fff2dc]' : 'text-[#f3ddbd]/75'
+              className={`flex items-center justify-between border-b border-[#7a5138]/10 px-3 py-3.5 text-base ${
+                pathname === item.href ? 'text-[#a84a32]' : 'text-[#5a4033]'
               }`}
             >
               {item.label}
+              <span aria-hidden className="text-[#9a6a32]">→</span>
             </Link>
           ))}
           <Link
             to="/login"
             onClick={() => setOpen(false)}
-            className="mt-3 flex items-center justify-center gap-2 rounded-full border border-[#f3ddbd]/40 px-4 py-2.5 text-sm font-medium text-[#fff2dc]"
+            className="mt-3 flex items-center justify-center gap-2 rounded-full border border-[#7a5138]/50 px-4 py-2.5 text-sm font-medium text-[#5b301b]"
           >
-            <span className="flex size-5 items-center justify-center rounded-full bg-white font-sans text-xs font-bold text-[#4285f4]">
-              G
-            </span>
-            Đăng nhập bằng Google
+            <UserRound size={18} strokeWidth={1.5} />
+            Đăng nhập
           </Link>
         </div>
       )}

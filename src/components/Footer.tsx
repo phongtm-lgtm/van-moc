@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import { Mail, MapPin, Phone } from 'lucide-react'
+import { Mail, MapPin, PackageCheck, Phone, RotateCcw, ShieldCheck } from 'lucide-react'
 
 /** Cập nhật URL thật khi có fanpage / kênh chính thức. */
-export const SOCIAL_LINKS = {
+const SOCIAL_LINKS = {
   facebook: '',
   messenger: '',
   tiktok: '',
@@ -17,11 +17,36 @@ const PRODUCT_LINKS = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#591d10] text-[#fff2dc] border-t border-[#c9973a]/20 pt-16 pb-8">
+    <footer className="relative overflow-hidden border-t border-[#9a6b1f]/25 bg-[#342217] text-[#fff2dc]">
+      <svg className="pointer-events-none absolute -right-16 top-28 h-80 w-80 text-[#c9973a]/[0.055]" viewBox="0 0 240 240" fill="none" stroke="currentColor" aria-hidden>
+        <circle cx="120" cy="120" r="86" />
+        <path d="M120 199c-42-31-59-65-50-99 8-29 30-46 50-59 20 13 42 30 50 59 9 34-8 68-50 99Z" />
+        <path d="M120 53v132M120 91c-20-16-34-18-47-15M120 118c23-17 39-20 51-16M120 147c-20-14-34-16-47-12" />
+      </svg>
+
+      <div className="border-b border-[#fff2dc]/10 bg-[#2d1e14]/55">
+        <div className="mx-auto grid max-w-[1400px] divide-y divide-[#fff2dc]/10 px-5 sm:grid-cols-3 sm:divide-x sm:divide-y-0 md:px-8">
+          {[
+            { icon: ShieldCheck, title: 'Chất liệu tuyển chọn', text: 'Sừng tự nhiên, vân độc bản' },
+            { icon: PackageCheck, title: 'Gói quà chỉn chu', text: 'Trao gửi trọn vẹn ý nghĩa' },
+            { icon: RotateCcw, title: 'Hỗ trợ tận tâm', text: 'Đồng hành trong suốt trải nghiệm' },
+          ].map((item) => (
+            <div key={item.title} className="flex items-center gap-3.5 py-5 sm:justify-center sm:px-4 md:py-6">
+              <item.icon size={22} strokeWidth={1.25} className="shrink-0 text-[#c9973a]" />
+              <div>
+                <p className="text-[12px] font-semibold text-[#fff2dc]">{item.title}</p>
+                <p className="mt-0.5 text-[10px] text-[#fff2dc]/50">{item.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative z-10 pt-14 md:pt-16">
       <div className="container mx-auto px-5 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-8 pb-12">
         {/* Thương hiệu */}
         <div className="space-y-4 sm:col-span-2 lg:col-span-1">
-          <h4 className="font-display text-2xl tracking-wide text-[#fff2dc]">Vân Mộc</h4>
+          <img src="/assets/van-moc-logo-light.png" alt="Vân Mộc" className="h-14 w-auto max-w-[220px] object-contain object-left" />
           <p className="text-sm text-[#fff2dc]/70 leading-relaxed">
             Vân nguyên bản - Nét riêng bạn.
           </p>
@@ -132,6 +157,7 @@ export function Footer() {
             </a>
           ) : null}
         </div>
+      </div>
       </div>
     </footer>
   )
