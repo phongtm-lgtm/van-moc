@@ -7,6 +7,7 @@ import { HomePage } from './pages/HomePage'
 import { OrderHistoryPage } from './pages/OrderHistoryPage'
 import { ProductDetailPage } from './pages/ProductDetailPage'
 import { ProductPage } from './pages/ProductPage'
+import { TraceabilityPage } from './pages/TraceabilityPage'
 
 function Placeholder({ title }: { title: string }) {
   return (
@@ -30,7 +31,8 @@ export default function App() {
           <Route path="/account/orders" element={<OrderHistoryPage />} />
           <Route path="/villages" element={<Placeholder title="Câu Chuyện" />} />
           <Route path="/gioi-thieu" element={<Placeholder title="Về chúng tôi" />} />
-          <Route path="/quy-dinh" element={<Placeholder title="Chính sách" />} />
+          <Route path="/truy-xuat" element={<TraceabilityPage />} />
+          <Route path="/quy-dinh" element={<Placeholder title="Chính sách mua hàng" />} />
           <Route path="/custom-order" element={<Placeholder title="Chế tác theo yêu cầu" />} />
           <Route path="/lien-he" element={<Placeholder title="Liên hệ" />} />
           <Route path="/login" element={<Placeholder title="Đăng nhập" />} />

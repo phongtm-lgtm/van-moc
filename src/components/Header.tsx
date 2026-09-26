@@ -9,7 +9,7 @@ const NAV = [
   { label: 'Sản phẩm', href: '/shop' },
   { label: 'Chế tác riêng', href: '/custom-order' },
   { label: 'Về chúng tôi', href: '/gioi-thieu' },
-  { label: 'Chính sách', href: '/quy-dinh' },
+  { label: 'Truy xuất', href: '/truy-xuat' },
 ]
 
 export function Header() {
