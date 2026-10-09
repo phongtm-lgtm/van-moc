@@ -1,9 +1,15 @@
+.craft-page {
+  --craft-header-height: 5rem;
+  padding-top: var(--craft-header-height);
+}
+
 .craft-hero {
   display: grid;
   grid-template-columns: minmax(0, 48fr) minmax(0, 52fr);
   align-items: center;
   gap: clamp(1.5rem, 3vw, 3rem);
-  padding: 7rem max(1.5rem, calc((100% - 1440px) / 2)) 2rem;
+  min-height: min(42rem, calc(100svh - var(--craft-header-height)));
+  padding: 2rem max(1.5rem, calc((100% - 1440px) / 2));
   background: #f6eedf;
   color: #382519;
 }
@@ -12,6 +18,7 @@
   min-width: 0;
   width: 100%;
   padding: 1.5rem 0;
+  max-width: none;
 }
 
 .craft-hero .craft-eyebrow {
@@ -75,14 +82,13 @@
 .craft-hero :is(.craft-button, .craft-text-link):focus-visible { outline: 2px solid #956b40; outline-offset: 4px; }
 
 .craft-hero__visual {
-  position: relative;
   justify-self: center;
   min-width: 0;
-  width: min(100%, clamp(20.8rem, 52svh, 30.4rem));
+  width: 100%;
+  height: clamp(22rem, calc(100svh - 10rem), 36rem);
   margin: 0;
 }
-.craft-hero__visual img { display: block; width: 100%; height: auto; object-fit: contain; }
-.craft-hero__visual figcaption { position: absolute; right: 50%; bottom: 1rem; width: max-content; max-width: calc(100% - 2rem); transform: translateX(50%); padding: 0.5rem 0.8rem; background: rgba(44, 27, 17, 0.76); color: #fff8ed; font-size: 0.72rem; letter-spacing: 0.03em; text-align: center; }
+.craft-hero__visual img { display: block; width: 100%; height: 100%; object-fit: contain; }
 
 @media (min-width: 681px) and (max-width: 1024px) {
   .craft-hero { grid-template-columns: minmax(0, 52fr) minmax(0, 48fr); }
@@ -90,14 +96,15 @@
 }
 
 @media (max-width: 767px) {
-  .craft-hero { padding-top: 5.5rem; }
+  .craft-page { --craft-header-height: 4rem; }
 }
 
 @media (max-width: 680px) {
-  .craft-hero { grid-template-columns: minmax(0, 1fr); gap: 1rem; }
+  .craft-hero { grid-template-columns: minmax(0, 1fr); min-height: 0; gap: 1rem; padding-top: 1.5rem; }
   .craft-hero__copy { padding: 1.5rem 0 0; }
   .craft-hero h1 { font-size: clamp(2.5rem, 8.5vw, 3.5rem); }
-  .craft-hero__visual { width: min(100%, 24rem); }
+  .craft-hero__visual { width: min(100%, 24rem); height: auto; }
+  .craft-hero__visual img { height: auto; }
 }
 
 @media (prefers-reduced-motion: reduce) {
