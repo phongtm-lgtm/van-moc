@@ -96,6 +96,46 @@ button, input, select, textarea { font-family: var(--font-sans); }
 
 footer p.text-\[10px\], footer p.text-\[11px\] { font-size: .75rem; line-height: 1.65; }
 
+/* Cart text must stay readable even in dense product rows. */
+.cart-page .cart-heading p,
+.cart-page .cart-item__info p,
+.cart-page .cart-item__info > span,
+.cart-page .cart-summary > p { font-size: var(--vm-type-small); line-height: 1.65; }
+.cart-page .cart-heading h1 span { font-size: var(--vm-type-label); }
+.cart-page .cart-list__header {
+  font-size: var(--vm-type-small);
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+.cart-page .cart-item__info > a {
+  font-size: var(--vm-type-body);
+  line-height: 1.5;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.cart-page .cart-item__info :is(p, span) { overflow-wrap: anywhere; }
+.cart-page .cart-item__price,
+.cart-page .cart-item__total,
+.cart-page .cart-item__quantity output,
+.cart-page .cart-list__actions,
+.cart-page .cart-summary > div { font-size: var(--vm-type-label); line-height: 1.6; }
+.cart-page .cart-summary__total { font-size: var(--vm-type-body) !important; }
+.cart-page .cart-summary__total strong { font-size: 1.25rem; }
+.cart-page .cart-summary > div strong { flex-shrink: 0; white-space: nowrap; }
+.cart-page .cart-summary > a { font-size: var(--vm-type-body); line-height: 1.5; min-height: 2.75rem; align-items: center; }
+.cart-page .cart-list__actions :is(button, label) { min-height: 2.75rem; }
+.cart-page .cart-item__quantity :is(button, output) { height: 2.75rem; }
+.cart-page .cart-item__quantity button { width: 2.25rem; }
+.cart-page .cart-item__quantity output { min-width: 2.25rem; }
+
+@media (min-width: 761px) {
+  .cart-page .cart-list__header,
+  .cart-page .cart-item { grid-template-columns: 1rem minmax(12rem, 1fr) 6.5rem 7.2rem 7.5rem 1.7rem; }
+}
+@media (min-width: 421px) and (max-width: 760px) {
+  .cart-page .cart-item__total { position: static; grid-column: 3; text-align: left; }
+}
+
 @media (max-width: 600px) {
   .checkout-page .checkout-field :is(input, select, textarea),
   .account-page .customer-account :is(input, select, textarea),
