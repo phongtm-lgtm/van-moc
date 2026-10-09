@@ -1988,11 +1988,16 @@ h2 *,
   transition: background 180ms, border-color 180ms, box-shadow 180ms, color 180ms, transform 150ms;
 }
 
-.shop-product-card__buy-now:hover {
+.shop-product-card__buy-now:hover:not(:disabled) {
   background: #3f2a14;
   box-shadow: none;
   color: #fff8e7;
   transform: translateY(-1px);
+}
+
+.shop-product-card__buy-now:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .shop-product-card__buy-now:focus-visible {
@@ -2400,8 +2405,8 @@ h2 *,
 .pdp-cta--cart { background: transparent; color: #6a351c; }
 .pdp-cta--cart:hover { background: rgba(106, 53, 28, 0.08); }
 .pdp-actions .shop-product-card__buy-now { border: 1.5px solid #6b3d1e; border-radius: 999px; background: #513723; color: #fff8e7; font-size: 1rem; }
-.pdp-actions .shop-product-card__buy-now:hover { background: #3f2a14; }
-.pdp-cta:active { transform: scale(0.99); }
+.pdp-actions .shop-product-card__buy-now:hover:not(:disabled) { background: #3f2a14; }
+.pdp-cta:active:not(:disabled) { transform: scale(0.99); }
 
 /* Assurances */
 .pdp-assurances { display: grid; grid-template-columns: repeat(3, 1fr); margin-top: 1.25rem; padding: 0.9rem 0.5rem; border-radius: 0.45rem; background: rgba(236, 220, 195, 0.4); }

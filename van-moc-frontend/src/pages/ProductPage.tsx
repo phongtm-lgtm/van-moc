@@ -53,7 +53,7 @@ function ProductCard({ product }: { product: Product }) {
       </div>
       <div className="shop-product-card__actions">
         <button type="button" className="shop-product-card__buy-now" disabled={loading || product.stock === 0}
-          aria-label={`Mua ngay ${product.name}`} onClick={() => void add(true)}>Mua ngay</button>
+          aria-label={`${product.stock === 0 ? 'Hết hàng' : 'Mua ngay'} ${product.name}`} onClick={() => void add(true)}>{product.stock === 0 ? 'Hết hàng' : 'Mua ngay'}</button>
         <button type="button" className="shop-product-card__cart" disabled={loading || product.stock === 0}
           aria-label={`Thêm ${product.name} vào giỏ hàng`} onClick={() => void add(false)}><ShoppingCart size={17} /></button>
       </div>

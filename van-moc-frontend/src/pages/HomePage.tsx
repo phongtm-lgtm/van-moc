@@ -23,9 +23,6 @@ import { api, money, type Product } from '../api/catalog'
 import { useCart } from '../hooks/useCart'
 import { useNavigate } from 'react-router-dom'
 
-/** Thay bằng URL Messenger fanpage thật khi có. */
-export const MESSENGER_URL = '' as const
-
 const BRAND_VALUES = [
   {
     step: '01',
@@ -338,11 +335,11 @@ function ProductCard({ product }: { product: Product }) {
           <button
             type="button"
             className="shop-product-card__buy-now"
-            aria-label={`Mua ngay ${product.name}`}
+            aria-label={`${product.stock === 0 ? 'Hết hàng' : 'Mua ngay'} ${product.name}`}
             disabled={loading || product.stock === 0}
             onClick={() => void add(true)}
           >
-            Mua ngay
+            {product.stock === 0 ? 'Hết hàng' : 'Mua ngay'}
           </button>
           <button
             type="button"
@@ -597,7 +594,6 @@ function PartnersRow() {
 }
 
 export function HomePage() {
-  const messengerHref = MESSENGER_URL || undefined
 
   return (
     <div className="relative overflow-x-hidden">
@@ -1054,25 +1050,6 @@ export function HomePage() {
                 Gửi yêu cầu chế tác
                 <ArrowRight size={15} />
               </Link>
-              {messengerHref ? (
-                <a
-                  href={messengerHref}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full border border-[#6e4932]/7 bg-[#fff9ec]/40 px-7 py-3 text-sm font-semibold text-[#4b3324] transition-colors hover:bg-[#fff8e7]/85"
-                >
-                  <MessageCircle size={16} strokeWidth={1.5} />
-                  Tư vấn qua Messenger
-                </a>
-              ) : (
-                <span
-                  title="Cập nhật MESSENGER_URL khi có fanpage"
-                  className="inline-flex min-h-12 cursor-not-allowed items-center justify-center gap-2.5 rounded-full border border-[#6e4932]/35 bg-[#fff9ec]/20 px-7 py-3 text-sm font-semibold text-[#6b5340]"
-                >
-                  <MessageCircle size={16} strokeWidth={1.5} />
-                  Tư vấn qua Messenger
-                </span>
-              )}
             </div>
           </Reveal>
         </div>

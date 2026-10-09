@@ -180,7 +180,7 @@ export function ProductDetailPage() {
             <output aria-live="polite">{quantity}</output><button type="button" disabled={quantity >= product.stock} onClick={() => setQuantity(q => q + 1)} aria-label="Tăng số lượng"><Plus size={15} /></button>
           </div></div>
           <div className="pdp-actions"><button type="button" className="pdp-cta pdp-cta--cart" disabled={Boolean(disabled)} onClick={() => void addProductToCart()}><ShoppingCart size={20} />Thêm vào giỏ hàng</button>
-            <button type="button" className="pdp-cta shop-product-card__buy-now" disabled={Boolean(disabled)} onClick={() => void addProductToCart(true)}>Mua ngay</button></div>
+             <button type="button" className="pdp-cta shop-product-card__buy-now" disabled={Boolean(disabled)} onClick={() => void addProductToCart(true)}>{product.stock === 0 ? 'Hết hàng' : 'Mua ngay'}</button></div>
           {notice && <p role="status">{notice}</p>}
           <div className="pdp-assurances"><div><Truck size={22} aria-hidden /><span><strong>Giao hàng toàn quốc</strong>3–5 ngày làm việc</span></div>
             <div><Gift size={22} aria-hidden /><span><strong>Sản phẩm thủ công</strong>Đóng gói trang nhã</span></div><div><ShieldCheck size={22} aria-hidden /><span><strong>Hỗ trợ đổi trả</strong>Trong 7 ngày</span></div></div>
