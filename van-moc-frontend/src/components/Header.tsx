@@ -36,7 +36,8 @@ export function Header() {
               <Link
                 key={item.href}
                 to={item.href}
-                className={`relative px-4 py-2 text-base font-medium transition-colors after:absolute after:left-4 after:right-4 after:bottom-0 after:h-px after:origin-left after:bg-[#a84a32] after:transition-transform ${
+                aria-current={active ? 'page' : undefined}
+                className={`relative border-0 outline-none focus-visible:after:scale-x-100 focus-visible:after:h-0.5 px-4 py-2 text-base font-medium transition-colors after:absolute after:left-4 after:right-4 after:bottom-0 after:h-px after:origin-left after:bg-[#a84a32] after:transition-transform ${
                   active
                     ? 'text-[#4a2a1a] after:scale-x-100'
                     : 'text-[#5a4033] after:scale-x-0 hover:text-[#3a2116] hover:after:scale-x-100'

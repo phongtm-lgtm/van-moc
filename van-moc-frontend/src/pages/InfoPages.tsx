@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight, Gift, Heart, MessageCircle, PencilLine, Sparkles } from 'lucide-react'
+import './CustomOrderHero.css'
 
 const MESSENGER_URL = 'https://m.me/vanmoc2026'
 
@@ -68,22 +69,17 @@ export function AboutPage() {
 
 export function CustomOrderPage() {
   return <main className="bg-paper-warm min-h-screen text-[#382419]">
-    <section className="relative overflow-hidden pt-24 md:pt-32">
-      <div className="container relative z-10 mx-auto grid items-center gap-10 px-5 pb-16 md:grid-cols-2 md:gap-12 md:px-8 md:pb-24">
-        <div className="max-w-xl">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#9a582f]">Chế tác riêng cùng Vân Mộc</p>
-          <h1 className="mt-5 font-serif text-4xl leading-tight italic text-[#452416] md:text-5xl lg:text-6xl">Dấu ấn riêng trên từng tác phẩm</h1>
-          <p className="mt-6 max-w-lg text-base leading-relaxed text-[#634c3b] md:text-lg">Từ chất liệu sừng tự nhiên và đôi tay nghệ nhân, Vân Mộc cùng bạn tạo nên những món đồ thủ công mang câu chuyện, ý nghĩa và phong cách riêng.</p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a href={MESSENGER_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#5a301a] px-6 py-3 font-semibold text-[#fff3dd] transition-colors hover:bg-[#3f2517]"><MessageCircle size={19} aria-hidden="true" /> Tư vấn qua Messenger <ArrowRight size={17} aria-hidden="true" /></a>
-            <Link to="/shop" className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#8e6d52] px-6 py-3 font-semibold text-[#5a301a] transition-colors hover:bg-[#e9d9bf]">Xem các sản phẩm</Link>
-          </div>
-          <p className="mt-5 text-sm text-[#806954]">Gửi ảnh mẫu, số lượng và thời gian mong muốn ngay trong cuộc trò chuyện.</p>
-        </div>
-        <div className="relative overflow-hidden rounded-[2rem] border border-[#aa825b]/30 shadow-[0_22px_60px_rgba(73,40,20,0.18)]">
-          <img src="/image/truy-xuat/che-tac-mai.jpg" alt="Nghệ nhân chế tác sản phẩm thủ công" className="aspect-[4/3] w-full object-cover md:aspect-[5/5]" />
+    <section className="craft-hero" aria-labelledby="craft-hero-title">
+      <div className="craft-hero__copy">
+        <p className="craft-eyebrow">Chế tác riêng cùng Vân Mộc</p>
+        <h1 id="craft-hero-title">Mỗi ý tưởng, một dấu ấn riêng</h1>
+        <p className="craft-lead">Từ một kỷ niệm, một lời nhắn hay một hình mẫu bạn yêu thích, Vân Mộc cùng bạn biến ý tưởng cá nhân thành món đồ sừng thủ công mang ý nghĩa riêng.</p>
+        <div className="craft-hero__actions">
+          <a className="craft-button craft-button--primary" href={MESSENGER_URL} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} aria-hidden="true" />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
+          <Link className="craft-text-link" to="/shop">Khám phá sản phẩm <ArrowRight size={17} aria-hidden="true" /></Link>
         </div>
       </div>
+      <figure className="craft-hero__visual"><img src="/image/products/luoc-rang-thua.jpg" alt="Lược sừng với sắc màu tự nhiên bên những món đồ thủ công" fetchPriority="high" /><figcaption>Sắc vân tự nhiên · Nét riêng không lặp lại</figcaption></figure>
     </section>
 
     <section className="relative bg-[#f5ebdb]/80 py-16 md:py-24">
