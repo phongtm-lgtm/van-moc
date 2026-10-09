@@ -97,6 +97,17 @@ button, input, select, textarea { font-family: var(--font-sans); }
 footer p.text-\[10px\], footer p.text-\[11px\] { font-size: .75rem; line-height: 1.65; }
 
 /* Cart text must stay readable even in dense product rows. */
+.cart-page { min-height: 0; padding-bottom: 3rem; }
+.cart-page .cart-heading h1 { font-weight: 400; }
+.cart-page .cart-item { min-height: 0; padding-block: 1rem; align-items: center; }
+.cart-page .cart-item__image { height: 5rem; background: #eee5d9; }
+.cart-page .cart-item__placeholder { display: grid; place-items: center; height: 100%; padding: .4rem; text-align: center; color: #66584b; font-size: .75rem; line-height: 1.5; }
+.cart-page .cart-item__info > a { color: #33251d; }
+.cart-page .cart-item__info :is(p, span),
+.cart-page .cart-summary > small { color: #66584b; }
+.cart-page .cart-item__price { color: #704326; }
+.cart-page .cart-list, .cart-page .cart-summary { background: #fffdf8; border-color: #e6d8c7; box-shadow: none; }
+.cart-page .cart-list__actions { gap: .75rem 1rem; padding-block: .35rem; }
 .cart-page .cart-heading p,
 .cart-page .cart-item__info p,
 .cart-page .cart-item__info > span,

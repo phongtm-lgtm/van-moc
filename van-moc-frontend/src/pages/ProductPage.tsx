@@ -3,6 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom'
 import { ChevronDown, ChevronLeft, ChevronRight, ShoppingCart, SlidersHorizontal, X } from 'lucide-react'
 import { useCart } from '../hooks/useCart'
 import { api, type Category, type Product, type ProductPageResponse } from '../api/catalog'
+import './ProductPage.css'
 
 function formatPrice(price: number) {
   return `${new Intl.NumberFormat('vi-VN').format(price)} đ`
@@ -16,7 +17,7 @@ function FilterContent({ categories, category, onCategoryChange }: {
       <h3>Danh mục</h3>
       <div className="shop-category-list">
         {[{ id: '', name: 'Tất cả sản phẩm' }, ...categories].map(item => <button type="button" key={item.id}
-          className={category === item.id ? 'is-active' : ''} onClick={() => onCategoryChange(item.id)}><span>{item.name}</span></button>)}
+          className={category === item.id ? 'is-active' : ''} aria-pressed={category === item.id} onClick={() => onCategoryChange(item.id)}><span>{item.name}</span></button>)}
       </div>
     </section>
   </div>
@@ -26,24 +27,25 @@ function ProductCard({ product }: { product: Product }) {
   const navigate = useNavigate()
   const { addItem, loading } = useCart()
   const [error, setError] = useState('')
+  const [failedImage, setFailedImage] = useState<string | null>(null)
   const add = async (buyNow: boolean) => {
     if (buyNow && product.engravingEnabled) { navigate(`/shop/${product.slug}`); return }
     try {
       await addItem({ id: product.id, name: product.name, price: product.price, stock: product.stock, image: product.imageUrl || '' })
       setError('')
        if (buyNow) navigate('/checkout', { state: { productId: product.id } })
-    } catch (cause) { setError((cause as Error).message) }
+    } catch { setError('Không thể thêm sản phẩm. Vui lòng kiểm tra giỏ hàng và thử lại.') }
   }
   return <article className="shop-product-card group">
     <Link to={`/shop/${product.slug}`} className="block" tabIndex={-1} aria-hidden>
       <div className="shop-product-card__media">
-        {product.imageUrl ? <img src={product.imageUrl} alt={product.name} /> : <span>Chưa có ảnh</span>}
+        {product.imageUrl && failedImage !== product.imageUrl ? <img src={product.imageUrl} alt={product.name} loading="lazy" decoding="async" onError={() => setFailedImage(product.imageUrl)} /> : <span className="shop-product-card__placeholder">{product.imageUrl ? 'Ảnh đang được cập nhật' : 'Chưa có ảnh'}</span>}
         <div className="shop-product-card__wash" aria-hidden />
       </div>
     </Link>
     <div className="shop-product-card__body">
       <div className="shop-product-card__engraving">{product.engravingEnabled ? <span>Có thể khắc tên</span> : null}</div>
-      <Link to={`/shop/${product.slug}`} className="shop-product-card__name-link"><h3>{product.name}</h3></Link>
+      <Link to={`/shop/${product.slug}`} className="shop-product-card__name-link" title={product.name}><h3>{product.name}</h3></Link>
       <p className="shop-product-card__description">{product.shortDescription}</p>
       <div className="shop-product-card__price-row">
         <p className="shop-product-card__price">{formatPrice(product.price)}</p>
@@ -75,13 +77,31 @@ export function ProductPage() {
   const [error, setError] = useState('')
   const [retry, setRetry] = useState(0)
   useEffect(() => {
+    if (!filterOpen) return
+    const previousFocus = document.activeElement as HTMLElement | null
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    const panel = document.querySelector<HTMLElement>('.shop-filter-drawer__panel')
+    const controls = () => [...(panel?.querySelectorAll<HTMLButtonElement>('button') ?? [])]
+    controls()[0]?.focus()
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setFilterOpen(false)
+      if (event.key !== 'Tab') return
+      const buttons = controls(), first = buttons[0], last = buttons.at(-1)
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last?.focus() }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first?.focus() }
+    }
+    document.addEventListener('keydown', onKeyDown)
+    return () => { document.body.style.overflow = previousOverflow; document.removeEventListener('keydown', onKeyDown); previousFocus?.focus() }
+  }, [filterOpen])
+  useEffect(() => {
     const controller = new AbortController()
     // oxlint-disable-next-line react/set-state-in-effect -- synchronize the existing catalog view with the API
     setLoading(true); setError(''); setResult(null)
     Promise.all([api<Category[]>('/api/categories', controller.signal),
       api<ProductPageResponse>(`/api/products?page=${page}&size=12${category ? `&categoryId=${category}` : ''}`, controller.signal)])
-      .then(([nextCategories, products]) => { setCategories(nextCategories); setResult(products) })
-      .catch((cause: Error) => { if (!controller.signal.aborted) setError(cause.message) })
+       .then(([nextCategories, products]) => { if (!controller.signal.aborted) { setCategories(nextCategories); setResult(products) } })
+       .catch(() => { if (!controller.signal.aborted) setError('Không tải được danh sách sản phẩm. Vui lòng thử lại.') })
       .finally(() => { if (!controller.signal.aborted) setLoading(false) })
     return () => controller.abort()
   }, [page, category, retry])
@@ -106,9 +126,9 @@ export function ProductPage() {
         </aside>
         <div className="shop-results">
           <div className="shop-toolbar">
-            <p>Hiển thị <strong>{products.length}</strong> sản phẩm</p>
+            <p aria-live="polite">{loading ? 'Đang tải sản phẩm…' : error ? 'Chưa tải được sản phẩm' : <>Hiển thị <strong>{products.length}</strong> / {result?.totalElements ?? 0} sản phẩm</>}</p>
             <div className="shop-toolbar__controls">
-              <button type="button" className="shop-mobile-filter" onClick={() => setFilterOpen(true)}><SlidersHorizontal size={15} /> Bộ lọc</button>
+              <button type="button" className="shop-mobile-filter" aria-haspopup="dialog" aria-expanded={filterOpen} onClick={() => setFilterOpen(true)}><SlidersHorizontal size={15} /> Bộ lọc</button>
               <label className="shop-sort">
                 <span className="sr-only">Sắp xếp sản phẩm</span>
                 <select value={sort} onChange={event => updateSearch({ sort: event.target.value === 'popular' ? null : event.target.value })}>
@@ -117,11 +137,11 @@ export function ProductPage() {
               </label>
             </div>
           </div>
-          {loading && <p role="status">Đang tải sản phẩm…</p>}
-          {error && <p role="alert">{error} <button type="button" onClick={() => setRetry(v => v + 1)}>Thử lại</button></p>}
+          {loading && <p className="shop-state" role="status">Đang tải sản phẩm…</p>}
+          {error && <p className="shop-state" role="alert">{error} <button type="button" onClick={() => setRetry(v => v + 1)}>Thử lại</button></p>}
           {products.length ? <div className="shop-grid">{products.map(product => <ProductCard key={product.id} product={product} />)}</div>
-            : !loading && !error && <div className="py-20 text-center text-sm text-[#74604d]">Không có sản phẩm phù hợp với bộ lọc đã chọn.</div>}
-          {result && result.totalPages > 0 && <nav className="shop-pagination" aria-label="Phân trang sản phẩm">
+            : !loading && !error && <div className="shop-state" role="status">{category ? 'Không có sản phẩm phù hợp với bộ lọc đã chọn.' : 'Chưa có sản phẩm. Vui lòng quay lại sau.'}</div>}
+          {result && result.totalPages > 1 && <nav className="shop-pagination" aria-label="Phân trang sản phẩm">
              <button type="button" disabled={loading || page === 0} onClick={() => changePage(page - 1)} aria-label="Trang trước"><ChevronLeft size={16} /></button>
             {Array.from({ length: Math.min(result.totalPages, 5) }, (_, index) => Math.max(0, Math.min(page - 2, result.totalPages - 5)) + index).map(value =>
                <button type="button" key={value} className={page === value ? 'is-active' : ''} aria-current={page === value ? 'page' : undefined} onClick={() => changePage(value)}>{value + 1}</button>)}

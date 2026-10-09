@@ -10,6 +10,7 @@ function formatPrice(price: number) {
 export function CartPage() {
   const { items, loading, error, refresh, updateQuantity, removeItem, clearCart } = useCart()
   const [selection, setSelectedKeys] = useState<string[] | null>(null)
+  const [failedImages, setFailedImages] = useState<Record<string, string>>({})
   const selectedKeys = selection ?? items.map(item => item.key)
   const selectedItems = items.filter((item) => selectedKeys.includes(item.key))
   const subtotal = selectedItems.reduce((total, item) => {
@@ -39,7 +40,7 @@ export function CartPage() {
         <header className="cart-heading">
           <div>
             <h1>Giỏ hàng <span>({items.length})</span></h1>
-            <p>Những sản phẩm thủ công tinh tuyển từ làng nghề Thụy Ứng</p>
+            <p>Kiểm tra sản phẩm trước khi thanh toán</p>
           </div>
         </header>
         {loading && <p role="status">Đang đồng bộ giỏ…</p>}
@@ -73,14 +74,16 @@ export function CartPage() {
                   />
                   <div className="cart-item__product">
                      <Link to={`/shop/${encodeURIComponent(item.product.slug || item.product.id)}`} className="cart-item__image">
-                      <img src={item.product.image} alt={item.product.name} />
+                      {item.product.image && failedImages[item.key] !== item.product.image
+                        ? <img src={item.product.image} alt={item.product.name} onError={() => setFailedImages(images => ({ ...images, [item.key]: item.product.image }))} />
+                        : <span className="cart-item__placeholder">Ảnh đang cập nhật</span>}
                     </Link>
                     <div className="cart-item__info">
                        <Link to={`/shop/${encodeURIComponent(item.product.slug || item.product.id)}`}>{item.product.name}</Link>
                       {(!item.available || item.stock === 0 || item.quantity > item.stock) && <p role="alert">Sản phẩm hoặc cấu hình không còn khả dụng / không đủ tồn.</p>}
                       {item.product.category && <p>{item.product.category}</p>}
                       {item.customization && (
-                        <span>Khắc: “{item.customization.text}” · {item.customization.position}</span>
+                        <span>Khắc: “{item.customization.text}” · {item.customization.position}<br />Phí khắc: {formatPrice(item.customization.fee)} / sản phẩm (đã gồm trong thành tiền)</span>
                       )}
                     </div>
                   </div>
@@ -108,16 +111,16 @@ export function CartPage() {
                   Chọn tất cả
                 </label>
                 <button type="button" onClick={removeSelected} disabled={selectedItems.length === 0}>
-                  <Trash2 size={14} /> Xóa sản phẩm đã chọn
+                  <Trash2 size={14} /> Xóa đã chọn ({selectedItems.length})
                 </button>
-                <button type="button" disabled={loading} onClick={() => void clearCart().catch(() => {})}>Xóa toàn bộ</button>
+                <button type="button" disabled={loading} onClick={() => void clearCart().catch(() => {})} aria-label={`Xóa toàn bộ giỏ hàng (${items.length} sản phẩm)`}>Xóa toàn bộ giỏ ({items.length})</button>
               </div>
             </section>
 
             <aside className="cart-summary">
-              <h2>Tổng cộng</h2>
+              <h2>Đơn hàng</h2>
               <div><span>Tạm tính ({selectedItems.length} sản phẩm)</span><strong>{formatPrice(subtotal)}</strong></div>
-               <div><span>Phí khắc (đã gồm trong tạm tính)</span><strong>{formatPrice(selectedItems.reduce((total, item) => total + (item.customization?.fee ?? 0) * item.quantity, 0))}</strong></div>
+                {selectedItems.some(item => item.customization) && <div><span>Phí khắc (đã gồm trong tạm tính)</span><strong>{formatPrice(selectedItems.reduce((total, item) => total + (item.customization?.fee ?? 0) * item.quantity, 0))}</strong></div>}
               <div className="cart-summary__total"><span>Tổng tiền</span><strong>{formatPrice(subtotal)}</strong></div>
                <Link to="/checkout" state={{ cartItemIds: selectedItems.map(item => item.key) }} className={loading || !selectedItems.length || selectedItems.some(item => !item.available) ? 'is-disabled' : ''}
                  aria-disabled={loading || !selectedItems.length || selectedItems.some(item => !item.available)}
@@ -125,7 +128,7 @@ export function CartPage() {
                  Tiến hành thanh toán
                </Link>
               <p><ShieldCheck size={15} /> Thanh toán an toàn và bảo mật</p>
-               <small>Phí giao hàng được backend tính khi checkout.</small>
+                <small>Phí giao hàng được tính ở bước thanh toán.</small>
             </aside>
           </div>
         )}
