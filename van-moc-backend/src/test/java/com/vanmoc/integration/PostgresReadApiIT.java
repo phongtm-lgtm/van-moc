@@ -1004,7 +1004,7 @@ class PostgresReadApiIT {
         var auth = org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oidcLogin()
                 .oidcUser(com.vanmoc.user.service.OidcTestIdentity.principal(user.id()));
         mvc.perform(get("/api/orders/" + order + "/payment").with(auth)).andExpect(status().isOk())
-                .andExpect(jsonPath("$.qrUrl").value("https://vietqr.app/img?acc=123456789&bank=Vietcombank&amount=100000&des=VMQR"));
+                 .andExpect(jsonPath("$.qrUrl").value("https://vietqr.app/img?acc=123456789&bank=Vietcombank&amount=100000&des=SEVQR%20VMQR"));
         mvc.perform(get("/api/orders/" + order + "/payment").with(org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.oidcLogin()
                 .oidcUser(com.vanmoc.user.service.OidcTestIdentity.principal(outsider.id())))).andExpect(status().isNotFound());
         String template = "{\"id\":%d,\"gateway\":\"Vietcombank\",\"accountNumber\":\"123456789\",\"code\":\"VMQR\",\"transferType\":\"in\",\"transferAmount\":100000}";

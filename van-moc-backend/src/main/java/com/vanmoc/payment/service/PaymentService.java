@@ -33,7 +33,7 @@ public class PaymentService {
             qr = UriComponentsBuilder.fromUriString("https://vietqr.app/img")
                     .queryParam("acc", config.accountNumber()).queryParam("bank", config.bank())
                     .queryParam("amount", payment.getExpectedAmount().toBigIntegerExact().toString())
-                    .queryParam("des", payment.getTransferCode()).build().encode().toUriString();
+                    .queryParam("des", "SEVQR " + payment.getTransferCode()).build().encode().toUriString();
         }
         return new PaymentResponse(payment.getStatus(), payment.getExpectedAmount(), payment.getTransferCode(),
                 payment.getExpiresAt(), payment.getMethod() == PaymentMethod.BANK_TRANSFER ? config.bank() : null,

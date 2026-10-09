@@ -142,7 +142,8 @@ export function CheckoutPage() {
     window.setTimeout(() => setCopied(''), 1600)
   }
 
-  const transferContent = bankPayment?.transferCode ?? created?.orderCode ?? ''
+  const transferCode = bankPayment?.transferCode ?? created?.orderCode
+  const transferContent = transferCode ? `SEVQR ${transferCode}` : ''
   const qrUrl = bankPayment?.qrUrl
 
   if (orderCode) {
