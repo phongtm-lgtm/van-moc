@@ -16,6 +16,19 @@ import java.time.Instant;
 
 @Service
 public class SePayWebhookService {
+    private static final java.util.regex.Pattern CONTENT_CODE = java.util.regex.Pattern.compile(
+            "(?<![A-Z0-9])SEVQR\\s+(VM[A-F0-9]{8})(?![A-Z0-9])");
+
+    static String transferCode(String code, String content) {
+        if (code != null && !code.isBlank()) return code;
+        var matcher = CONTENT_CODE.matcher(content == null ? "" : content);
+        String found = "";
+        while (matcher.find()) {
+            if (!found.isEmpty() && !found.equals(matcher.group(1))) return "";
+            found = matcher.group(1);
+        }
+        return found;
+    }
     private final SePaySignatureService signatures;
     private final SePayConfig config;
     private final SePayEventRepository events;
@@ -43,7 +56,8 @@ public class SePayWebhookService {
         // Dashboard's Send Test uses id=0: acknowledge without creating a real payment event.
         if (data.path("id").asLong() == 0) return;
         if (data.path("id").asLong() < 0) throw new RuleException("INVALID_WEBHOOK_PAYLOAD", HttpStatus.BAD_REQUEST);
-        String id = data.path("id").asText(), code = data.path("code").asText("");
+        String id = data.path("id").asText(), code = transferCode(
+                data.path("code").asText(""), data.path("content").asText(""));
         if (code.length() > 255) throw new RuleException("INVALID_WEBHOOK_PAYLOAD", HttpStatus.BAD_REQUEST);
         var amount = data.path("transferAmount").decimalValue();
         if (!events.insert(id, code, amount, new String(raw, StandardCharsets.UTF_8))) return;

@@ -6,6 +6,7 @@ import type { CartItem } from '../contexts/cart-context'
 import { accountApi, type Address } from '../api/account'
 import { getPayment, type Payment, type CheckoutResult, type CheckoutRequest } from '../api/orders'
 import { api, ApiError } from '../api/catalog'
+import './BankTransferModal.css'
 
 const SHIPPING_OPTIONS = [
   { value: 'standard', title: 'Giao hàng tiêu chuẩn', time: '3 – 5 ngày', fee: 30000 },
@@ -133,7 +134,7 @@ export function CheckoutPage() {
       const result = await getPayment(id)
       setBankPayment(result); setError('')
       setPaymentCheckNotice(result.status === 'PENDING'
-        ? 'Đã kiểm tra: backend chưa xác nhận thanh toán. Nếu đã chuyển tiền, không chuyển lại; giao dịch có thể cần đối soát.'
+        ? 'Chưa ghi nhận thanh toán. Nếu đã chuyển khoản, vui lòng chờ hệ thống xác nhận và không thanh toán lại.'
         : result.status === 'EXPIRED' ? 'Đơn đã hết hạn thanh toán. Nếu đã chuyển tiền, vui lòng liên hệ để đối soát.'
         : result.status === 'PAID' ? 'Đã xác nhận thanh toán.' : `Trạng thái thanh toán: ${result.status}. Vui lòng liên hệ để kiểm tra.`)
       if (result.status === 'PAID') { setShowBankTransfer(false); setOrderCode(created?.orderCode ?? '') }
@@ -419,7 +420,7 @@ export function CheckoutPage() {
             <button className="checkout-modal__close" type="button" onClick={closeBankTransfer} aria-label="Đóng"><X size={18} /></button>
             <h2 id="bank-modal-title">Thanh toán qua mã QR</h2>
             <div className="bank-modal__content">
-               <div className="bank-modal__qr">{qrUrl && waitSeconds > 0 ? <img src={qrUrl} alt="Mã QR chuyển khoản đơn hàng" /> : <p>{bankPayment ? 'QR không còn hiệu lực' : 'Đang tải thanh toán…'}</p>}</div>
+               <div className="bank-modal__qr">{qrUrl && waitSeconds > 0 ? <><img src={qrUrl} alt="Mã QR chuyển khoản đơn hàng" /><p className="bank-modal__qr-guide">Quét mã bằng ứng dụng ngân hàng để thanh toán</p></> : <p>{bankPayment ? 'QR không còn hiệu lực' : 'Đang tải thanh toán…'}</p>}</div>
               <div className="bank-modal__details">
                 <dl>
                    <div><dt>Ngân hàng</dt><dd><span>{bankPayment?.bank}</span><button type="button" disabled={!bankPayment?.bank} onClick={() => copyValue(bankPayment?.bank ?? '', 'bank')} aria-label="Sao chép ngân hàng">{copied === 'bank' ? <Check size={14} /> : <Copy size={14} />}</button></dd></div>
@@ -435,15 +436,15 @@ export function CheckoutPage() {
                     </dd>
                   </div>
                 </dl>
-                <p className="bank-modal__timer">Thời gian chờ thanh toán: <strong>{formatCountdown(waitSeconds)}</strong></p>
+                <p className="bank-modal__timer">{bankPayment && waitSeconds === 0 ? 'Mã QR đã hết hạn' : <>Mã QR còn hiệu lực: <strong>{formatCountdown(waitSeconds)}</strong></>}</p>
               </div>
             </div>
             <div className="bank-modal__notice">
               <Info size={18} strokeWidth={1.8} />
-               <span role="status" aria-live="polite">{error || paymentCheckNotice || (waitSeconds === 0 && bankPayment ? 'Đã hết thời gian thanh toán. Nếu đã chuyển tiền, vui lòng liên hệ để đối soát.' : 'Chuyển đúng số tiền và nội dung.')}</span>
+               <span role="status" aria-live="polite">{error || (waitSeconds === 0 && bankPayment?.status === 'PENDING' ? 'Mã QR đã hết hạn. Nếu đã chuyển khoản, không thanh toán lại; vui lòng liên hệ để đối soát.' : paymentCheckNotice || 'Hệ thống tự động xác nhận thanh toán. Chuyển đúng số tiền và nội dung.')}</span>
             </div>
              <button className="bank-modal__confirm" type="button" disabled={checking} onClick={() => void checkPayment()}>
-               {checking ? 'Đang kiểm tra…' : 'Kiểm tra thanh toán'} <ArrowRight size={15} />
+               {checking ? 'Đang kiểm tra…' : 'Kiểm tra lại trạng thái'} <ArrowRight size={15} />
             </button>
           </section>
         </div>

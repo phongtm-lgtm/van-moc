@@ -1,0 +1,10 @@
+.bank-modal .bank-modal__qr { aspect-ratio: auto; overflow: visible; border: 0; background: transparent; }
+.bank-modal .bank-modal__qr img { display: block; height: auto; border: 1px solid #e3d7c7; border-radius: 4px; }
+.bank-modal__qr-guide { margin: .55rem 0 0; color: #806b5a; font-size: .72rem; line-height: 1.5; text-align: center; }
+.bank-modal .bank-modal__timer { margin-top: 1rem; padding-top: .7rem; border-top: 1px solid #e3d7c7; color: #67503c; text-align: right; }
+.bank-modal .bank-modal__timer strong { font-size: 1rem; font-variant-numeric: tabular-nums; }
+.bank-modal .bank-modal__notice { padding: .6rem 0; border: 0; background: transparent; margin-top: .85rem; }
+.bank-modal .bank-modal__confirm { width: auto; min-height: 2.5rem; margin: .5rem 0 0 auto; padding: .55rem 1rem; border: 1px solid #cdb79e; background: transparent; color: #65432d; font-size: .82rem; font-weight: 600; }
+.bank-modal .bank-modal__confirm:hover:not(:disabled) { background: #f2e8da; }
+.bank-modal .bank-modal__confirm:disabled { opacity: .6; cursor: wait; }
+.bank-modal .bank-modal__confirm:focus-visible { outline: 2px solid #956b40; outline-offset: 3px; }
