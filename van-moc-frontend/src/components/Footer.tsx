@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { Mail, MapPin, PackageCheck, Phone, RotateCcw, ShieldCheck } from 'lucide-react'
+import { api, type Category } from '../api/catalog'
 
 /** Cập nhật URL thật khi có fanpage / kênh chính thức. */
 const SOCIAL_LINKS = {
@@ -8,14 +10,16 @@ const SOCIAL_LINKS = {
   tiktok: '',
 } as const
 
-const PRODUCT_LINKS = [
-  { label: 'Lược sừng', href: '/shop' },
-  { label: 'Trâm cài', href: '/shop' },
-  { label: 'Bộ quà tặng', href: '/shop' },
-  { label: 'Chế tác theo yêu cầu', href: '/custom-order' },
-]
-
 export function Footer() {
+  const [categories, setCategories] = useState<Category[]>([])
+  useEffect(() => {
+    const controller = new AbortController()
+    api<Category[]>('/api/categories', controller.signal)
+      .then(rows => { if (!controller.signal.aborted) setCategories(rows) })
+      .catch(() => { /* Keep the catalog link available if categories cannot be loaded. */ })
+    return () => controller.abort()
+  }, [])
+
   return (
     <footer className="relative overflow-hidden border-t border-[#9a6b1f]/25 bg-[#342217] text-[#fff2dc]">
       <svg className="pointer-events-none absolute -right-16 top-28 h-80 w-80 text-[#c9973a]/[0.055]" viewBox="0 0 240 240" fill="none" stroke="currentColor" aria-hidden>
@@ -81,13 +85,15 @@ export function Footer() {
             Sản phẩm
           </h4>
           <ul className="text-sm text-[#fff2dc]/65 space-y-3">
-            {PRODUCT_LINKS.map((item) => (
-              <li key={item.label}>
-                <Link to={item.href} className="hover:text-[#c9973a] transition-colors">
-                  {item.label}
+            <li><Link to="/shop" className="hover:text-[#c9973a] transition-colors">Tất cả sản phẩm</Link></li>
+            {categories.map((item) => (
+              <li key={item.id}>
+                <Link to={`/shop?category=${encodeURIComponent(item.id)}`} className="hover:text-[#c9973a] transition-colors">
+                  {item.name}
                 </Link>
               </li>
             ))}
+            <li><Link to="/custom-order" className="hover:text-[#c9973a] transition-colors">Chế tác theo yêu cầu</Link></li>
           </ul>
         </div>
 
