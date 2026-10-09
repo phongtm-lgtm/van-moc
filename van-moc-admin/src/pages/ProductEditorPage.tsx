@@ -4,6 +4,7 @@ import { accountApi } from '@/api/account'
 import { blankProduct, type ProductForm, type Product, type ProductImage, type Page, type Movement } from '@/api/products'
 import { productSlug } from '@/utils/bulkProducts'
 import FontSample from '@/components/products/FontSample'
+import { useToast } from '@/context/ToastContext'
 import { Package, ImagePlus, PencilLine, SlidersHorizontal, Plus, ArrowLeft, ChevronDown, Send } from 'lucide-react'
 import './ProductEditorPage.css'
 
@@ -41,6 +42,7 @@ export default function ProductEditorPage() {
   const [searchParams] = useSearchParams()
   const sourceId = searchParams.get('copy')
   const navigate = useNavigate()
+  const showToast = useToast()
   const [createdId, setCreatedId] = useState<string>()
   const id = routeId || createdId
   const [form, setForm] = useState<ProductForm>(initialForm)
@@ -145,10 +147,10 @@ export default function ProductEditorPage() {
           setForm({ ...initialForm(), categoryId: form.categoryId, material: form.material }); setPrice('')
           setProduct(null); setCreatedId(undefined); setAutoSlug(true); setPhotos([]); setAdvancedOpen(false); setEngravingOpen(false)
         }
-        setNotice('Đã lưu sản phẩm. Bạn có thể nhập sản phẩm tiếp theo.')
+        showToast('Đã lưu sản phẩm thành công. Bạn có thể nhập sản phẩm tiếp theo.')
         requestAnimationFrame(() => editor.current?.querySelector<HTMLInputElement>('[name="name"]')?.focus())
       } else {
-        setNotice(intent === 'draft' ? 'Đã lưu nháp. Sản phẩm chưa hiển thị để bán.' : 'Đã lưu sản phẩm.')
+        showToast(intent === 'draft' ? 'Đã lưu nháp thành công. Sản phẩm chưa hiển thị để bán.' : 'Đã lưu sản phẩm thành công.')
         if (!routeId) navigate(`/products/${saved.id}`, { replace: true })
       }
     } catch (cause) { setError((cause as Error).message) }

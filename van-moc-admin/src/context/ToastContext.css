@@ -1,0 +1,31 @@
+.admin-toast-region {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 10000;
+  width: min(420px, calc(100vw - 32px));
+  pointer-events: none;
+}
+
+.admin-toast {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid #abefc6;
+  border-radius: 12px;
+  background: #f6fef9;
+  color: #05603a;
+  box-shadow: 0 8px 28px rgb(16 24 40 / 15%);
+  pointer-events: auto;
+}
+
+.admin-toast > svg { flex-shrink: 0; }
+.admin-toast > span { flex: 1; font-size: 14px; overflow-wrap: anywhere; }
+.admin-toast button { display: flex; align-items: center; justify-content: center; padding: 6px; border: 0; border-radius: 6px; background: transparent; color: inherit; cursor: pointer; }
+.admin-toast button:hover { background: #dcfae6; }
+.admin-toast button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
+
+@media (max-width: 640px) {
+  .admin-toast-region { top: 16px; right: 16px; }
+}
