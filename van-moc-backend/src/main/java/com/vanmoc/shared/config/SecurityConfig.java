@@ -101,9 +101,12 @@ public class SecurityConfig {
     @Bean
     CorsConfigurationSource corsConfigurationSource(
             @Value("${app.cors.allowed-origin}") String origin,
-            @Value("${app.cors.admin-origin:http://localhost:5174}") String adminOrigin) {
+            @Value("${app.cors.admin-origin:http://localhost:5174}") String adminOrigin,
+            @Value("${app.cors.admin-vercel-origin:}") String adminVercelOrigin) {
         var config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of(origin, adminOrigin));
+        var allowedOrigins = new java.util.ArrayList<>(List.of(origin, adminOrigin));
+        if (!adminVercelOrigin.isBlank()) allowedOrigins.add(adminVercelOrigin);
+        config.setAllowedOrigins(allowedOrigins);
         config.setAllowedMethods(List.of("GET", "POST", "PATCH", "DELETE"));
         config.setAllowedHeaders(List.of("Accept", "Accept-Language", "Content-Type", "X-CSRF-TOKEN"));
         config.setAllowCredentials(true);
