@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, Search, ShoppingCart, X } from 'lucide-react'
+import { Menu, ShoppingCart, X } from 'lucide-react'
 import { useCart } from '../hooks/useCart'
 import { AccountDropdown } from './AccountDropdown'
 
@@ -53,13 +53,6 @@ export function Header() {
           <AccountDropdown onOpen={() => setOpen(false)} />
         </div>
         <div className="hidden shrink-0 items-center gap-4 md:flex">
-          <button
-            type="button"
-            aria-label="Tìm kiếm"
-            className="cursor-pointer text-[#5a4033] transition-colors hover:text-[#3a2116]"
-          >
-            <Search size={22} strokeWidth={1.5} />
-          </button>
           <Link
             to="/cart"
             aria-label="Giỏ hàng"
@@ -71,13 +64,6 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-3 md:hidden">
-          <button
-            type="button"
-            aria-label="Tìm kiếm"
-            className="cursor-pointer text-[#5a4033] transition-colors hover:text-[#3a2116]"
-          >
-            <Search size={20} strokeWidth={1.5} />
-          </button>
           <Link
             to="/cart"
             aria-label="Giỏ hàng"

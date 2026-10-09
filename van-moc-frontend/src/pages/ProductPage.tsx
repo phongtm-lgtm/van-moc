@@ -1,13 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Link, useNavigate, useSearchParams } from 'react-router-dom'
-import { ChevronDown, ChevronLeft, ChevronRight, ShoppingCart, SlidersHorizontal, X } from 'lucide-react'
-import { useCart } from '../hooks/useCart'
-import { api, type Category, type Product, type ProductPageResponse } from '../api/catalog'
+import { useSearchParams } from 'react-router-dom'
+import { ChevronDown, ChevronLeft, ChevronRight, SlidersHorizontal, X } from 'lucide-react'
+import { api, type Category, type ProductPageResponse } from '../api/catalog'
+import { ProductCard } from '../components/ProductCard'
 import './ProductPage.css'
-
-function formatPrice(price: number) {
-  return `${new Intl.NumberFormat('vi-VN').format(price)} đ`
-}
 
 function FilterContent({ categories, category, onCategoryChange }: {
   categories: Category[]; category: string; onCategoryChange: (category: string) => void
@@ -21,47 +17,6 @@ function FilterContent({ categories, category, onCategoryChange }: {
       </div>
     </section>
   </div>
-}
-
-function ProductCard({ product }: { product: Product }) {
-  const navigate = useNavigate()
-  const { addItem, loading } = useCart()
-  const [error, setError] = useState('')
-  const [failedImage, setFailedImage] = useState<string | null>(null)
-  const add = async (buyNow: boolean) => {
-    if (buyNow && product.engravingEnabled) { navigate(`/shop/${product.slug}`); return }
-    try {
-      await addItem({ id: product.id, name: product.name, price: product.price, stock: product.stock, image: product.imageUrl || '' })
-      setError('')
-       if (buyNow) navigate('/checkout', { state: { productId: product.id } })
-    } catch { setError('Không thể thêm sản phẩm. Vui lòng kiểm tra giỏ hàng và thử lại.') }
-  }
-  return <article className="shop-product-card group">
-    <Link to={`/shop/${product.slug}`} className="block" tabIndex={-1} aria-hidden>
-      <div className="shop-product-card__media">
-        {product.imageUrl && failedImage !== product.imageUrl ? <img src={product.imageUrl} alt={product.name} loading="lazy" decoding="async" onError={() => setFailedImage(product.imageUrl)} /> : <span className="shop-product-card__placeholder">{product.imageUrl ? 'Ảnh đang được cập nhật' : 'Chưa có ảnh'}</span>}
-        <div className="shop-product-card__wash" aria-hidden />
-      </div>
-    </Link>
-    <div className="shop-product-card__body">
-      <div className="shop-product-card__engraving">{product.engravingEnabled ? <span>Có thể khắc tên</span> : null}</div>
-      <Link to={`/shop/${product.slug}`} className="shop-product-card__name-link" title={product.name}><h3>{product.name}</h3></Link>
-      <p className="shop-product-card__description">{product.shortDescription}</p>
-      <div className="shop-product-card__price-row">
-        <p className="shop-product-card__price">{formatPrice(product.price)}</p>
-        <p className={`shop-product-card__stock ${product.stock <= 10 ? 'is-low' : ''}`}>
-          {product.stock === 0 ? 'Hết hàng' : product.stock <= 10 ? `Chỉ còn ${product.stock}` : `Còn lại ${product.stock}`}
-        </p>
-      </div>
-      <div className="shop-product-card__actions">
-        <button type="button" className="shop-product-card__buy-now" disabled={loading || product.stock === 0}
-          aria-label={`${product.stock === 0 ? 'Hết hàng' : 'Mua ngay'} ${product.name}`} onClick={() => void add(true)}>{product.stock === 0 ? 'Hết hàng' : 'Mua ngay'}</button>
-        <button type="button" className="shop-product-card__cart" disabled={loading || product.stock === 0}
-          aria-label={`Thêm ${product.name} vào giỏ hàng`} onClick={() => void add(false)}><ShoppingCart size={17} /></button>
-      </div>
-      {error && <p role="alert">{error}</p>}
-    </div>
-  </article>
 }
 
 export function ProductPage() {

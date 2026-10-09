@@ -74,6 +74,19 @@ export function ProductDetailPage() {
   }, [id, retry, navigate])
   const imageCount = product?.images.length ?? 0
   useEffect(() => {
+    if (!product) return
+    const title = `${product.name} | Vân Mộc`
+    const description = product.shortDescription || `${product.name} — sản phẩm thủ công từ sừng tự nhiên tại Vân Mộc.`
+    document.title = title
+    for (const [selector, content] of [
+      ['meta[name="description"]', description], ['meta[property="og:title"]', title],
+      ['meta[property="og:description"]', description], ['meta[name="twitter:title"]', title],
+      ['meta[name="twitter:description"]', description],
+    ]) document.head.querySelector<HTMLMetaElement>(selector)?.setAttribute('content', content)
+    const image = product.images.find(item => item.primary && item.mediaType !== 'VIDEO') || product.images.find(item => item.mediaType !== 'VIDEO')
+    if (image) document.head.querySelector<HTMLMetaElement>('meta[property="og:image"]')?.setAttribute('content', new URL(image.url, location.origin).href)
+  }, [product])
+  useEffect(() => {
     const selected = document.querySelector<HTMLElement>('.pdp-gallery__thumbs .is-active')
     const strip = selected?.parentElement
     if (selected && strip && selected.offsetLeft < strip.scrollLeft) strip.scrollTo({ left: selected.offsetLeft, behavior: 'smooth' })

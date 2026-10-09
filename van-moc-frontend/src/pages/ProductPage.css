@@ -1,4 +1,4 @@
-/* Scoped catalog refinements; shared home cards are intentionally unaffected. */
+/* Catalog layout only; product presentation lives in components/ProductCard.css. */
 .shop-page { --shop-brown: var(--vm-card-title); --shop-body: var(--vm-card-muted); --shop-line: var(--vm-card-border); }
 .shop-page .shop-catalog { background-image: linear-gradient(rgba(255,250,238,.86), rgba(249,240,223,.87)), url('/image/textures/van-moc-paper-bg.png'); }
 .shop-page .shop-catalog__inner { grid-template-columns: 14rem minmax(0, 1fr); gap: 1.75rem; }
@@ -11,30 +11,7 @@
 .shop-page .shop-category-list button { width: 100%; margin: 0; min-height: 2.75rem; padding: .55rem .65rem; overflow-wrap: anywhere; }
 .shop-page .shop-category-list button.is-active { background: #eee2d1; border-left-color: #704326; color: #33251d; }
 .shop-page .shop-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem 1rem; align-items: stretch; }
-.shop-page .shop-product-card { display: flex; flex-direction: column; border: 1px solid var(--shop-line); border-radius: .35rem; background: var(--vm-card-surface); overflow: hidden; cursor: default; }
-.shop-page .shop-product-card__media { aspect-ratio: 1; border-radius: 0; background: var(--vm-card-image); box-shadow: none; }
-.shop-page .shop-product-card__media img { filter: none; }
-.shop-page .shop-product-card:hover .shop-product-card__media img { filter: none; transform: none; }
-.shop-page .shop-product-card__wash { display: none; }
-.shop-page .shop-product-card__placeholder { display: grid; place-items: center; height: 100%; padding: 1rem; color: #66584b; text-align: center; font-size: .875rem; }
-.shop-page .shop-product-card__body { display: flex; flex: 1; flex-direction: column; gap: .6rem; padding: 1rem; }
-.shop-page .shop-product-card__engraving { min-height: 1.4rem; }
-.shop-page .shop-product-card__engraving span { padding: .2rem .45rem; background: #f5ecde; color: #704326; border-color: #e6d8c7; border-radius: .2rem; font-size: .75rem; letter-spacing: 0; text-transform: none; line-height: 1.4; }
-.shop-page .shop-product-card h3 { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; min-height: 3rem; margin: 0; color: #33251d; font-size: 1rem; font-weight: 600; line-height: 1.5; overflow-wrap: anywhere; }
-.shop-page .shop-product-card__name-link:hover h3 { color: #704326; }
-.shop-page .shop-product-card__price-row { margin: 0 0 .2rem; gap: .4rem; }
-.shop-page .shop-product-card__price { color: #704326; font-size: 1.0625rem; font-weight: 700; white-space: nowrap; }
-.shop-page .shop-product-card__stock { margin: 0; color: #66584b; font-size: .8125rem; line-height: 1.6; }
-.shop-page .shop-product-card__stock.is-low { color: #66584b; }
-.shop-page .shop-product-card__actions { margin-top: auto; padding: 0; border: 0; gap: .5rem; }
-.shop-page .shop-product-card__actions button { min-height: 2.75rem; height: auto; border-radius: .25rem; box-shadow: none; transform: none; }
-.shop-page .shop-product-card__buy-now { width: auto; padding: .6rem .75rem; background: #503522; border: 1px solid #503522; color: #fff; font-size: .875rem; letter-spacing: 0; }
-.shop-page .shop-product-card__buy-now:hover:not(:disabled) { background: #33251d; color: #fff; transform: none; }
-.shop-page .shop-product-card__cart { width: 2.75rem; flex: 0 0 2.75rem; background: #fffdf8; border-color: #c9b69f; color: #503522; }
-.shop-page .shop-product-card__cart:hover:not(:disabled) { background: #f0e5d6; color: #503522; transform: none; }
-.shop-page .shop-product-card__actions button:disabled { opacity: 1; cursor: not-allowed; background: #eee5d9; border-color: #e6d8c7; color: #66584b; }
 .shop-page :is(button, a, select):focus-visible { outline: 2px solid #704326; outline-offset: 3px; }
-.shop-page .shop-product-card [role="alert"] { color: #8b3524; font-size: .8125rem; line-height: 1.6; margin: 0; }
 .shop-page .shop-toolbar { margin-bottom: 1.1rem; gap: .75rem; }
 .shop-page .shop-toolbar p { color: #66584b; }
 .shop-page .shop-sort select { min-height: 2.75rem; background: #fffdf8; color: #33251d; font-size: .875rem; max-width: 100%; }
@@ -60,6 +37,4 @@
 }
 @media (max-width: 480px) {
   .shop-page .shop-grid { grid-template-columns: minmax(0, 1fr); }
-  .shop-page .shop-product-card { width: 100%; }
-  .shop-page .shop-product-card__media { aspect-ratio: 4 / 3; }
 }

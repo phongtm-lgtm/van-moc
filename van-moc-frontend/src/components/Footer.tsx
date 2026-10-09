@@ -1,11 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { Mail, MapPin, PackageCheck, Phone, RotateCcw, ShieldCheck } from 'lucide-react'
+import { Mail, PackageCheck, Phone, RotateCcw, ShieldCheck } from 'lucide-react'
 import { api, type Category } from '../api/catalog'
+import { BRAND } from '../brand'
 
 /** Cập nhật URL thật khi có fanpage / kênh chính thức. */
 const SOCIAL_LINKS = {
-  facebook: '',
+  facebook: BRAND.facebook,
   messenger: '',
   tiktok: '',
 } as const
@@ -55,25 +56,17 @@ export function Footer() {
             Vân nguyên bản - Nét riêng bạn.
           </p>
           <div className="space-y-2.5 pt-1 text-sm text-[#fff2dc]/65">
-            <div className="flex items-start gap-2.5">
-              <MapPin size={15} className="text-[#c9973a] shrink-0 mt-0.5" />
-              <span>
-                {/* TODO: thay bằng địa chỉ thật của thương hiệu khi có */}
-                Làng nghề Thụy Ứng, xã Hòa Bình, huyện Thường Tín, Hà Nội
-              </span>
-            </div>
             <div className="flex items-center gap-2.5">
               <Phone size={15} className="text-[#c9973a] shrink-0" />
-              {/* TODO: thay bằng số điện thoại thật */}
-              <span>+84 XXX XXX XXX</span>
+              <a href={`tel:${BRAND.phone}`} className="hover:text-[#c9973a]">{BRAND.phone}</a>
             </div>
             <div className="flex items-center gap-2.5">
               <Mail size={15} className="text-[#c9973a] shrink-0" />
               <a
-                href="mailto:lienhe@vanmoc.vn"
+                href={`mailto:${BRAND.email}`}
                 className="hover:text-[#c9973a] transition-colors"
               >
-                lienhe@vanmoc.vn
+                {BRAND.email}
               </a>
             </div>
           </div>
@@ -97,37 +90,17 @@ export function Footer() {
           </ul>
         </div>
 
-        {/* Đăng ký tin */}
+        {/* Hỗ trợ và thông tin chính sách */}
         <div className="space-y-4 sm:col-span-2 lg:col-span-1">
           <h4 className="text-[13px] font-bold tracking-[0.16em] text-[#fff2dc] uppercase">
-            Đăng ký tin
+            Hỗ trợ khách hàng
           </h4>
-          <p className="text-sm text-[#fff2dc]/65 leading-relaxed">
-            Nhận thông tin về sản phẩm mới và những câu chuyện từ làng nghề.
-          </p>
-          <form
-            className="space-y-2 pt-1"
-            onSubmit={(e) => {
-              e.preventDefault()
-            }}
-          >
-            <div className="flex gap-2 items-end border-b border-[#fff2dc]/35 focus-within:border-[#c9973a] transition-colors pb-1">
-              <input
-                placeholder="email@cua-ban.com"
-                required
-                className="flex-1 h-9 bg-transparent text-[#fff2dc] placeholder:text-[#fff2dc]/40 text-sm focus:outline-none"
-                type="email"
-                aria-label="Email đăng ký nhận tin"
-              />
-              <button
-                type="submit"
-                className="h-9 px-2 text-[#c9973a] hover:text-[#fff2dc] transition-colors cursor-pointer flex items-center justify-center"
-                aria-label="Đăng ký"
-              >
-                <Mail size={16} strokeWidth={1.5} />
-              </button>
-            </div>
-          </form>
+          <ul className="text-sm text-[#fff2dc]/75 space-y-3">
+            <li><Link to="/lien-he" className="hover:text-[#c9973a]">Liên hệ Vân Mộc</Link></li>
+            <li><Link to="/quy-dinh" className="hover:text-[#c9973a]">Chính sách mua hàng</Link></li>
+            <li><Link to="/chinh-sach-bao-mat" className="hover:text-[#c9973a]">Chính sách bảo mật</Link></li>
+            <li><a href={BRAND.facebook} target="_blank" rel="noopener noreferrer" className="hover:text-[#c9973a]">Fanpage Vân Mộc</a></li>
+          </ul>
         </div>
       </div>
 

@@ -14,6 +14,8 @@ import { AccountLayout } from './components/AccountLayout'
 import { OrderHistoryPage } from './pages/OrderHistoryPage'
 import { OrderDetailPage } from './pages/OrderDetailPage'
 import { AboutPage, ContactPage, CustomOrderPage, VillagesPage } from './pages/InfoPages'
+import { PolicyPage } from './pages/PolicyPages'
+import { Seo } from './components/Seo'
 
 function Placeholder({ title }: { title: string }) {
   return (
@@ -41,6 +43,7 @@ export default function App() {
   return (
     <div className="flex min-h-screen flex-col bg-[#fff8e7]">
       <OAuthReturn />
+      <Seo />
       <Header />
       <main className="flex-1">
         <Routes>
@@ -58,11 +61,11 @@ export default function App() {
           <Route path="/villages" element={<VillagesPage />} />
           <Route path="/gioi-thieu" element={<AboutPage />} />
           <Route path="/truy-xuat" element={<TraceabilityPage />} />
-          <Route path="/quy-dinh" element={<Placeholder title="Chính sách mua hàng" />} />
+          <Route path="/quy-dinh" element={<PolicyPage />} />
           <Route path="/custom-order" element={<CustomOrderPage />} />
           <Route path="/lien-he" element={<ContactPage />} />
           <Route path="/login" element={<><HomePage /><LoginPage /></>} />
-          <Route path="/chinh-sach-bao-mat" element={<Placeholder title="Chính sách bảo mật" />} />
+          <Route path="/chinh-sach-bao-mat" element={<PolicyPage privacyPolicy />} />
           <Route path="/register" element={<Navigate to="/login" replace />} />
           <Route path="*" element={<Placeholder title="Đang phát triển" />} />
         </Routes>

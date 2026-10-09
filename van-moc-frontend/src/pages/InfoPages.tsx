@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom'
+import type { ReactNode } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { MessengerIcon } from '../components/MessengerIcon'
 import './CustomOrderHero.css'
+import { BRAND } from '../brand'
 
-const MESSENGER_URL = 'https://m.me/vanmoc2026'
+const MESSENGER_URL = BRAND.messenger
 
 const CRAFT_STEPS = [
   { number: '01', title: 'Gửi hình mẫu', description: 'Chia sẻ hình ảnh, bản phác thảo hoặc ý tưởng về món đồ bạn mong muốn.' },
@@ -18,7 +20,7 @@ type InfoPageProps = {
   description: string
   image?: string
   imageAlt?: string
-  sections: { title: string; text: string }[]
+  sections: { title: string; text: ReactNode }[]
   action?: { label: string; to: string }
 }
 
@@ -89,7 +91,12 @@ export function CustomOrderPage() {
 
 export function ContactPage() {
   return <InfoPage eyebrow="Liên hệ" title="Kết nối với Vân Mộc"
-    description="Bạn cần tư vấn sản phẩm hoặc muốn trao đổi về ý tưởng chế tác riêng? Hãy gửi email đến lienhe@vanmoc.vn."
-    sections={[{ title: 'Làng nghề Thụy Ứng', text: 'Thụy Ứng, Hà Nội — nơi Vân Mộc gìn giữ câu chuyện chế tác sừng thủ công.' }]}
+    description="Bạn cần tư vấn sản phẩm, hỗ trợ đơn hàng hoặc trao đổi ý tưởng chế tác riêng? Liên hệ Vân Mộc qua các kênh chính thức bên dưới."
+    sections={[
+      { title: 'Hotline', text: <a href={`tel:${BRAND.phone}`}>{BRAND.phone}</a> },
+      { title: 'Email', text: <a href={`mailto:${BRAND.email}`}>{BRAND.email}</a> },
+      { title: 'Fanpage chính thức', text: <a href={BRAND.facebook} target="_blank" rel="noopener noreferrer">Facebook · Vân Mộc</a> },
+      { title: 'Hỗ trợ đơn hàng', text: 'Khi liên hệ, vui lòng cung cấp mã đơn hàng và nội dung cần hỗ trợ. Không gửi mật khẩu, mã OTP hoặc thông tin đăng nhập ngân hàng.' },
+    ]}
     action={{ label: 'Xem sản phẩm', to: '/shop' }} />
 }
