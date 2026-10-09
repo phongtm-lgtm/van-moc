@@ -25,6 +25,10 @@ public interface ProductJpaRepository extends JpaRepository<ProductEntity, UUID>
             + "and (:categoryId is null or p.category.id = :categoryId)")
     Page<ProductEntity> findVisible(@Param("categoryId") UUID categoryId, Pageable pageable);
 
+    @EntityGraph(attributePaths = "category")
+    @Query("select p from ProductEntity p where p.featured = true and p.active = true and p.category.active = true")
+    Page<ProductEntity> findFeatured(Pageable pageable);
+
     @Query("select count(p) from ProductEntity p where p.active = true and p.category.active = true "
             + "and (:categoryId is null or p.category.id = :categoryId)")
     long countVisible(@Param("categoryId") UUID categoryId);

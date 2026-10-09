@@ -48,6 +48,8 @@ public class ProductEntity extends BaseEntity {
 
     private boolean active = true;
 
+    private boolean featured;
+
     @Column(name = "engraving_enabled")
     private boolean engravingEnabled;
 

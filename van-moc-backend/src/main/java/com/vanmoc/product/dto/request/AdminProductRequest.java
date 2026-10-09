@@ -9,7 +9,7 @@ public record AdminProductRequest(@NotNull UUID categoryId,
         @NotBlank @Size(max=255) String name, @Size(max=2000) String shortDescription,
         @Size(max=20000) String description, @NotBlank @Size(max=255) String material,
         @NotNull @DecimalMin("0") @Digits(integer=13,fraction=0) BigDecimal price,
-        boolean active, boolean engravingEnabled, @Min(1) @Max(255) Integer engravingMaxChars,
+        boolean active, boolean featured, boolean engravingEnabled, @Min(1) @Max(255) Integer engravingMaxChars,
         @NotNull @DecimalMin("0") @Digits(integer=13,fraction=0) BigDecimal engravingFee,
         @NotNull @Size(max=20) List<@NotBlank @Pattern(regexp="[A-Z0-9_]{1,80}") String> fonts,
         @NotNull @Size(max=20) List<@Valid Position> positions, @NotNull Long version) {

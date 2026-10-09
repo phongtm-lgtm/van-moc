@@ -54,6 +54,17 @@ public class ProductService {
                 page, size, result.getTotalElements(), result.getTotalPages());
     }
 
+    public List<ProductResponse> getFeaturedProducts() {
+        var featured = products.findFeatured(PageRequest.of(0, 12,
+                Sort.by(Sort.Order.desc("createdAt"), Sort.Order.asc("id")))).getContent();
+        if (featured.isEmpty()) return List.of();
+        var imageUrls = new HashMap<UUID, String>();
+        for (var image : images.findListImages(featured.stream().map(p -> p.getId()).toList())) {
+            if (!imageUrls.containsKey(image.getProductId())) imageUrls.put(image.getProductId(), image.getImageUrl());
+        }
+        return featured.stream().map(p -> ProductMapper.toResponse(p, imageUrls.get(p.getId()))).toList();
+    }
+
     public ProductDetailResponse getProductDetail(UUID id) {
         var product = products.findByIdAndActiveTrueAndCategoryActiveTrue(id)
                 .orElseThrow(() -> new ResourceNotFoundException("PRODUCT_NOT_FOUND"));

@@ -62,7 +62,7 @@ public class AdminProductService {
         p.setCategory(categories.findById(r.categoryId()).filter(CategoryEntity::isActive)
                 .orElseThrow(()->new ResourceNotFoundException("CATEGORY_NOT_FOUND")));
         p.setCode(r.code().trim());p.setSlug(r.slug());p.setName(r.name().trim());p.setMaterial(r.material().trim());
-        p.setDescription(r.description());p.setShortDescription(r.shortDescription());p.setPrice(r.price());p.setActive(r.active());
+        p.setDescription(r.description());p.setShortDescription(r.shortDescription());p.setPrice(r.price());p.setActive(r.active());p.setFeatured(r.featured());
         p.setEngravingEnabled(r.engravingEnabled());p.setEngravingMaxChars(r.engravingMaxChars());p.setEngravingFee(r.engravingFee());
         try{products.saveAndFlush(p);}catch(org.springframework.dao.DataIntegrityViolationException exception){throw new RuleException("PRODUCT_CODE_OR_SLUG_EXISTS",HttpStatus.CONFLICT);}
         fonts.deleteAll(fonts.findByProductIdOrderByDisplayOrderAscIdAsc(p.getId()));
@@ -72,7 +72,7 @@ public class AdminProductService {
         for(int i=0;i<r.positions().size();i++){var v=r.positions().get(i);var pos=new ProductEngravingPositionEntity();pos.setProduct(p);pos.setPosition(v.position());pos.setMaxChars(v.maxChars());pos.setDisplayOrder(i);positions.save(pos);}
         return map(p);
     }
-    private AdminProductResponse map(ProductEntity p){return new AdminProductResponse(p.getId(),p.getStock(),new AdminProductRequest(p.getCategory().getId(),p.getCode(),p.getSlug(),p.getName(),p.getShortDescription(),p.getDescription(),p.getMaterial(),p.getPrice(),p.isActive(),p.isEngravingEnabled(),p.getEngravingMaxChars(),p.getEngravingFee(),fonts.findByProductIdOrderByDisplayOrderAscIdAsc(p.getId()).stream().map(ProductEngravingFontEntity::getFont).toList(),positions.findByProductIdOrderByDisplayOrderAscIdAsc(p.getId()).stream().map(v->new AdminProductRequest.Position(v.getPosition(),v.getMaxChars())).toList(),p.getVersion()),images.findByProductIdOrderByDisplayOrderAscIdAsc(p.getId()).stream().map(ProductMapper::toImageResponse).toList());}
+    private AdminProductResponse map(ProductEntity p){return new AdminProductResponse(p.getId(),p.getStock(),new AdminProductRequest(p.getCategory().getId(),p.getCode(),p.getSlug(),p.getName(),p.getShortDescription(),p.getDescription(),p.getMaterial(),p.getPrice(),p.isActive(),p.isFeatured(),p.isEngravingEnabled(),p.getEngravingMaxChars(),p.getEngravingFee(),fonts.findByProductIdOrderByDisplayOrderAscIdAsc(p.getId()).stream().map(ProductEngravingFontEntity::getFont).toList(),positions.findByProductIdOrderByDisplayOrderAscIdAsc(p.getId()).stream().map(v->new AdminProductRequest.Position(v.getPosition(),v.getMaxChars())).toList(),p.getVersion()),images.findByProductIdOrderByDisplayOrderAscIdAsc(p.getId()).stream().map(ProductMapper::toImageResponse).toList());}
     @Transactional
     public void delete(UUID user, UUID id, long version) {
         requireAdmin(user);

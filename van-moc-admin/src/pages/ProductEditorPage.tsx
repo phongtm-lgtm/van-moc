@@ -78,7 +78,7 @@ export default function ProductEditorPage() {
       .then(([items, loaded, fontItems]) => {
         if (!alive) return
         const details = loaded ? { ...loaded.details, description: loaded.details.description?.trim() ? loaded.details.description : loaded.details.shortDescription ?? '' } : { ...initialForm(), categoryId: items[0]?.id ?? '' }
-        if (sourceId && !routeId) Object.assign(details, { code: newSku(), name: `${details.name} (bản sao)`, slug: '', version: 0, active: false })
+        if (sourceId && !routeId) Object.assign(details, { code: newSku(), name: `${details.name} (bản sao)`, slug: '', version: 0, active: false, featured: false })
         if (sourceId && !routeId) details.slug = productSlug(details.name)
         setCategories(items); setAvailableFonts(fontItems); setForm(details); setPrice(loaded ? String(details.price) : '')
         setProduct(routeId ? loaded : null); setCreatedId(undefined); setPhotos([])
@@ -218,7 +218,7 @@ export default function ProductEditorPage() {
           <div className="pe-side-column">
             <div className="pe-card pe-publishing">
               <div className="pe-section-heading"><span className="pe-section-icon"><Send size={20} strokeWidth={1.7} /></span><div><h2>Xuất bản</h2><p>Trạng thái hiển thị và lưu sản phẩm.</p></div></div>
-              <div className="pe-savebar"><div className="pe-publish-status"><span>Trạng thái hiện tại</span><span className="pe-status"><span />{id ? product?.details.active ? 'Đang bán' : 'Bản nháp / chưa bán' : 'Sản phẩm mới'}</span></div><p>Lưu nháp để hoàn thiện sau, hoặc lưu sản phẩm để mở bán.</p><div className="pe-save-actions"><button type="submit" name="intent" value="draft" className="pe-button pe-button-secondary">Lưu nháp</button><button type="submit" name="intent" value="publish" className="pe-button pe-button-primary">{busy ? 'Đang lưu…' : 'Lưu sản phẩm'}</button></div><button type="submit" name="intent" value="another" className="pe-text-button pe-save-another"><Icon name="plus" /> Lưu & thêm sản phẩm tiếp theo</button></div>
+               <div className="pe-savebar"><div className="pe-publish-status"><span>Trạng thái hiện tại</span><span className="pe-status"><span />{id ? product?.details.active ? 'Đang bán' : 'Bản nháp / chưa bán' : 'Sản phẩm mới'}</span></div><label className="pe-switch-row"><span><strong>Hiển thị trên trang chủ</strong><small>Sản phẩm nổi bật sẽ xuất hiện ở mục “Những sản phẩm được yêu thích” khi đang bán và danh mục còn hoạt động.</small></span><input type="checkbox" role="switch" checked={form.featured} onChange={event => update('featured', event.target.checked)} /><span className="pe-switch-track" aria-hidden="true" /></label><p>Lưu nháp để hoàn thiện sau, hoặc lưu sản phẩm để mở bán.</p><div className="pe-save-actions"><button type="submit" name="intent" value="draft" className="pe-button pe-button-secondary">Lưu nháp</button><button type="submit" name="intent" value="publish" className="pe-button pe-button-primary">{busy ? 'Đang lưu…' : 'Lưu sản phẩm'}</button></div><button type="submit" name="intent" value="another" className="pe-text-button pe-save-another"><Icon name="plus" /> Lưu & thêm sản phẩm tiếp theo</button></div>
             </div>
             <div className="pe-card">
               <SectionTitle icon="photo" title="Ảnh và video sản phẩm" description="Ảnh đầu tiên là ảnh đại diện. Video hiển thị trong thư viện." />

@@ -22,6 +22,9 @@ public class ProductController {
         return service.getProducts(request.getCategoryId(), request.getPage(), request.getSize());
     }
 
+    @GetMapping("/products/featured")
+    public List<ProductResponse> featured() { return service.getFeaturedProducts(); }
+
     @GetMapping("/products/{id}")
     public ProductDetailResponse detail(@PathVariable UUID id) { return service.getProductDetail(id); }
 

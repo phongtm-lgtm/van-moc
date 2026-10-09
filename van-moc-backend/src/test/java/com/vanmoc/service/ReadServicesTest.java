@@ -52,6 +52,15 @@ class ReadServicesTest {
     }
 
     @Test
+    void featuredProductsAreLimitedAndDoNotLoadImagesWhenEmpty() {
+        when(products.findFeatured(any())).thenReturn(new PageImpl<>(List.of()));
+        assertTrue(service.getFeaturedProducts().isEmpty());
+        verify(products).findFeatured(argThat(page -> page.getPageNumber() == 0 && page.getPageSize() == 12
+                && page.getSort().getOrderFor("createdAt").isDescending()));
+        verifyNoInteractions(images);
+    }
+
+    @Test
     void invalidPaginationIsRejectedBeforePersistence() {
         assertThrows(IllegalArgumentException.class, () -> service.getProducts(null, -1, 12));
         assertThrows(IllegalArgumentException.class, () -> service.getProducts(null, 0, 101));
