@@ -10,18 +10,16 @@ export function AccountDropdown({ onOpen }: { onOpen?: () => void }) {
   const root = useRef<HTMLDivElement>(null)
   const trigger = useRef<HTMLButtonElement>(null)
   const [open, setOpen] = useState(false)
-  const [session, setSession] = useState<{ pathname: string; me: Me | null } | null>(null)
+  const [session, setSession] = useState<Me | null | undefined>(undefined)
   const [busy, setBusy] = useState(false)
   const [error, setError] = useState('')
-  const checking = session?.pathname !== pathname
-
   useEffect(() => {
     let active = true
     accountApi<Me>('/api/me')
-      .then(me => { if (active) setSession({ pathname, me }) })
-      .catch(() => { if (active) setSession({ pathname, me: null }) })
+      .then(me => { if (active) setSession(me) })
+      .catch(() => { if (active) setSession(null) })
     return () => { active = false }
-  }, [pathname])
+  }, [])
 
   useEffect(() => {
     if (!open) return
@@ -45,7 +43,7 @@ export function AccountDropdown({ onOpen }: { onOpen?: () => void }) {
     setError('')
     try {
       await accountApi('/api/auth/logout', 'POST')
-      setSession({ pathname, me: null })
+      setSession(null)
       close()
       navigate('/login')
     } catch (cause) { setError((cause as Error).message) }
@@ -55,7 +53,7 @@ export function AccountDropdown({ onOpen }: { onOpen?: () => void }) {
   return <div className="account-dropdown" ref={root} onBlur={event => {
     if (!event.currentTarget.contains(event.relatedTarget as Node | null)) setOpen(false)
   }}>
-    {checking ? <span className="account-dropdown__trigger" role="status">Đang kiểm tra…</span> : session?.me ? <>
+    {session === undefined ? <span className="account-dropdown__trigger" aria-busy="true"><UserRound size={19} strokeWidth={1.5} aria-hidden="true" /><span>Tài khoản</span></span> : session ? <>
       <button ref={trigger} type="button" className="account-dropdown__trigger"
         aria-expanded={open} aria-controls={id}
         onClick={() => { if (!open) onOpen?.(); setOpen(!open); setError('') }}>

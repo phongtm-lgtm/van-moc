@@ -49,7 +49,7 @@ export function Header() {
         </nav>
 
         <div className="header-account-position">
-          <AccountDropdown key={pathname} onOpen={() => setOpen(false)} />
+          <AccountDropdown onOpen={() => setOpen(false)} />
         </div>
         <div className="hidden shrink-0 items-center gap-4 md:flex">
           <button
