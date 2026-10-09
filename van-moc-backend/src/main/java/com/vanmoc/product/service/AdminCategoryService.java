@@ -37,7 +37,7 @@ public class AdminCategoryService {
     @Transactional(readOnly = true)
     public List<CategoryResponse> list(UUID user) {
         requireAdmin(user);
-        return categories.findByActiveTrueOrderByDisplayOrderAscNameAsc().stream()
+        return categories.findAllByOrderByDisplayOrderAscNameAsc().stream()
                 .map(ProductMapper::toResponse).toList();
     }
 
@@ -48,7 +48,7 @@ public class AdminCategoryService {
         category.setName(request.name().trim());
         category.setSlug(request.slug());
         category.setActive(true);
-        category.setDisplayOrder(categories.findByActiveTrueOrderByDisplayOrderAscNameAsc().stream()
+        category.setDisplayOrder(categories.findAllByOrderByDisplayOrderAscNameAsc().stream()
                 .mapToInt(CategoryEntity::getDisplayOrder).max().orElse(0) + 1);
         if (categories.existsBySlug(request.slug()))
             throw new RuleException("CATEGORY_SLUG_EXISTS", HttpStatus.CONFLICT);
@@ -60,14 +60,21 @@ public class AdminCategoryService {
     }
 
     @Transactional
+    public CategoryResponse setVisibility(UUID user, UUID id, boolean active) {
+        requireAdmin(user);
+        var category = categories.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("CATEGORY_NOT_FOUND"));
+        category.setActive(active);
+        return ProductMapper.toResponse(categories.save(category));
+    }
+
+    @Transactional
     public void delete(UUID user, UUID id) {
         requireAdmin(user);
         var category = categories.findById(id)
-                .filter(CategoryEntity::isActive)
                 .orElseThrow(() -> new ResourceNotFoundException("CATEGORY_NOT_FOUND"));
         if (products.existsByCategoryId(id))
             throw new RuleException("CATEGORY_HAS_PRODUCTS", HttpStatus.CONFLICT);
-        category.setActive(false);
-        categories.save(category);
+        categories.delete(category);
     }
 }

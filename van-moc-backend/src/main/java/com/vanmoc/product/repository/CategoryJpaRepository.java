@@ -7,5 +7,6 @@ import java.util.UUID;
 
 public interface CategoryJpaRepository extends JpaRepository<CategoryEntity, UUID> {
     List<CategoryEntity> findByActiveTrueOrderByDisplayOrderAscNameAsc();
+    List<CategoryEntity> findAllByOrderByDisplayOrderAscNameAsc();
     boolean existsBySlug(String slug);
 }

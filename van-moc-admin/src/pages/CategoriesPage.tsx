@@ -5,7 +5,7 @@ import { accountApi } from '@/api/account'
 import { productSlug } from '@/utils/bulkProducts'
 import './CategoriesPage.css'
 
-type Category = { id: string; name: string; slug: string; displayOrder: number }
+type Category = { id: string; name: string; slug: string; displayOrder: number; active: boolean }
 
 export default function CategoriesPage() {
   const [categories, setCategories] = useState<Category[]>([])
@@ -49,6 +49,19 @@ export default function CategoriesPage() {
     finally { setBusy(false) }
   }
 
+  const toggleVisibility = async (category: Category) => {
+    if (busy || !window.confirm(category.active
+      ? `Ẩn danh mục “${category.name}”? Sản phẩm thuộc danh mục này cũng sẽ tạm ngừng hiển thị và không thể đặt mua trên cửa hàng.`
+      : `Hiện lại danh mục “${category.name}” trên cửa hàng?`)) return
+    setBusy(true); setError(''); setNotice('')
+    try {
+      const updated = await accountApi<Category>(`/api/admin/categories/${category.id}/visibility`, 'PATCH', { active: !category.active })
+      setCategories(items => items.map(item => item.id === updated.id ? updated : item))
+      setNotice(`Đã ${updated.active ? 'hiện' : 'ẩn'} danh mục “${updated.name}”.`)
+    } catch { setError('Không cập nhật được trạng thái danh mục. Vui lòng tải lại và thử lại.') }
+    finally { setBusy(false) }
+  }
+
   return <section className="categories-page">
     <header className="categories-heading"><div><h1>Danh mục sản phẩm</h1><p>Thêm danh mục mới và quản lý danh mục đang sử dụng.</p></div><Link to="/products">← Quay lại sản phẩm</Link></header>
     {error && <div className="categories-feedback is-error" role="alert">{error}<button type="button" onClick={() => { setLoading(true); setReload(value => value + 1) }}>Tải lại</button></div>}
@@ -60,7 +73,7 @@ export default function CategoriesPage() {
         {!autoSlug && <button type="button" className="categories-text-button" onClick={() => { setAutoSlug(true); setSlug(productSlug(name)) }}>Tạo lại slug từ tên</button>}
         <button type="submit" className="categories-primary" disabled={busy || !name.trim() || !slug}><Plus size={18} />{busy ? 'Đang xử lý…' : 'Thêm danh mục'}</button>
       </form></div>
-      <div className="categories-card"><h2>Danh mục hiện có</h2><p>Chỉ có thể xóa danh mục chưa có sản phẩm.</p>{loading ? <p role="status">Đang tải danh mục…</p> : !categories.length ? <div className="categories-empty"><FolderOpen size={32} /><span>Chưa có danh mục nào.</span></div> : <ul className="categories-list">{categories.map(category => <li key={category.id}><div><strong>{category.name}</strong><span>/{category.slug}</span></div><button type="button" aria-label={`Xóa danh mục ${category.name}`} title="Xóa danh mục" disabled={busy} onClick={() => void remove(category)}><Trash2 size={19} /></button></li>)}</ul>}</div>
+      <div className="categories-card"><h2>Danh mục hiện có</h2><p>Ẩn danh mục để tạm ngừng hiển thị danh mục và sản phẩm bên trong. Có thể hiện lại bất cứ lúc nào. Chỉ xóa được danh mục chưa có sản phẩm.</p>{loading ? <p role="status">Đang tải danh mục…</p> : !categories.length ? <div className="categories-empty"><FolderOpen size={32} /><span>Chưa có danh mục nào.</span></div> : <ul className="categories-list">{categories.map(category => <li key={category.id}><div><strong>{category.name}</strong><span>/{category.slug}</span><span className={`category-visibility ${category.active ? 'is-active' : ''}`}>{category.active ? 'Đang hiển thị' : 'Đã ẩn'}</span></div><div className="category-actions"><button className="category-visibility-button" type="button" aria-label={`${category.active ? 'Ẩn' : 'Hiện'} danh mục ${category.name}`} disabled={busy} onClick={() => void toggleVisibility(category)}>{category.active ? 'Ẩn' : 'Hiện'}</button><button type="button" aria-label={`Xóa danh mục ${category.name}`} title="Xóa danh mục" disabled={busy} onClick={() => void remove(category)}><Trash2 size={19} /></button></div></li>)}</ul>}</div>
     </div>
   </section>
 }

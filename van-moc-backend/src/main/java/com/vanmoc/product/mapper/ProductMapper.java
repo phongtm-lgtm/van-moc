@@ -15,7 +15,7 @@ public final class ProductMapper {
 
     public static CategoryResponse toResponse(CategoryEntity category) {
         return new CategoryResponse(category.getId(), category.getName(), category.getSlug(),
-                category.getDescription(), category.getDisplayOrder());
+                category.getDescription(), category.getDisplayOrder(), category.isActive());
     }
 
     public static ProductResponse toResponse(ProductEntity product, String imageUrl) {
