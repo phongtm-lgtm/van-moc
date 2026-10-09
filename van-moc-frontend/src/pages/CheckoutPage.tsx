@@ -50,7 +50,9 @@ export function CheckoutPage() {
   const selectedProducts = selectedIds
     ? cartItems.filter(item => selectedIds.includes(item.key)).map(selectionOf)
     : selectedProductId ? cartItems.filter(item => item.product.id === selectedProductId).map(selectionOf) : initialDraft?.selectedProducts
-  const items = selectedProducts ? cartItems.filter(item => selectedProducts.some(selected => selected.productId === item.product.id && selected.customization === selectionOf(item).customization)) : cartItems
+  const selectedItems = selectedProducts ? cartItems.filter(item => selectedProducts.some(selected => selected.productId === item.product.id && selected.customization === selectionOf(item).customization)) : cartItems
+  const [orderedItems, setOrderedItems] = useState<CartItem[] | null>(null)
+  const items = orderedItems ?? selectedItems
   const [addresses, setAddresses] = useState<Address[]>([])
   const [delivery, setDelivery] = useState<Delivery>(initialDraft?.delivery ?? EMPTY_DELIVERY)
   const [provinces, setProvinces] = useState<LocationOption[]>([])
@@ -72,9 +74,9 @@ export function CheckoutPage() {
   const [copied, setCopied] = useState('')
   const [waitSeconds, setWaitSeconds] = useState(PAYMENT_WAIT_SECONDS)
 
-  const productTotal = preview?.productSubtotal ?? items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
-  const customizationTotal = preview?.engravingTotal ?? items.reduce((sum, item) => sum + (item.customization?.fee ?? 0) * item.quantity, 0)
-  const shippingFee = preview?.shippingFee ?? 0
+  const productTotal = created?.productSubtotal ?? preview?.productSubtotal ?? items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
+  const customizationTotal = created?.engravingTotal ?? preview?.engravingTotal ?? items.reduce((sum, item) => sum + (item.customization?.fee ?? 0) * item.quantity, 0)
+  const shippingFee = created?.shippingFee ?? preview?.shippingFee ?? 0
   const total = bankPayment?.amount ?? created?.grandTotal ?? preview?.grandTotal ?? 0
   const itemCount = items.reduce((count, item) => count + item.quantity, 0)
   const selection = JSON.stringify(items.map(item => item.key).sort())
@@ -195,6 +197,7 @@ export function CheckoutPage() {
     try {
       await accountApi<CheckoutResult>('/api/checkout/preview', 'POST', { ...payload, idempotencyKey: 'preview' })
       const result = await accountApi<CheckoutResult>('/api/checkout', 'POST', { ...payload, idempotencyKey: attempt.current.key })
+      setOrderedItems(items)
       setCreated(result)
       sessionStorage.removeItem(DRAFT_KEY)
       if (payment === 'bank') setShowBankTransfer(true)
@@ -219,6 +222,10 @@ export function CheckoutPage() {
   const transferCode = bankPayment?.transferCode ?? created?.orderCode
   const transferContent = transferCode ? `SEVQR ${transferCode}` : ''
   const qrUrl = bankPayment?.qrUrl
+  const closeBankTransfer = () => {
+    if (created?.orderId) navigate(`/account/orders/${created.orderId}`)
+    else setShowBankTransfer(false)
+  }
 
   if (orderCode) {
     return (
@@ -332,7 +339,7 @@ export function CheckoutPage() {
                       <span className="checkout-option__copy">
                         <strong>{option.title} ({option.time})</strong>
                       </span>
-                      <b>{preview ? formatPrice(shippingFee) : 'Đang tính'}</b>
+                      <b>{created || previewReady ? formatPrice(shippingFee) : 'Đang tính'}</b>
                     </label>
                   ))}
                 </div>
@@ -367,9 +374,9 @@ export function CheckoutPage() {
                 </div>
 
                 <div className="checkout-totals">
-                   <div><span>Tạm tính</span><strong>{formatPrice(productTotal)}{!previewReady && ' (tạm tính)'}</strong></div>
+                   <div><span>Tạm tính</span><strong>{formatPrice(productTotal)}{!created && !previewReady && ' (tạm tính)'}</strong></div>
                   {customizationTotal > 0 && <div><span>Phí khác</span><strong>{formatPrice(customizationTotal)}</strong></div>}
-                  <div><span>Phí vận chuyển</span><strong>{previewReady ? formatPrice(shippingFee) : 'Đang tính'}</strong></div>
+                  <div><span>Phí vận chuyển</span><strong>{created || previewReady ? formatPrice(shippingFee) : 'Đang tính'}</strong></div>
                   <div className="checkout-totals__grand"><span>Tổng cộng</span><strong>{created || previewReady ? formatPrice(total) : 'Chờ kiểm tra đơn hàng'}</strong></div>
                 </div>
               </section>
@@ -407,9 +414,9 @@ export function CheckoutPage() {
 
       {showBankTransfer && (
         <div className="checkout-modal-layer" role="presentation">
-          <button className="checkout-modal-layer__backdrop" type="button" onClick={() => setShowBankTransfer(false)} aria-label="Đóng thông tin chuyển khoản" />
+          <button className="checkout-modal-layer__backdrop" type="button" onClick={closeBankTransfer} aria-label="Đóng thông tin chuyển khoản" />
           <section className="bank-modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="bank-modal-title">
-            <button className="checkout-modal__close" type="button" onClick={() => setShowBankTransfer(false)} aria-label="Đóng"><X size={18} /></button>
+            <button className="checkout-modal__close" type="button" onClick={closeBankTransfer} aria-label="Đóng"><X size={18} /></button>
             <h2 id="bank-modal-title">Thanh toán qua mã QR</h2>
             <div className="bank-modal__content">
                <div className="bank-modal__qr">{qrUrl && waitSeconds > 0 ? <img src={qrUrl} alt="Mã QR chuyển khoản đơn hàng" /> : <p>{bankPayment ? 'QR không còn hiệu lực' : 'Đang tải thanh toán…'}</p>}</div>
