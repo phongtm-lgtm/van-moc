@@ -27,10 +27,11 @@ function ProductCard({ product }: { product: Product }) {
   const { addItem, loading } = useCart()
   const [error, setError] = useState('')
   const add = async (buyNow: boolean) => {
+    if (buyNow && product.engravingEnabled) { navigate(`/shop/${product.slug}`); return }
     try {
-      await addItem({ id: product.id, name: product.name, price: product.price, image: product.imageUrl || '' })
+      await addItem({ id: product.id, name: product.name, price: product.price, stock: product.stock, image: product.imageUrl || '' })
       setError('')
-      if (buyNow) navigate('/cart')
+       if (buyNow) navigate('/checkout', { state: { productId: product.id } })
     } catch (cause) { setError((cause as Error).message) }
   }
   return <article className="shop-product-card group">

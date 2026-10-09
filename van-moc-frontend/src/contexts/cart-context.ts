@@ -5,6 +5,7 @@ export type CartProduct = {
   slug?: string
   name: string
   price: number
+  stock?: number
   image: string
   category?: string
 }
@@ -30,6 +31,7 @@ export type CartContextValue = {
   items: CartItem[]
   itemCount: number
   loading: boolean
+  authenticated: boolean | null
   error: string
   total: number
   engravingTotal: number

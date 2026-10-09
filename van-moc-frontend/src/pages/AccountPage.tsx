@@ -11,7 +11,10 @@ export function LoginPage() {
   const location = useLocation()
   const closeButton = useRef<HTMLButtonElement>(null)
   const from = (location.state as { from?: string } | null)?.from
-  const close = () => navigate(from && from !== '/login' ? from : '/')
+  const close = () => {
+    if (from === '/checkout') sessionStorage.removeItem('vanmoc.oauth.return')
+    navigate(from && from !== '/login' ? from : '/')
+  }
 
   useEffect(() => {
     const previousOverflow = document.body.style.overflow

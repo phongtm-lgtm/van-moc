@@ -11,7 +11,7 @@ export function AccountLayout({ me, title, description, children }: { me: Me | n
     if (loggingOut) return
     setLoggingOut(true)
     setLogoutError('')
-    try { await accountApi('/api/auth/logout', 'POST'); navigate('/login') }
+    try { await accountApi('/api/auth/logout', 'POST'); window.dispatchEvent(new Event('vanmoc-auth-changed')); navigate('/login') }
     catch (cause) { setLogoutError((cause as Error).message) }
     finally { setLoggingOut(false) }
   }

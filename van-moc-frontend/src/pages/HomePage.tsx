@@ -296,10 +296,11 @@ function ProductCard({ product }: { product: Product }) {
   const [error, setError] = useState('')
   const href = `/shop/${product.slug}`
   const add = async (buyNow: boolean) => {
+    if (buyNow && product.engravingEnabled) { navigate(href); return }
     try {
-      await addItem({ id: product.id, name: product.name, price: product.price, image: product.imageUrl || '' })
+      await addItem({ id: product.id, name: product.name, price: product.price, stock: product.stock, image: product.imageUrl || '' })
       setError('')
-      if (buyNow) navigate('/cart')
+      if (buyNow) navigate('/checkout', { state: { productId: product.id } })
     } catch (cause) { setError((cause as Error).message) }
   }
   return (

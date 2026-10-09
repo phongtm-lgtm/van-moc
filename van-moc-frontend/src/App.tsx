@@ -1,4 +1,5 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 import { Footer } from './components/Footer'
 import { Header } from './components/Header'
 import { CartPage } from './pages/CartPage'
@@ -21,9 +22,24 @@ function Placeholder({ title }: { title: string }) {
   )
 }
 
+function OAuthReturn() {
+  const navigate = useNavigate()
+  const location = useLocation()
+  useEffect(() => {
+    if (location.pathname !== '/shop') return
+    const path = sessionStorage.getItem('vanmoc.oauth.return')
+    if (path === '/checkout') {
+      sessionStorage.removeItem('vanmoc.oauth.return')
+      navigate(path, { replace: true })
+    }
+  }, [location.pathname, navigate])
+  return null
+}
+
 export default function App() {
   return (
     <div className="flex min-h-screen flex-col bg-[#fff8e7]">
+      <OAuthReturn />
       <Header />
       <main className="flex-1">
         <Routes>

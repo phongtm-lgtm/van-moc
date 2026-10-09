@@ -105,10 +105,10 @@ export function ProductDetailPage() {
   const changeImage = (dir: -1 | 1) => { if (imageCount) setActiveImage(cur => (cur + dir + imageCount) % imageCount) }
   const addProductToCart = async (buyNow = false) => {
     try {
-      await addItem({ id: product.id, name: product.name, price: product.price, image: (active?.mediaType !== 'VIDEO' ? active?.url : product.images.find(image => image.mediaType !== 'VIDEO')?.url) || '' }, quantity,
+       await addItem({ id: product.id, name: product.name, price: product.price, stock: product.stock, image: (active?.mediaType !== 'VIDEO' ? active?.url : product.images.find(image => image.mediaType !== 'VIDEO')?.url) || '' }, quantity,
          engravingEnabled ? { text: normalized, font: selectedFont.id, position: engravingPosition, fee: product.engraving.unitFee } : undefined)
       setNotice('Đã thêm vào giỏ hàng.')
-      if (buyNow) navigate('/cart')
+        if (buyNow) navigate('/checkout', { state: { productId: product.id } })
     } catch (cause) { setNotice((cause as Error).message) }
   }
   return <article className="pdp">

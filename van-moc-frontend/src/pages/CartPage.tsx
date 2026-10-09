@@ -43,7 +43,7 @@ export function CartPage() {
           </div>
         </header>
         {loading && <p role="status">Đang đồng bộ giỏ…</p>}
-        {error && <p role="alert">{error} <Link to="/login">Đăng nhập</Link> <button type="button" onClick={() => void refresh()}>Thử lại</button></p>}
+        {error && <p role="alert">{error} <button type="button" onClick={() => void refresh()}>Thử lại</button></p>}
 
         {items.length === 0 ? (
           <section className="cart-empty">
