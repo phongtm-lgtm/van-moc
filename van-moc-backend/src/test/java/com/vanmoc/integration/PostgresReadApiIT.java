@@ -922,8 +922,9 @@ class PostgresReadApiIT {
         jdbc.update("update users set role='ADMIN' where id=?",admin.id());
         var existing=adminProducts.get(admin.id(),PRODUCT);
         var r=existing.details();
-        var request=new com.vanmoc.product.dto.request.AdminProductRequest(r.categoryId(),"NEW-CODE","new-product","New product","Short","Description","Horn",new java.math.BigDecimal("100000"),true,true,30,new java.math.BigDecimal("20000"),List.of("SCRIPT"),List.of(new com.vanmoc.product.dto.request.AdminProductRequest.Position(com.vanmoc.product.enums.EngravingPosition.FRONT,20)),0L);
+        var request=new com.vanmoc.product.dto.request.AdminProductRequest(r.categoryId(),"NEW-CODE","new-product","New product","Short","Description","Horn",new java.math.BigDecimal("100000"),true,true,true,30,new java.math.BigDecimal("20000"),List.of("SCRIPT"),List.of(new com.vanmoc.product.dto.request.AdminProductRequest.Position(com.vanmoc.product.enums.EngravingPosition.FRONT,20)),0L);
         var created=adminProducts.save(admin.id(),null,request);
+        assertTrue(created.details().featured());
         assertEquals(0,created.stock());
         assertEquals(1,adminProducts.list(admin.id(),"NEW-CODE",null,true,true,0).getTotalElements());
         assertThrows(org.springframework.security.access.AccessDeniedException.class,()->adminProducts.get(buyer.id(),created.id()));
