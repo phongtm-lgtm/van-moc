@@ -1,4 +1,4 @@
-export const API_BASE = import.meta.env.VITE_API_BASE_URL
+export const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? 'https://api.vanmocvn.com' : '')
 if (!API_BASE) throw new Error('Thiếu VITE_API_BASE_URL trong .env admin')
 export type Me = { id: string; email: string; fullName: string; role: string }
 export class ApiError extends Error {
