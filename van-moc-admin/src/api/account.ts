@@ -1,5 +1,5 @@
-export const API_BASE = import.meta.env.VITE_API_BASE_URL || (import.meta.env.PROD ? 'https://api.vanmocvn.com' : '')
-if (!API_BASE) throw new Error('Thiếu VITE_API_BASE_URL trong .env admin')
+// In production, keep session and CSRF cookies first-party through the Vercel /api rewrite.
+export const API_BASE = import.meta.env.PROD ? '' : (import.meta.env.VITE_API_BASE_URL || '')
 export type Me = { id: string; email: string; fullName: string; role: string }
 export class ApiError extends Error {
   constructor(public status: number, message: string) { super(message) }
