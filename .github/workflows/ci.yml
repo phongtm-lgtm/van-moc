@@ -40,6 +40,7 @@ jobs:
       LOCATION_CONNECT_TIMEOUT_MS: 1000
       LOCATION_READ_TIMEOUT_MS: 1000
       JWT_SECRET: ci-only-signing-key-not-a-secret-0123456789abcdef0123456789abcdef
+      SERVER_PORT: 0
     defaults:
       run:
         working-directory: van-moc-backend
