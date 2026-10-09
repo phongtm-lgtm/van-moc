@@ -1,0 +1,14 @@
+.checkout-field .checkout-field__error {
+  color: #b42318;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.checkout-field :is(input, select, textarea)[aria-invalid="true"] {
+  border-color: #d92d20;
+}
+
+.checkout-field :is(input, select, textarea)[aria-invalid="true"]:focus {
+  outline: 2px solid rgb(217 45 32 / 20%);
+  outline-offset: 1px;
+}

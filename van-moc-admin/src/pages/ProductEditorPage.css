@@ -78,6 +78,7 @@
 .pe-choice-group { min-width: 0; }
 .pe-choice-group legend { font-size: 14px; font-weight: 500; margin-bottom: 12px; }
 .pe-choice-group legend span { font-size: 13px; color: var(--pe-muted); font-weight: 400; margin-left: 8px; }
+.pe-choice-toolbar { display: flex; justify-content: flex-end; margin: -5px 0 10px; }
 .pe-fonts, .pe-positions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
 .pe-fonts > label { border: 1px solid var(--pe-line); border-radius: 7px; padding: 14px 8px; cursor: pointer; text-align: center; }
 .pe-fonts > label.is-selected, .pe-position.is-selected { border-color: var(--pe-accent); background: var(--pe-tint); }

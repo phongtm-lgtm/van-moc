@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react'
 import { ChevronRight, Clock3, PackageCheck, ShoppingBag, Truck, XCircle } from 'lucide-react'
 import { Link } from 'react-router-dom'
-import { accountApi, type Me } from '../api/account'
+import { accountApi } from '../api/account'
 import { getOrder, money, ORDER_LABELS, type OrderDetail, type OrderPage } from '../api/orders'
-import { AccountLayout } from '../components/AccountLayout'
 
 type Filter = 'all' | 'processing' | 'shipping' | 'delivered' | 'cancelled'
 const FILTERS: { value: Filter; label: string }[] = [
@@ -16,7 +15,6 @@ const ICONS = { all: ShoppingBag, processing: Clock3, shipping: Truck, delivered
 export function OrderHistoryPage() {
   const [filter, setFilter] = useState<Filter>('all')
   const [orders, setOrders] = useState<OrderDetail[]>([])
-  const [me, setMe] = useState<Me | null>(null)
   const [page, setPage] = useState(0)
   const [totalPages, setTotalPages] = useState(0)
   const [loading, setLoading] = useState(true)
@@ -27,10 +25,10 @@ export function OrderHistoryPage() {
     // Loading belongs to the page/retry request lifecycle, not a derived value.
     // oxlint-disable-next-line react/set-state-in-effect
     setLoading(true); setError('')
-    Promise.all([accountApi<Me>('/api/me'), accountApi<OrderPage>(`/api/orders?page=${page}`)])
-      .then(async ([user, result]) => {
+    accountApi<OrderPage>(`/api/orders?page=${page}`)
+      .then(async result => {
         const rows = await Promise.all(result.content.map(row => getOrder(row.orderId!)))
-        if (active) { setMe(user); setOrders(rows); setTotalPages(result.totalPages) }
+        if (active) { setOrders(rows); setTotalPages(result.totalPages) }
       }).catch((cause: Error) => { if (active) { setError(cause.message); setOrders([]) } })
       .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
@@ -38,7 +36,8 @@ export function OrderHistoryPage() {
   const visibleOrders = filter === 'all' ? orders : orders.filter(order => group(order) === filter)
   const countFor = (value: Filter) => value === 'all' ? orders.length : orders.filter(order => group(order) === value).length
   return (
-    <AccountLayout me={me} title="Lịch sử đơn hàng" description="Theo dõi những đơn hàng bạn đã đặt tại Vân Mộc.">
+    <>
+      <header className="account-layout__heading"><h1>Lịch sử đơn hàng</h1><p>Theo dõi những đơn hàng bạn đã đặt tại Vân Mộc.</p></header>
         <section className="orders-content">
           <div className="orders-filters" role="tablist" aria-label="Lọc đơn hàng trên trang hiện tại">
             {FILTERS.map(item => <button className={filter === item.value ? 'is-active' : ''} type="button" role="tab" aria-selected={filter === item.value} key={item.value} onClick={() => setFilter(item.value)}>
@@ -78,6 +77,6 @@ export function OrderHistoryPage() {
             <button type="button" disabled={loading || page + 1 >= totalPages} onClick={() => setPage(value => value + 1)}>Trang sau</button>
           </div>
         </section>
-    </AccountLayout>
+    </>
   )
 }

@@ -60,7 +60,7 @@ public class SecurityConfig {
                 .requestMatchers("/api/admin/orders/*/status").authenticated()
                 .requestMatchers("/api/admin/shipping", "/api/admin/shipping/*").authenticated()
                 .requestMatchers(HttpMethod.GET, "/api/engraving-fonts", "/api/categories", "/api/products", "/api/products/*", "/api/products/by-slug/*",
-                        "/api/provinces", "/api/provinces/*/wards").permitAll()
+                        "/api/provinces", "/api/provinces/*/wards", "/api/shipping/quote").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/auth/csrf").permitAll()
                 .requestMatchers("/oauth2/**", "/login/**", "/error").permitAll()
                 .requestMatchers("/api/me", "/api/addresses", "/api/addresses/*", "/api/cart", "/api/cart/**")

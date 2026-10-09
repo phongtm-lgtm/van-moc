@@ -3,9 +3,10 @@ import { ArrowRight, Check, Copy, CreditCard, Info, Pencil, QrCode, Truck, X } f
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useCart } from '../hooks/useCart'
 import type { CartItem } from '../contexts/cart-context'
-import { accountApi, type Address } from '../api/account'
+import { accountApi, AccountApiError, type Address } from '../api/account'
 import { getPayment, type Payment, type CheckoutResult, type CheckoutRequest } from '../api/orders'
 import { api, ApiError } from '../api/catalog'
+import './CheckoutPage.css'
 import './BankTransferModal.css'
 
 const SHIPPING_OPTIONS = [
@@ -16,6 +17,15 @@ const PAYMENT_WAIT_SECONDS = 15 * 60
 const DRAFT_KEY = 'vanmoc.checkout.draft'
 type Delivery = { recipientName: string; phone: string; provinceCode: number; wardCode: number; addressLine: string }
 const EMPTY_DELIVERY: Delivery = { recipientName: '', phone: '', provinceCode: 0, wardCode: 0, addressLine: '' }
+type DeliveryErrors = Partial<Record<keyof Delivery | 'note', string>>
+const DELIVERY_MESSAGES: Record<keyof Delivery | 'note', string> = {
+  recipientName: 'Vui lòng nhập họ và tên (tối đa 255 ký tự).',
+  phone: 'Số điện thoại không hợp lệ. Nhập 8–20 ký tự gồm số, dấu +, khoảng trắng, dấu ngoặc hoặc dấu -.',
+  provinceCode: 'Vui lòng chọn Tỉnh / Thành phố.',
+  wardCode: 'Vui lòng chọn Phường / Xã hợp lệ.',
+  addressLine: 'Vui lòng nhập địa chỉ chi tiết (tối đa 2000 ký tự).',
+  note: 'Ghi chú đơn hàng không được vượt quá 2000 ký tự.',
+}
 type SelectedProduct = { productId: string; customization: string }
 function selectionOf(item: CartItem): SelectedProduct {
   const engraving = item.customization
@@ -60,9 +70,13 @@ export function CheckoutPage() {
   const [wards, setWards] = useState<LocationOption[]>([])
   const [preview, setPreview] = useState<CheckoutResult | null>(null)
   const [previewFor, setPreviewFor] = useState('')
+  const [shippingQuote, setShippingQuote] = useState<{ provinceCode: number; fee: number } | null>(null)
+  const [shippingError, setShippingError] = useState('')
+  const [shippingRetry, setShippingRetry] = useState(0)
   const [created, setCreated] = useState<CheckoutResult | null>(null)
   const [bankPayment, setBankPayment] = useState<Payment | null>(null)
   const [error, setError] = useState('')
+  const [fieldErrors, setFieldErrors] = useState<DeliveryErrors>({})
   const [busy, setBusy] = useState(false)
   const [checking, setChecking] = useState(false)
   const [paymentCheckNotice, setPaymentCheckNotice] = useState('')
@@ -77,7 +91,8 @@ export function CheckoutPage() {
 
   const productTotal = created?.productSubtotal ?? preview?.productSubtotal ?? items.reduce((sum, item) => sum + item.product.price * item.quantity, 0)
   const customizationTotal = created?.engravingTotal ?? preview?.engravingTotal ?? items.reduce((sum, item) => sum + (item.customization?.fee ?? 0) * item.quantity, 0)
-  const shippingFee = created?.shippingFee ?? preview?.shippingFee ?? 0
+  const shippingReady = shippingQuote?.provinceCode === delivery.provinceCode
+  const shippingFee = created?.shippingFee ?? preview?.shippingFee ?? (shippingReady ? shippingQuote.fee : 0)
   const total = bankPayment?.amount ?? created?.grandTotal ?? preview?.grandTotal ?? 0
   const itemCount = items.reduce((count, item) => count + item.quantity, 0)
   const selection = JSON.stringify(items.map(item => item.key).sort())
@@ -87,6 +102,16 @@ export function CheckoutPage() {
   const previewInput = JSON.stringify([selection, addressId, delivery, payment, note, items.map(item => [item.quantity, item.lineTotal, item.customization])])
   const missingSelection = !!selectedProducts && items.length < selectedProducts.length
   const previewReady = !!preview && previewFor === previewInput && !loading && !missingSelection
+  const shippingLabel = created || previewReady || shippingReady ? formatPrice(shippingFee)
+    : !delivery.provinceCode ? 'Chọn tỉnh / thành' : shippingError ? 'Chưa tính được' : 'Đang tính…'
+  useEffect(() => {
+    if (!delivery.provinceCode) return
+    const controller = new AbortController()
+    api<{ provinceCode: number; fee: number }>(`/api/shipping/quote?provinceCode=${delivery.provinceCode}`, controller.signal)
+      .then(result => { if (!controller.signal.aborted) { setShippingQuote(result); setShippingError('') } })
+      .catch((cause: Error) => { if (!controller.signal.aborted) setShippingError(cause.message) })
+    return () => controller.abort()
+  }, [delivery.provinceCode, shippingRetry])
   useEffect(() => {
     let active = true
     api<LocationOption[]>('/api/provinces').then(rows => { if (active) setProvinces(rows) })
@@ -166,6 +191,29 @@ export function CheckoutPage() {
     return () => window.clearInterval(timer)
   }, [showBankTransfer, bankPayment?.expiresAt])
 
+  const updateDelivery = <K extends keyof Delivery>(field: K, value: Delivery[K]) => {
+    if (field === 'provinceCode') { setShippingQuote(null); setShippingError('') }
+    setDelivery(current => ({ ...current, [field]: value, ...(field === 'provinceCode' ? { wardCode: 0 } : {}) }))
+    setFieldErrors(current => ({ ...current, [field]: undefined, ...(field === 'provinceCode' ? { wardCode: undefined } : {}) }))
+  }
+  const focusField = (errors: DeliveryErrors) => {
+    const field = Object.keys(errors)[0]
+    if (field) requestAnimationFrame(() => document.getElementById(`checkout-${field}`)?.focus())
+  }
+  const handleSubmitError = (cause: unknown) => {
+    if (cause instanceof AccountApiError && cause.invalidParams.length) {
+      const errors: DeliveryErrors = {}
+      for (const { field } of cause.invalidParams) {
+        if (Object.hasOwn(DELIVERY_MESSAGES, field)) errors[field as keyof DeliveryErrors] = DELIVERY_MESSAGES[field as keyof DeliveryErrors]
+      }
+      if (Object.keys(errors).length) { setFieldErrors(errors); focusField(errors); return }
+    }
+    setError((cause as Error).message)
+  }
+  const fieldError = (field: keyof DeliveryErrors) => fieldErrors[field]
+    ? <small id={`checkout-${field}-error`} className="checkout-field__error" role="alert">{fieldErrors[field]}</small> : null
+  const fieldProps = (field: keyof DeliveryErrors) => ({ id: `checkout-${field}`, 'aria-invalid': !!fieldErrors[field], 'aria-describedby': fieldErrors[field] ? `checkout-${field}-error` : undefined })
+
   const placeOrder = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
     if (busy || created || loading || missingSelection || !items.length) return
@@ -175,10 +223,15 @@ export function CheckoutPage() {
       navigate('/login', { state: { from: '/checkout' } })
       return
     }
-    if (!delivery.recipientName.trim() || !delivery.phone.trim() || !delivery.wardCode || !delivery.addressLine.trim()) {
-      setError('Vui lòng nhập đầy đủ thông tin nhận hàng.'); return
-    }
-    if (delivery.phone.trim().length < 8) { setError('Số điện thoại không hợp lệ.'); return }
+    const errors: DeliveryErrors = {}
+    if (!delivery.recipientName.trim() || delivery.recipientName.trim().length > 255) errors.recipientName = DELIVERY_MESSAGES.recipientName
+    if (!/^[+0-9 ()-]{8,20}$/.test(delivery.phone.trim())) errors.phone = DELIVERY_MESSAGES.phone
+    if (!delivery.provinceCode) errors.provinceCode = DELIVERY_MESSAGES.provinceCode
+    if (!delivery.wardCode) errors.wardCode = DELIVERY_MESSAGES.wardCode
+    if (!delivery.addressLine.trim() || delivery.addressLine.trim().length > 2000) errors.addressLine = DELIVERY_MESSAGES.addressLine
+    if (note.length > 2000) errors.note = DELIVERY_MESSAGES.note
+    setFieldErrors(errors); setError('')
+    if (Object.keys(errors).length) { focusField(errors); return }
     setBusy(true); setError('')
     let checkoutAddressId = addressId
     try {
@@ -188,7 +241,7 @@ export function CheckoutPage() {
         checkoutAddressId = saved.id
         setAddresses(rows => [...rows, saved])
       } else checkoutAddressId = match.id
-    } catch (cause) { setError((cause as Error).message); setBusy(false); return }
+    } catch (cause) { handleSubmitError(cause); setBusy(false); return }
     const payload = { cartItemIds: JSON.parse(selection) as string[], addressId: checkoutAddressId, paymentMethod: payment === 'cod' ? 'COD' as const : 'BANK_TRANSFER' as const, note }
     const hash = JSON.stringify(payload)
     if (attempt.current && attempt.current.hash !== hash) {
@@ -209,7 +262,7 @@ export function CheckoutPage() {
         saveDraft({ delivery, payment, note, selectedProducts: selectedProducts ?? null })
         sessionStorage.setItem('vanmoc.oauth.return', '/checkout'); navigate('/login', { state: { from: '/checkout' } }); return
       }
-      setError((cause as Error).message)
+      handleSubmitError(cause)
     }
     finally { setBusy(false) }
   }
@@ -285,7 +338,7 @@ export function CheckoutPage() {
             <li><span>3</span><strong>Xác nhận đơn hàng</strong></li>
           </ol>
 
-          <form id="checkout-form" className="checkout-layout" onSubmit={placeOrder}>
+          <form id="checkout-form" className="checkout-layout" noValidate onSubmit={placeOrder}>
             <div className="checkout-main">
               <section className="checkout-section">
                 <h2>Thông tin giao hàng</h2>
@@ -293,37 +346,43 @@ export function CheckoutPage() {
                    {authenticated && addresses.length > 0 && <label className="checkout-field checkout-field--wide"><span>Dùng địa chỉ đã lưu (không bắt buộc)</span>
                      <select value="" disabled={busy || !!created} onChange={event => {
                        const saved = addresses.find(row => row.id === event.target.value)
-                       if (saved) setDelivery({ recipientName: saved.recipientName, phone: saved.phone, provinceCode: saved.provinceCode, wardCode: saved.wardCode, addressLine: saved.addressLine })
+                      if (saved) { setFieldErrors({}); setShippingError(''); setDelivery({ recipientName: saved.recipientName, phone: saved.phone, provinceCode: saved.provinceCode, wardCode: saved.wardCode, addressLine: saved.addressLine }) }
                      }}>
                        <option value="">Nhập địa chỉ mới</option>{addresses.map(row => <option key={row.id} value={row.id}>{row.label} — {row.addressLine}, {row.wardName}</option>)}
                      </select>
                    </label>}
                    <label className="checkout-field checkout-field--wide">
                      <span>Họ và tên <b>*</b></span>
-                     <input required maxLength={255} value={delivery.recipientName} disabled={busy || !!created} onChange={event => setDelivery(value => ({ ...value, recipientName: event.target.value }))} />
+                     <input {...fieldProps('recipientName')} required maxLength={255} autoComplete="name" value={delivery.recipientName} disabled={busy || !!created} onChange={event => updateDelivery('recipientName', event.target.value)} />
+                     {fieldError('recipientName')}
                    </label>
                    <label className="checkout-field checkout-field--wide">
                      <span>Số điện thoại <b>*</b></span>
-                     <input required type="tel" pattern="[+0-9 ()-]{8,20}" value={delivery.phone} disabled={busy || !!created} onChange={event => setDelivery(value => ({ ...value, phone: event.target.value }))} />
+                     <input {...fieldProps('phone')} required type="tel" autoComplete="tel" maxLength={20} value={delivery.phone} disabled={busy || !!created} onChange={event => updateDelivery('phone', event.target.value)} />
+                     {fieldError('phone')}
                    </label>
                    <label className="checkout-field">
                      <span>Tỉnh / Thành phố <b>*</b></span>
-                     <select required value={delivery.provinceCode || ''} disabled={busy || !!created} onChange={event => { setWards([]); setDelivery(value => ({ ...value, provinceCode: Number(event.target.value), wardCode: 0 })) }}>
+                     <select {...fieldProps('provinceCode')} required value={delivery.provinceCode || ''} disabled={busy || !!created} onChange={event => { setWards([]); updateDelivery('provinceCode', Number(event.target.value)) }}>
                        <option value="">Chọn tỉnh / thành</option>{provinces.map(row => <option key={row.code} value={row.code}>{row.name}</option>)}
                      </select>
+                     {fieldError('provinceCode')}
                    </label>
                    <label className="checkout-field">
                      <span>Phường / Xã <b>*</b></span>
-                     <select required value={delivery.wardCode || ''} disabled={busy || !!created || !delivery.provinceCode} onChange={event => setDelivery(value => ({ ...value, wardCode: Number(event.target.value) }))}>
+                     <select {...fieldProps('wardCode')} required value={delivery.wardCode || ''} disabled={busy || !!created || !delivery.provinceCode} onChange={event => updateDelivery('wardCode', Number(event.target.value))}>
                        <option value="">Chọn phường / xã</option>{wards.map(row => <option key={row.code} value={row.code}>{row.name}</option>)}
                      </select>
+                     {fieldError('wardCode')}
                    </label>
                    <label className="checkout-field checkout-field--wide">
                      <span>Địa chỉ chi tiết <b>*</b></span>
-                     <textarea required maxLength={2000} value={delivery.addressLine} rows={3} disabled={busy || !!created} onChange={event => setDelivery(value => ({ ...value, addressLine: event.target.value }))} />
+                     <textarea {...fieldProps('addressLine')} required maxLength={2000} autoComplete="street-address" value={delivery.addressLine} rows={3} disabled={busy || !!created} onChange={event => updateDelivery('addressLine', event.target.value)} />
+                     {fieldError('addressLine')}
                   </label>
                   <label className="checkout-field checkout-field--wide">
-                    <span>Ghi chú đơn hàng</span><textarea value={note} maxLength={2000} disabled={busy || !!created} onChange={event => setNote(event.target.value)} />
+                    <span>Ghi chú đơn hàng</span><textarea {...fieldProps('note')} value={note} maxLength={2000} disabled={busy || !!created} onChange={event => { setNote(event.target.value); setFieldErrors(current => ({ ...current, note: undefined })) }} />
+                    {fieldError('note')}
                   </label>
                 </div>
               </section>
@@ -340,10 +399,11 @@ export function CheckoutPage() {
                       <span className="checkout-option__copy">
                         <strong>{option.title} ({option.time})</strong>
                       </span>
-                      <b>{created || previewReady ? formatPrice(shippingFee) : 'Đang tính'}</b>
+                      <b>{shippingLabel}</b>
                     </label>
                   ))}
                 </div>
+                {shippingError && !shippingReady && !previewReady && <p className="checkout-field__error" role="alert">Không tải được phí giao hàng. <button type="button" onClick={() => { setShippingError(''); setShippingRetry(value => value + 1) }}>Thử lại</button></p>}
               </section>
             </div>
 
@@ -377,8 +437,8 @@ export function CheckoutPage() {
                 <div className="checkout-totals">
                    <div><span>Tạm tính</span><strong>{formatPrice(productTotal)}{!created && !previewReady && ' (tạm tính)'}</strong></div>
                   {customizationTotal > 0 && <div><span>Phí khác</span><strong>{formatPrice(customizationTotal)}</strong></div>}
-                  <div><span>Phí vận chuyển</span><strong>{created || previewReady ? formatPrice(shippingFee) : 'Đang tính'}</strong></div>
-                  <div className="checkout-totals__grand"><span>Tổng cộng</span><strong>{created || previewReady ? formatPrice(total) : 'Chờ kiểm tra đơn hàng'}</strong></div>
+                  <div><span>Phí vận chuyển</span><strong>{shippingLabel}</strong></div>
+                  <div className="checkout-totals__grand"><span>Tổng cộng</span><strong>{created || previewReady ? formatPrice(total) : shippingReady ? `${formatPrice(productTotal + customizationTotal + shippingFee)} (tạm tính)` : 'Chờ kiểm tra đơn hàng'}</strong></div>
                 </div>
               </section>
 
@@ -415,9 +475,9 @@ export function CheckoutPage() {
 
       {showBankTransfer && (
         <div className="checkout-modal-layer" role="presentation">
-          <button className="checkout-modal-layer__backdrop" type="button" onClick={closeBankTransfer} aria-label="Đóng thông tin chuyển khoản" />
+          <button className="checkout-modal-layer__backdrop" type="button" onClick={closeBankTransfer} aria-label="Đóng thông tin chuyển khoản và xem đơn hàng" />
           <section className="bank-modal checkout-modal" role="dialog" aria-modal="true" aria-labelledby="bank-modal-title">
-            <button className="checkout-modal__close" type="button" onClick={closeBankTransfer} aria-label="Đóng"><X size={18} /></button>
+            <button className="checkout-modal__close" type="button" onClick={closeBankTransfer} aria-label="Đóng và xem đơn hàng"><X size={18} /></button>
             <h2 id="bank-modal-title">Thanh toán qua mã QR</h2>
             <div className="bank-modal__content">
                <div className="bank-modal__qr">{qrUrl && waitSeconds > 0 ? <><img src={qrUrl} alt="Mã QR chuyển khoản đơn hàng" /><p className="bank-modal__qr-guide">Quét mã bằng ứng dụng ngân hàng để thanh toán</p></> : <p>{bankPayment ? 'QR không còn hiệu lực' : 'Đang tải thanh toán…'}</p>}</div>

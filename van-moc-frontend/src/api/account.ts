@@ -2,6 +2,13 @@ import { API_BASE, ApiError } from './catalog'
 
 export type Me = { id: string; email: string; fullName: string; avatarUrl: string | null; role: string }
 export type Address = { id: string; label: string; recipientName: string; phone: string; wardCode: number; wardName: string; provinceCode: number; provinceName: string; addressLine: string; isDefault: boolean }
+export class AccountApiError extends ApiError {
+  invalidParams: { field: string; message: string }[]
+  constructor(status: number, message: string, invalidParams: { field: string; message: string }[] = []) {
+    super(status, message)
+    this.invalidParams = invalidParams
+  }
+}
 export async function accountApi<T>(path: string, method = 'GET', body?: unknown, signal?: AbortSignal): Promise<T> {
   const headers: Record<string, string> = { 'Accept-Language': 'vi' }
   if (body !== undefined) headers['Content-Type'] = 'application/json'
@@ -13,7 +20,7 @@ export async function accountApi<T>(path: string, method = 'GET', body?: unknown
   }
   const response = await fetch(`${API_BASE}${path}`, { credentials: 'include', method, headers, signal, body: body === undefined ? undefined : JSON.stringify(body) })
   if (!response.ok) {
-    const problem: { code?: string; detail?: string } = await response.json().catch(() => ({}))
+    const problem: { code?: string; detail?: string; invalid_params?: { field: string; message: string }[] } = await response.json().catch(() => ({}))
     const messages: Record<string, string> = {
       INVALID_ENGRAVING: 'Nội dung/font/vị trí khắc không hợp lệ.',
       INSUFFICIENT_STOCK: 'Tổng số lượng sản phẩm vượt tồn kho hiện tại.',
@@ -28,7 +35,7 @@ export async function accountApi<T>(path: string, method = 'GET', body?: unknown
       INVALID_SHIPPING_FEE: 'Phí giao hàng phải là số nguyên VND không âm.',
       PROVINCE_NOT_FOUND: 'Tỉnh/thành không còn khả dụng.',
     }
-    throw new ApiError(response.status, response.status === 401 ? 'Vui lòng đăng nhập Google.' : messages[problem.code || ''] || 'Yêu cầu không thành công. Kiểm tra dữ liệu và thử lại.')
+    throw new AccountApiError(response.status, response.status === 401 ? 'Vui lòng đăng nhập Google.' : messages[problem.code || ''] || 'Yêu cầu không thành công. Kiểm tra dữ liệu và thử lại.', problem.invalid_params)
   }
   return response.status === 204 ? undefined as T : response.json() as Promise<T>
 }

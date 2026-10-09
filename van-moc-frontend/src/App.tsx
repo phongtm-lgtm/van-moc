@@ -10,6 +10,7 @@ import { TraceabilityPage } from './pages/TraceabilityPage'
 import { AccountPage, LoginPage } from './pages/AccountPage'
 import { AddressesPage } from './pages/AddressesPage'
 import { CheckoutPage } from './pages/CheckoutPage'
+import { AccountLayout } from './components/AccountLayout'
 import { OrderHistoryPage } from './pages/OrderHistoryPage'
 import { OrderDetailPage } from './pages/OrderDetailPage'
 import { AboutPage, ContactPage, CustomOrderPage, VillagesPage } from './pages/InfoPages'
@@ -48,10 +49,12 @@ export default function App() {
           <Route path="/shop/:id" element={<ProductDetailPage />} />
           <Route path="/cart" element={<CartPage />} />
           <Route path="/checkout" element={<CheckoutPage />} />
-          <Route path="/account/orders" element={<OrderHistoryPage />} />
           <Route path="/account/orders/:id" element={<OrderDetailPage />} />
-          <Route path="/account" element={<AccountPage />} />
-          <Route path="/account/addresses" element={<AddressesPage />} />
+          <Route path="/account" element={<AccountLayout />}>
+            <Route index element={<AccountPage />} />
+            <Route path="addresses" element={<AddressesPage />} />
+            <Route path="orders" element={<OrderHistoryPage />} />
+          </Route>
           <Route path="/villages" element={<VillagesPage />} />
           <Route path="/gioi-thieu" element={<AboutPage />} />
           <Route path="/truy-xuat" element={<TraceabilityPage />} />

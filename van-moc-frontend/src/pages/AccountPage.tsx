@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
-import { Link, useLocation, useNavigate, useSearchParams } from 'react-router-dom'
+import { Link, useLocation, useNavigate, useOutletContext, useSearchParams } from 'react-router-dom'
 import { X } from 'lucide-react'
 import { api, API_BASE, ApiError } from '../api/catalog'
 import { accountApi, type Address, type Me } from '../api/account'
-import { AccountLayout } from '../components/AccountLayout'
+import type { AccountOutletContext } from '../components/AccountLayout'
 
 export function LoginPage() {
   const [params] = useSearchParams()
@@ -53,7 +53,7 @@ type Location = { code: number; name: string }
 const EMPTY = { fullName: '', phone: '', email: '', provinceCode: 0, wardCode: 0, addressLine: '' }
 
 export function AccountPage() {
-  const [me, setMe] = useState<Me | null>(null)
+  const { me, setMe } = useOutletContext<AccountOutletContext>()
   const [form, setForm] = useState(EMPTY)
   const [savedForm, setSavedForm] = useState(EMPTY)
   const [address, setAddress] = useState<Address | null>(null)
@@ -91,7 +91,7 @@ export function AccountPage() {
       })
       .finally(() => { if (active) setLoading(false) })
     return () => { active = false }
-  }, [retry])
+  }, [retry, setMe])
 
   useEffect(() => {
     if (!form.provinceCode) return
@@ -139,7 +139,8 @@ export function AccountPage() {
     } finally { setBusy(false) }
   }
 
-  return <AccountLayout me={me} title="Thông tin tài khoản" description="Quản lý thông tin cá nhân và địa chỉ nhận hàng của bạn.">
+  return <>
+    <header className="account-layout__heading"><h1>Thông tin tài khoản</h1><p>Quản lý thông tin cá nhân và địa chỉ nhận hàng của bạn.</p></header>
     <section className="customer-account">
     {me?.role === 'ADMIN' && import.meta.env.VITE_ADMIN_URL && <a href={import.meta.env.VITE_ADMIN_URL}>Trang quản trị</a>}
     {loading ? <p className="customer-account__feedback" role="status">Đang tải thông tin tài khoản…</p> : !ready ?
@@ -190,5 +191,5 @@ export function AccountPage() {
         </div>
       </form>}
     </section>
-  </AccountLayout>
+  </>
 }

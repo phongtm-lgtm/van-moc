@@ -3,6 +3,7 @@ package com.vanmoc.shipping.service;
 import com.vanmoc.shipping.repository.ShippingRateJpaRepository;
 import com.vanmoc.shipping.entity.ShippingRateEntity;
 import com.vanmoc.shipping.dto.response.ShippingRatesResponse;
+import com.vanmoc.shipping.dto.response.ShippingQuoteResponse;
 import com.vanmoc.location.repository.ProvinceJpaRepository;
 import com.vanmoc.user.repository.UserJpaRepository;
 import com.vanmoc.user.enums.UserRole;
@@ -24,6 +25,12 @@ public class ShippingService {
     @Transactional(readOnly = true)
     public BigDecimal feeFor(int provinceCode) {
         return rates.findById(provinceCode).or(() -> rates.findById(0)).orElseThrow().getFee();
+    }
+    @Transactional(readOnly = true)
+    public ShippingQuoteResponse quote(int provinceCode) {
+        if (provinceCode <= 0) throw new ResourceNotFoundException("PROVINCE_NOT_FOUND");
+        validateProvince(provinceCode);
+        return new ShippingQuoteResponse(provinceCode, feeFor(provinceCode));
     }
     @Transactional(readOnly = true)
     public ShippingRatesResponse list(UUID adminId) {

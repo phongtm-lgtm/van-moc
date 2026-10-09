@@ -1,9 +1,9 @@
-.order-manager { width: 100%; color: var(--admin-text); font-size: 15px; line-height: 1.55; }
+.order-manager { width: 100%; color: var(--admin-text); font-size: 16px; line-height: 1.55; }
 .order-manager__header, .order-manager__heading, .order-pagination { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
 .order-manager__header { margin-bottom: 24px; }
 .order-manager__header h1 { font-size: 28px; font-weight: 650; letter-spacing: -.5px; line-height: 1.3; }
-.order-manager__header p { margin-top: 6px; color: var(--admin-muted); font-size: 15px; }
-.order-button { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; gap: 8px; min-height: 40px; padding: 8px 14px; border: 1px solid var(--admin-border); border-radius: 7px; background: var(--admin-surface); color: var(--admin-text); font-size: 14px; font-weight: 500; white-space: nowrap; cursor: pointer; }
+.order-manager__header p { margin-top: 6px; color: var(--admin-muted); font-size: 16px; }
+.order-button { display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; gap: 8px; min-height: 40px; padding: 8px 14px; border: 1px solid var(--admin-border); border-radius: 7px; background: var(--admin-surface); color: var(--admin-text); font-size: 15px; font-weight: 500; white-space: nowrap; cursor: pointer; }
 .order-button:hover { background: var(--admin-subtle); }
 .order-button--primary { background: #3e654c; border-color: #3e654c; color: white; }
 .order-button--primary:hover { background: #31533e; }
@@ -11,39 +11,39 @@
 .order-manager button:disabled { opacity: .45; cursor: not-allowed; }
 .order-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; margin-bottom: 24px; }
 .order-stat { display: flex; flex-direction: column; align-items: flex-start; gap: 5px; padding: 18px 22px; border: 1px solid var(--admin-border); border-radius: 10px; background: var(--admin-surface); text-align: left; }
-.order-stat > span { color: var(--admin-muted); font-size: 14px; }
+.order-stat > span { color: var(--admin-muted); font-size: 16px; }
 .order-stat strong { font-size: 28px; font-weight: 600; line-height: 1.4; font-variant-numeric: tabular-nums; }
-.order-stat small { color: var(--admin-muted); font-size: 13px; }
+.order-stat small { color: var(--admin-muted); font-size: 15px; }
 .order-stat--pending { cursor: pointer; border-top: 3px solid var(--admin-accent); padding-top: 16px; }
 .order-stat--pending:hover { background: var(--admin-subtle); }
 .order-stat--pending strong { color: var(--admin-accent); }
 .order-list-panel { padding: 22px; border: 1px solid var(--admin-border); border-radius: 10px; background: var(--admin-surface); }
 .order-manager__heading { margin-bottom: 16px; }
-.order-manager__heading h2 { font-weight: 600; font-size: 18px; }
-.order-manager__heading > span { color: var(--admin-muted); font-size: 14px; }
+.order-manager__heading h2 { font-weight: 600; font-size: 20px; }
+.order-manager__heading > span { color: var(--admin-muted); font-size: 15px; }
 .order-tabs { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; padding-bottom: 14px; border-bottom: 1px solid var(--admin-border); margin-bottom: 18px; }
-.order-tab { display: inline-flex; align-items: center; gap: 7px; border-radius: 6px; padding: 8px 11px; color: var(--admin-muted); font-size: 14px; font-weight: 500; cursor: pointer; }
+.order-tab { display: inline-flex; align-items: center; gap: 7px; border-radius: 6px; padding: 8px 11px; color: var(--admin-muted); font-size: 16px; font-weight: 500; cursor: pointer; }
 .order-tab:hover { background: var(--admin-subtle); color: var(--admin-text); }
 .order-tab--active, .order-tab--active:hover { background: var(--admin-tint); color: var(--admin-accent); font-weight: 600; }
-.order-tab > span { min-width: 22px; padding: 0 5px; border-radius: 4px; background: var(--admin-surface); color: var(--admin-accent); font-size: 13px; text-align: center; }
+.order-tab > span { min-width: 22px; padding: 0 5px; border-radius: 4px; background: var(--admin-surface); color: var(--admin-accent); font-size: 15px; text-align: center; }
 .order-filters { display: grid; grid-template-columns: 1.5fr 1fr; gap: 12px; margin-bottom: 14px; }
 .order-search { display: flex; gap: 8px; min-width: 0; }
 .order-filters input, .order-filters select { min-width: 0; width: 100%; min-height: 44px; border: 1px solid var(--admin-border); border-radius: 7px; background: var(--admin-surface); padding: 9px 12px; color: var(--admin-text); font: inherit; }
 .order-filters input::placeholder { color: var(--admin-muted); }
-.order-priority-note { color: var(--admin-muted); font-size: 13px; margin-bottom: 14px; }
+.order-priority-note { color: var(--admin-muted); font-size: 15px; margin-bottom: 14px; }
 .order-table-wrap { overflow-x: auto; }
-.order-table { border-collapse: collapse; width: 100%; min-width: 650px; text-align: left; font-size: 15px; }
-.order-table th { padding: 12px; border-bottom: 1px solid var(--admin-border); background: var(--admin-subtle); color: var(--admin-muted); font-size: 13px; font-weight: 600; }
+.order-table { border-collapse: collapse; width: 100%; min-width: 650px; text-align: left; font-size: 16px; }
+.order-table th { padding: 12px; border-bottom: 1px solid var(--admin-border); background: var(--admin-subtle); color: var(--admin-muted); font-size: 15px; font-weight: 600; }
 .order-table td { padding: 16px 12px; border-bottom: 1px solid var(--admin-border); vertical-align: top; }
 .order-table tbody tr:last-child td { border-bottom: 0; }
 .order-table tbody tr:hover { background: var(--admin-subtle); }
 .order-row--pending { background: color-mix(in srgb, var(--admin-tint) 40%, var(--admin-surface)); }
 .order-code { display: inline-block; font-weight: 600; white-space: nowrap; }
 .order-code:hover { color: var(--admin-accent); text-decoration: underline; }
-.order-recipient, .order-date, .order-payment, .order-method { display: block; color: var(--admin-muted); font-size: 13px; margin-top: 4px; }
+.order-recipient, .order-date, .order-payment, .order-method { display: block; color: var(--admin-muted); font-size: 15px; margin-top: 4px; }
 .order-date { white-space: nowrap; }
 .order-payment--paid { color: var(--admin-accent); }
-.order-status { display: inline-block; padding: 3px 8px; border-radius: 5px; background: var(--admin-subtle); font-size: 13px; font-weight: 500; }
+.order-status { display: inline-block; padding: 3px 8px; border-radius: 5px; background: var(--admin-subtle); font-size: 15px; font-weight: 500; }
 .order-status--pending_confirmation { color: #985e20; background: #fbf0df; }
 .order-status--cancelled { color: #b14848; background: #faeceb; }
 .order-status--confirmed, .order-status--processing, .order-status--ready_to_ship, .order-status--shipping { color: #48647b; background: #ecf1f6; }
@@ -57,11 +57,11 @@
 .order-total strong { font-weight: 600; }
 .order-actions { text-align: right; }
 .order-actions > div { display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 8px; }
-.order-action-hint { display: block; margin-top: 6px; color: var(--admin-muted); font-size: 12px; }
+.order-action-hint { display: block; margin-top: 6px; color: var(--admin-muted); font-size: 14px; }
 .order-table .order-empty { padding: 40px 12px; text-align: center; color: var(--admin-muted); }
-.order-pagination { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--admin-border); color: var(--admin-muted); font-size: 14px; }
+.order-pagination { margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--admin-border); color: var(--admin-muted); font-size: 15px; }
 .order-pagination > div { display: flex; align-items: center; gap: 12px; }
-.order-feedback { margin-bottom: 20px; font-size: 14px; }
+.order-feedback { margin-bottom: 20px; font-size: 15px; }
 .order-notice { padding: 12px 16px; border: 1px solid var(--admin-border); border-radius: 7px; background: var(--admin-tint); color: var(--admin-accent); }
 @media (max-width: 767px) {
   .order-manager__header { align-items: flex-start; }
@@ -70,7 +70,7 @@
   .order-stat { padding: 14px 12px; }
   .order-stat--pending { padding-top: 12px; }
   .order-stat strong { font-size: 26px; }
-  .order-stat > span { font-size: 13px; }
+  .order-stat > span { font-size: 15px; }
   .order-list-panel { padding: 16px; }
   .order-filters { grid-template-columns: 1fr; }
   .order-pagination { flex-wrap: wrap; }

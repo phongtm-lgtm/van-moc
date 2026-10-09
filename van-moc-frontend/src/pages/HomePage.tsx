@@ -5,12 +5,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Hand,
-  HandHeart,
   Hourglass,
-  ImageIcon,
   Leaf,
-  MessageCircle,
-  PencilLine,
   ShoppingCart,
   Sparkles,
   Star,
@@ -123,25 +119,21 @@ const REVIEWS = [
 const CUSTOM_STEPS = [
   {
     step: '01',
-    icon: ImageIcon,
     title: 'Gửi hình mẫu',
     desc: 'Gửi hình ảnh hoặc ý tưởng về sản phẩm bạn mong muốn.',
   },
   {
     step: '02',
-    icon: MessageCircle,
     title: 'Nhận tư vấn',
     desc: 'Vân Mộc tư vấn kiểu dáng, chất liệu, kích thước phù hợp.',
   },
   {
     step: '03',
-    icon: PencilLine,
     title: 'Xác nhận thiết kế',
     desc: 'Thống nhất bản thiết kế trước khi chế tác.',
   },
   {
     step: '04',
-    icon: HandHeart,
     title: 'Chế tác thủ công',
     desc: 'Nghệ nhân làng nghề Thụy Ứng trực tiếp chế tác, hoàn thiện từng chi tiết.',
   },
@@ -999,16 +991,6 @@ export function HomePage() {
           </Reveal>
 
           <Reveal className="custom-info-panel delay-150">
-            <div className="custom-panel-side" aria-hidden>
-              <svg className="custom-panel-lotus" viewBox="0 0 120 150" fill="none">
-                <path d="M60 142c1-38 0-72-1-100" />
-                <path d="M59 44C40 34 35 18 42 2c12 6 18 16 18 30 0-14 8-24 21-29 5 17-1 31-22 41Z" />
-                <path d="M58 58c-19-8-32-5-40 8 13 9 27 9 40-1M60 78c21-10 35-8 43 6-13 11-28 11-43 1" />
-                <path d="M58 32C49 26 49 16 58 6c10 10 10 19 1 26" />
-              </svg>
-              <p className="custom-panel-side-label">Giữ gìn tinh hoa thủ công Việt</p>
-            </div>
-
             <header className="relative z-10 max-w-2xl">
               <div className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#876342] md:text-[11px]">
                 <span className="h-px w-8 bg-[#ad7a38]" />
@@ -1016,26 +998,14 @@ export function HomePage() {
               </div>
               <h2 className="mt-3.5 max-w-xl text-[1.85rem] leading-[1.15] text-[#241a13] md:text-[2.35rem] lg:text-[2.55rem]">
                 Chế tác riêng từ ý tưởng của bạn
-                <span className="custom-seal custom-seal--inline" aria-hidden>
-                  <svg viewBox="0 0 32 32" fill="none">
-                    <rect x="1.5" y="1.5" width="29" height="29" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
-                    <path d="M10 8.5h12M10 16h12M10 23.5h12M16 8.5v15" stroke="currentColor" strokeWidth="1.3" />
-                    <path d="M8.5 11.5c3.2-1.8 7.2-2 11.2-.4M8.5 19c3.4-1.5 7-1.6 11.2-.2" stroke="currentColor" strokeWidth="1.1" />
-                  </svg>
-                </span>
               </h2>
 
             </header>
 
-            <ol className="relative z-10 mt-6 grid gap-3 sm:grid-cols-2 sm:gap-3.5">
+            <ol className="custom-steps relative z-10 mt-8 grid sm:grid-cols-2">
               {CUSTOM_STEPS.map((step) => (
                 <li key={step.step} className="custom-step-card">
-                  <div className="custom-step-head">
-                    <span className="custom-step-number">{step.step}</span>
-                    <span className="custom-step-icon" aria-hidden>
-                      <step.icon size={20} strokeWidth={1.4} />
-                    </span>
-                  </div>
+                  <span className="custom-step-number">{step.step}</span>
                   <h3>{step.title}</h3>
                   <p>{step.desc}</p>
                 </li>
@@ -1045,7 +1015,7 @@ export function HomePage() {
             <div className="relative z-10 mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 to="/custom-order"
-                className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-[#5a301a] px-8 py-3 text-sm font-semibold text-[#fff3dd] shadow-[0_6px_14px_rgba(65,35,19,0.14)] transition-colors hover:bg-[#3f2517]"
+                className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-[#5a301a] px-8 py-3 text-sm font-semibold text-[#fff3dd] transition-colors hover:bg-[#3f2517]"
               >
                 Gửi yêu cầu chế tác
                 <ArrowRight size={15} />
