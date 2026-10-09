@@ -42,6 +42,9 @@ public class SecurityConfig {
             @Value("${server.servlet.session.cookie.same-site}") String sameSite,
             @Value("${app.cors.allowed-origin}") String frontend) throws Exception {
         return http.cors(cors -> {}).csrf(csrf -> csrf.ignoringRequestMatchers("/api/payments/sepay/webhook"))
+                // API clients handle 401 themselves; saving a request in JDBC sessions is unnecessary
+                // and can race when several unauthenticated requests share the same session.
+                .requestCache(cache -> cache.disable())
                 .authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.POST, "/api/payments/sepay/webhook").permitAll()
                 .requestMatchers("/api/admin/login").permitAll()
