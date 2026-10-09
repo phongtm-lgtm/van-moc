@@ -1,0 +1,103 @@
+/* Shared UI type scale. Marketing heroes and engraving previews stay independent. */
+:root {
+  --vm-type-page: clamp(1.75rem, 2.5vw, 2.25rem);
+  --vm-type-section: clamp(1.25rem, 1.7vw, 1.5rem);
+  --vm-type-body: .9375rem;
+  --vm-type-label: .875rem;
+  --vm-type-small: .8125rem;
+}
+
+body { font-size: var(--vm-type-body); line-height: 1.6; }
+button, input, select, textarea { font-family: var(--font-sans); }
+
+.cart-page .cart-heading h1,
+.checkout-page .checkout-heading h1,
+.account-page .account-layout__heading h1,
+.order-view .order-view__header h1 {
+  font-size: var(--vm-type-page);
+  line-height: 1.3;
+  font-weight: 400;
+}
+
+.info-page h1,
+.tx-hero__copy h1 { font-size: clamp(1.875rem, 3.3vw, 3rem); line-height: 1.3; }
+.policy-page h1 { font-size: var(--vm-type-page); line-height: 1.3; }
+.info-page section h2 { font-size: var(--vm-type-section); line-height: 1.4; }
+.info-page section p { font-size: var(--vm-type-body); line-height: 1.75; }
+.home-hero__title, .craft-hero h1 { font-weight: 400; }
+
+.checkout-page .checkout-section h2,
+.cart-page .cart-summary h2,
+.order-view__section h2 {
+  font-size: var(--vm-type-section);
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+.custom-step-card h3 {
+  font-family: var(--font-sans);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+.custom-step-number { font-family: var(--font-display); }
+.tx-artisan__quote p { font-family: var(--font-sans); line-height: 1.75; }
+
+.checkout-page .checkout-field > span,
+.account-page .customer-account label { font-size: var(--vm-type-label); line-height: 1.5; }
+.checkout-page .checkout-field :is(input, select, textarea),
+.account-page .customer-account :is(input, select, textarea) {
+  font-size: var(--vm-type-body);
+  line-height: 1.5;
+}
+.checkout-page .checkout-option__copy strong,
+.checkout-page .checkout-product__copy strong,
+.order-view__product h3 { font-size: var(--vm-type-label); line-height: 1.5; }
+
+.checkout-page .checkout-product__copy small,
+.checkout-page .checkout-field em,
+.checkout-page .checkout-shipping span,
+.checkout-page .checkout-address-confirm p,
+.checkout-page .checkout-order__terms,
+.checkout-page .checkout-field__error,
+.account-page .customer-account label small,
+.order-view__product small,
+.order-view__timeline time,
+.order-view__timeline p,
+.order-view__product p,
+.order-view__qr p,
+.order-view__notice,
+.cart-page .cart-summary > small {
+  font-size: var(--vm-type-small);
+  line-height: 1.65;
+}
+
+.order-view__delivery,
+.order-view__transfer,
+.order-view__totals,
+.order-view__timeline li,
+.order-view__countdown,
+.order-view__cancel,
+.checkout-page .checkout-option__copy strong,
+.checkout-page .checkout-address-confirm button,
+.bank-modal .bank-modal__notice,
+.bank-modal .bank-modal__confirm { font-size: var(--vm-type-label); line-height: 1.6; }
+.bank-modal .bank-modal__qr-guide { font-size: var(--vm-type-small); line-height: 1.6; }
+
+.tx-hero__badge p,
+.tx-hero__eyebrow,
+.tx-profile__kicker,
+.tx-meta__item p,
+.tx-artisan__label,
+.tx-strip__note,
+.custom-collage-label,
+.shop-product-card__stock,
+.shop-pagination button { font-size: .8125rem; line-height: 1.6; }
+
+footer p.text-\[10px\], footer p.text-\[11px\] { font-size: .75rem; line-height: 1.65; }
+
+@media (max-width: 600px) {
+  .checkout-page .checkout-field :is(input, select, textarea),
+  .account-page .customer-account :is(input, select, textarea),
+  .account-addresses__modal.customer-account :is(input, select, textarea) { font-size: 1rem; }
+}

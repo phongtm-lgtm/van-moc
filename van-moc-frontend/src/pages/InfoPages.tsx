@@ -23,7 +23,7 @@ type InfoPageProps = {
 }
 
 function InfoPage({ eyebrow, title, description, image, imageAlt, sections, action }: InfoPageProps) {
-  return <div className="bg-paper-warm min-h-screen pt-16 md:pt-20">
+  return <div className="info-page bg-paper-warm min-h-screen pt-16 md:pt-20">
     <div className="container mx-auto px-5 py-14 md:px-8 md:py-20">
       <div className="mx-auto max-w-4xl">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#9a6b1f]">{eyebrow}</p>

@@ -49,8 +49,8 @@ h1 *,
 h2 *,
 .font-display * {
   font-family: var(--font-display);
-  font-style: normal !important;
-  font-weight: 400 !important;
+   font-style: normal;
+   font-weight: 400;
 }
 
 .text-title-gradient {

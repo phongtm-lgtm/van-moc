@@ -17,7 +17,7 @@ import { AboutPage, ContactPage, CustomOrderPage, VillagesPage } from './pages/I
 
 function Placeholder({ title }: { title: string }) {
   return (
-    <div className="container mx-auto px-6 py-24 text-center">
+    <div className="policy-page container mx-auto px-6 py-24 text-center">
       <h1 className="text-3xl text-[#3f2a1a] text-title-gradient">{title}</h1>
     </div>
   )

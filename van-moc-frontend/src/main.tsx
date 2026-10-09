@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom'
 import App from './App'
 import { CartProvider } from './contexts/CartContext'
 import './index.css'
+import './typography.css'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
