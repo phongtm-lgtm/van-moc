@@ -1,0 +1,23 @@
+# Backend deployment on Linux EC2; database may run on RDS.
+# Run explicitly: docker compose -p vanmoc-app -f compose.prod.yaml up -d
+services:
+  backend:
+    image: van-moc-backend:0.0.1-SNAPSHOT
+    restart: unless-stopped
+    # Preserve the loopback-only HTTP listener (and host networking on Linux).
+    network_mode: host
+    env_file:
+      - path: ./.env.prod
+        required: true
+    volumes:
+      - type: bind
+        source: ./application-prod.yaml
+        target: /config/application-prod.yaml
+        read_only: true
+        bind:
+          create_host_path: false
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+        max-file: '3'

@@ -1,0 +1,34 @@
+.engraving-font-page { width: 100%; color: var(--admin-text); font-size: 15px; }
+.ef-heading { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; margin-bottom: 24px; }
+.ef-heading h1 { font-size: 28px; line-height: 1.3; font-weight: 600; }
+.ef-heading p, .ef-toolbar p { color: var(--admin-muted); margin-top: 6px; }
+.ef-heading a { color: var(--admin-green); font-size: 14px; }
+.ef-library { border: 1px solid var(--admin-border); border-radius: 10px; background: var(--admin-surface); overflow: hidden; }
+.ef-toolbar { display: flex; align-items: end; justify-content: space-between; flex-wrap: wrap; gap: 20px; padding: 22px 24px; }
+.ef-toolbar h2 { font-size: 19px; font-weight: 600; }
+.ef-toolbar label { display: grid; gap: 8px; width: min(100%, 360px); font-size: 14px; font-weight: 500; }
+.ef-toolbar input { width: 100%; height: 44px; padding: 10px 12px; border: 1px solid var(--admin-border); border-radius: 8px; background: var(--admin-surface); color: var(--admin-text); }
+.ef-toolbar input:focus-visible, .ef-toggle input:focus-visible + .ef-toggle-track { outline: 2px solid var(--admin-green); outline-offset: 2px; }
+.ef-list li { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 16px 24px; border-top: 1px solid var(--admin-border); }
+.ef-font-info { min-width: 0; flex: 1; }
+.ef-font-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; }
+.ef-font-heading strong { font-weight: 600; overflow-wrap: anywhere; }
+.ef-status { border-radius: 99px; padding: 3px 9px; font-size: 12px; color: var(--admin-muted); background: var(--admin-bg); }
+.ef-status.is-active { color: var(--admin-green); background: var(--admin-green-soft); }
+.ef-preview { min-height: 38px; padding-top: 8px; font-size: 23px; line-height: 1.35; overflow-wrap: anywhere; }
+.ef-preview [role="status"] { font-family: inherit; font-size: 14px; color: var(--admin-muted); }
+.ef-list li.is-hidden .ef-preview { opacity: .65; }
+.ef-toggle { display: inline-flex; align-items: center; flex-shrink: 0; gap: 12px; cursor: pointer; }
+.ef-toggle-label { font-size: 13px; color: var(--admin-muted); white-space: nowrap; }
+.ef-toggle input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.ef-toggle-track { position: relative; width: 42px; height: 24px; border-radius: 99px; background: var(--admin-border); transition: background .2s; }
+.ef-toggle-track::after { content: ''; position: absolute; top: 3px; inset-inline-start: 3px; width: 18px; height: 18px; border-radius: 50%; background: var(--admin-surface); box-shadow: 0 1px 3px #0003; transition: transform .2s; }
+.ef-toggle input:checked + .ef-toggle-track { background: var(--admin-green); }
+.ef-toggle input:checked + .ef-toggle-track::after { transform: translateX(18px); }
+.ef-toggle input:disabled + .ef-toggle-track { opacity: .55; cursor: wait; }
+.ef-feedback { padding: 14px 16px; border-radius: 8px; margin-bottom: 18px; }
+.ef-error { color: var(--admin-text); border: 1px solid var(--admin-border); background: var(--admin-surface); }
+.ef-notice { color: var(--admin-green); background: var(--admin-green-soft); }
+.ef-feedback button { margin-inline-start: 12px; color: var(--admin-green); text-decoration: underline; cursor: pointer; }
+.ef-empty { border-top: 1px solid var(--admin-border); padding: 24px; color: var(--admin-muted); }
+@media (max-width: 600px) { .ef-heading h1 { font-size: 26px; } .ef-toolbar { padding: 18px; } .ef-toolbar label { width: 100%; } .ef-list li { padding: 16px 18px; gap: 12px; } .ef-preview { font-size: 20px; } .ef-toggle-label { display: none; } }

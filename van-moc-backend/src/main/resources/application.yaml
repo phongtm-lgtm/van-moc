@@ -1,0 +1,87 @@
+spring:
+  config:
+    import: optional:file:van-moc-backend/.env[.properties],optional:file:.env[.properties]
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE}
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    locations: classpath:db/migration
+  application:
+    name: van-moc-backend
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+  session:
+    timeout: ${SESSION_TIMEOUT}
+    jdbc:
+      initialize-schema: never
+      table-name: SPRING_SESSION
+      cleanup-cron: ${SESSION_CLEANUP_CRON}
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: ${GOOGLE_CLIENT_ID}
+            client-secret: ${GOOGLE_CLIENT_SECRET}
+            scope:
+              - openid
+              - profile
+              - email
+            redirect-uri: ${GOOGLE_REDIRECT_URI}
+  mvc:
+    problemdetails:
+      enabled: true
+  messages:
+    basename: i18n/messages
+    encoding: UTF-8
+    fallback-to-system-locale: false
+
+server:
+  port: ${SERVER_PORT}
+  servlet:
+    session:
+      cookie:
+        name: JSESSIONID
+        http-only: true
+        secure: ${SESSION_COOKIE_SECURE}
+        same-site: ${SESSION_COOKIE_SAME_SITE}
+
+aws:
+  access-key: ${AWS_ACCESS_KEY:}
+  secret-key: ${AWS_SECRET_KEY:}
+  s3:
+    bucket: ${AWS_S3_BUCKET:}
+    region: ${AWS_S3_REGION:ap-southeast-1}
+  cloudfront:
+    url: ${AWS_CLOUDFRONT_URL:}
+
+app:
+  auth:
+    jwt-secret: ${JWT_SECRET}
+    jwt-ttl-seconds: ${JWT_TTL_SECONDS:3600}
+  checkout:
+    payment-timeout-minutes: ${PAYMENT_TIMEOUT_MINUTES}
+  payment:
+    sepay:
+      enabled: ${SEPAY_ENABLED}
+      webhook-secret: ${SEPAY_WEBHOOK_SECRET}
+      account-number: ${SEPAY_ACCOUNT_NUMBER}
+      bank: ${SEPAY_BANK}
+  location:
+    init-mode: ${LOCATION_INIT_MODE}
+    provinces-url: ${LOCATION_PROVINCES_URL}
+    wards-url: ${LOCATION_WARDS_URL}
+    connect-timeout-ms: ${LOCATION_CONNECT_TIMEOUT_MS}
+    read-timeout-ms: ${LOCATION_READ_TIMEOUT_MS}
+  cors:
+    allowed-origin: ${FRONTEND_ORIGIN}
+    admin-origin: ${ADMIN_ORIGIN:http://localhost:5174}

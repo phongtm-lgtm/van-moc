@@ -1,0 +1,123 @@
+.order-workspace { width: 100%; min-width: 0; color: var(--admin-text); font-size: 15px; line-height: 1.55; }
+.od-back { display: inline-flex; align-items: center; gap: 7px; margin-bottom: 18px; color: var(--admin-muted); font-size: 14px; }
+.od-back:hover, .od-phone:hover { color: var(--admin-accent); text-decoration: underline; }
+.od-header { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.od-heading { min-width: 0; }
+.od-eyebrow { color: var(--admin-muted); font-size: 14px; margin-bottom: 4px; }
+.od-title-row { display: flex; align-items: center; flex-wrap: wrap; gap: 10px 14px; }
+.od-title-row h1 { font-size: 28px; font-weight: 650; letter-spacing: -.5px; line-height: 1.3; overflow-wrap: anywhere; }
+.od-created { display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 10px; font-size: 14px; color: var(--admin-muted); }
+.od-header-actions { display: flex; flex-direction: column; align-items: flex-end; gap: 8px; flex-shrink: 0; max-width: 360px; padding-top: 4px; }
+.od-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 9px 16px; border: 1px solid var(--admin-border); border-radius: 7px; background: var(--admin-surface); color: var(--admin-text); font-size: 15px; font-weight: 500; cursor: pointer; }
+.od-button:hover { background: var(--admin-subtle); }
+.od-button--primary { background: #3e654c; border-color: #3e654c; color: #fff; }
+.od-button--primary:hover { background: #31533e; }
+.order-workspace button:disabled, .od-cod input:disabled { opacity: .5; cursor: not-allowed; }
+.od-action-hint { color: var(--admin-muted); font-size: 13px; text-align: right; }
+.od-cod { display: flex; align-items: flex-start; gap: 9px; font-size: 14px; cursor: pointer; }
+.od-cod input { width: 17px; height: 17px; margin-top: 3px; flex-shrink: 0; accent-color: var(--admin-accent); }
+.od-badge { display: inline-flex; align-items: center; padding: 4px 10px; border-radius: 6px; background: var(--admin-subtle); color: var(--admin-text); font-size: 13px; font-weight: 500; }
+.od-badge--pending_payment, .od-badge--pending_confirmation, .od-payment--pending { color: #85601f; background: #fbf0df; }
+.od-badge--confirmed, .od-badge--processing, .od-badge--ready_to_ship, .od-badge--shipping { color: #48647b; background: #ecf1f6; }
+.od-badge--completed, .od-payment--paid { color: var(--admin-accent); background: var(--admin-tint); }
+.od-badge--cancelled, .od-payment--failed, .od-payment--expired { color: #b14848; background: #faeceb; }
+.od-grid { display: grid; grid-template-columns: minmax(0, 68fr) minmax(0, 32fr); align-items: start; gap: 24px; }
+.od-main-column, .od-side-column { display: grid; gap: 24px; min-width: 0; }
+.od-panel { min-width: 0; background: var(--admin-surface); border: 1px solid var(--admin-border); border-radius: var(--admin-radius); overflow: hidden; }
+.od-panel-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; padding: 17px 20px; border-bottom: 1px solid var(--admin-border); }
+.od-panel-heading h2 { display: flex; align-items: center; gap: 9px; font-size: 18px; font-weight: 600; line-height: 1.4; }
+.od-panel-heading h2 svg { color: var(--admin-accent); flex-shrink: 0; }
+.od-panel-heading > span { color: var(--admin-muted); font-size: 13px; }
+.od-panel-body { padding: 20px; }
+.od-products { list-style: none; margin: 0; padding: 0 20px; }
+.od-product { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 16px; padding: 20px 0; }
+.od-product + .od-product { border-top: 1px solid var(--admin-border); }
+.od-thumbnail { display: grid; place-items: center; width: 72px; height: 80px; border-radius: 7px; border: 1px solid var(--admin-border); background: var(--admin-subtle); color: var(--admin-muted); overflow: hidden; }
+.od-thumbnail img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.od-product-info { min-width: 0; overflow-wrap: anywhere; }
+.od-product-info h3 { font-size: 16px; font-weight: 600; line-height: 1.45; }
+.od-product-sku { font-size: 13px; color: var(--admin-muted); margin-top: 4px; }
+.od-product-unit { margin-top: 6px; font-size: 14px; }
+.od-product-unit span { margin-left: 6px; color: var(--admin-muted); }
+.od-product-total { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; font-variant-numeric: tabular-nums; }
+.od-product-total > span, .od-product-total small { color: var(--admin-muted); font-size: 13px; }
+.od-product-total strong { font-size: 15px; font-weight: 600; white-space: nowrap; }
+.od-engraving { border-left: 2px solid var(--admin-border); padding-left: 10px; margin-top: 12px; }
+.od-engraving > p { display: flex; align-items: baseline; gap: 6px; font-size: 14px; }
+.od-engraving svg { color: var(--admin-accent); flex-shrink: 0; align-self: flex-start; margin-top: 3px; }
+.od-engraving strong { font-weight: 500; }
+.od-engraving strong span { white-space: pre-wrap; }
+.od-engraving dl { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 6px; font-size: 13px; }
+.od-engraving dl div { display: flex; gap: 5px; }
+.od-engraving dt { color: var(--admin-muted); }
+.od-engraving dt::after { content: ':'; }
+.od-pricing { display: grid; gap: 10px; }
+.od-pricing > div, .od-payment-amounts > div { display: flex; justify-content: space-between; gap: 16px; }
+.od-pricing dt, .od-payment-amounts dt { color: var(--admin-muted); }
+.od-pricing dd, .od-payment-amounts dd { font-weight: 500; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.od-pricing .od-grand-total { border-top: 1px solid var(--admin-border); padding-top: 14px; margin-top: 4px; align-items: center; }
+.od-grand-total dt { color: var(--admin-text); font-weight: 600; }
+.od-grand-total dd { color: var(--admin-accent); font-size: 22px; font-weight: 650; }
+.od-info { display: grid; gap: 18px; }
+.od-info dt { margin-bottom: 5px; color: var(--admin-muted); font-size: 13px; }
+.od-info dd { overflow-wrap: anywhere; }
+.od-recipient { font-size: 16px; font-weight: 600; }
+.od-phone { display: inline-flex; align-items: center; gap: 7px; }
+.od-info address { font-style: normal; }
+.od-note { border-top: 1px solid var(--admin-border); padding-top: 16px; }
+.od-note dd { white-space: pre-wrap; }
+.od-payment-amounts { display: grid; gap: 10px; margin: 20px 0; padding: 16px 0; border-block: 1px solid var(--admin-border); font-size: 14px; }
+.od-payment-amounts > div { flex-wrap: wrap; gap: 4px 12px; }
+.od-payment-amounts > div:last-child dd { color: var(--admin-accent); font-weight: 600; }
+.od-transfer-code { font-family: ui-monospace, monospace; font-size: 14px; }
+.od-timeline { list-style: none; margin: 0; padding: 0; }
+.od-timeline li { position: relative; margin-left: 6px; padding: 0 0 24px 24px; border-left: 1px solid var(--admin-border); }
+.od-timeline li:last-child { padding-bottom: 0; border-left-color: transparent; }
+.od-timeline-dot { position: absolute; left: -5px; top: 7px; width: 9px; height: 9px; border-radius: 50%; background: var(--admin-border); box-shadow: 0 0 0 4px var(--admin-surface); }
+.od-timeline-dot--latest { background: var(--admin-accent); box-shadow: 0 0 0 4px var(--admin-tint); }
+.od-event-heading { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 4px 12px; }
+.od-event-heading h3 { font-size: 15px; font-weight: 600; }
+.od-event-heading time { font-size: 13px; color: var(--admin-muted); }
+.od-event-actor { margin-top: 3px; color: var(--admin-accent); font-size: 13px; }
+.od-event-description { margin-top: 5px; color: var(--admin-muted); font-size: 14px; overflow-wrap: anywhere; white-space: pre-wrap; }
+.od-muted { color: var(--admin-muted); }
+.od-feedback { display: flex; align-items: center; gap: 10px; padding: 12px 16px; margin-bottom: 20px; border: 1px solid var(--admin-border); border-radius: 7px; font-size: 14px; }
+.od-feedback > span { flex: 1; overflow-wrap: anywhere; }
+.od-feedback > svg { flex-shrink: 0; }
+.od-feedback--success { background: var(--admin-tint); color: var(--admin-accent); }
+.od-feedback--error { background: #faeceb; border-color: #e9c4bf; color: #9b3838; }
+.od-feedback .od-button { flex-shrink: 0; }
+.od-loading { display: flex; align-items: center; gap: 9px; padding: 16px 0; color: var(--admin-muted); }
+.od-spinner { animation: od-spin 1s linear infinite; }
+@keyframes od-spin { to { transform: rotate(360deg); } }
+.dark :is(.od-badge--pending_payment, .od-badge--pending_confirmation, .od-payment--pending) { color: #edcb90; background: #493c25; }
+.dark :is(.od-badge--confirmed, .od-badge--processing, .od-badge--ready_to_ship, .od-badge--shipping) { color: #afc7dc; background: #2b3c49; }
+.dark :is(.od-badge--cancelled, .od-payment--failed, .od-payment--expired, .od-feedback--error) { color: #f1aaa3; background: #492f2c; border-color: #67413e; }
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .od-grid { gap: 18px; }
+  .od-product { grid-template-columns: 60px minmax(0, 1fr); gap: 12px; }
+  .od-thumbnail { width: 60px; height: 68px; }
+  .od-product-total { grid-column: 2; align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 6px 12px; }
+  .od-product-total small { display: none; }
+}
+@media (max-width: 767px) {
+  .od-grid { grid-template-columns: minmax(0, 1fr); gap: 20px; }
+  .od-main-column, .od-side-column { gap: 20px; }
+  .od-header { flex-wrap: wrap; gap: 16px; }
+  .od-header-actions { align-items: flex-start; max-width: none; }
+  .od-action-hint { text-align: left; }
+}
+@media (max-width: 639px) {
+  .od-title-row h1 { font-size: 26px; }
+  .od-panel-heading, .od-panel-body { padding: 16px; }
+  .od-panel-heading h2 { font-size: 17px; }
+  .od-products { padding-inline: 16px; }
+  .od-product { grid-template-columns: 56px minmax(0, 1fr); gap: 12px; padding-block: 16px; }
+  .od-thumbnail { width: 56px; height: 64px; }
+  .od-product-total { grid-column: 2; align-items: flex-start; flex-direction: row; flex-wrap: wrap; gap: 6px 12px; }
+  .od-product-total small { display: none; }
+  .od-header-actions, .od-header-actions > .od-button { width: 100%; }
+  .od-feedback { flex-wrap: wrap; }
+  .od-grand-total dd { font-size: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .od-spinner { animation: none; } }

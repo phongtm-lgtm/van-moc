@@ -1,0 +1,1 @@
+ALTER TABLE engraving_fonts ADD COLUMN italic BOOLEAN NOT NULL DEFAULT false;
