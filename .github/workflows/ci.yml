@@ -33,6 +33,13 @@ jobs:
           VITE_API_BASE_URL: https://api.vanmocvn.com
   backend:
     runs-on: ubuntu-latest
+    env:
+      # Test-only configuration; integration tests use disposable PostgreSQL.
+      LOCATION_PROVINCES_URL: https://location.example.test/provinces
+      LOCATION_WARDS_URL: https://location.example.test/wards
+      LOCATION_CONNECT_TIMEOUT_MS: 1000
+      LOCATION_READ_TIMEOUT_MS: 1000
+      JWT_SECRET: ci-only-signing-key-not-a-secret-0123456789abcdef0123456789abcdef
     defaults:
       run:
         working-directory: van-moc-backend
