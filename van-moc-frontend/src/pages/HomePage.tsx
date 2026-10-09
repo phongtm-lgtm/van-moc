@@ -295,7 +295,7 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <article className="featured-product-card group flex h-full flex-col overflow-hidden rounded-[0.9rem] border border-[#8a5c2d]/15 bg-[#fffaf0]/90">
       <div className="relative">
-        <Link to={href} className="block overflow-hidden bg-[#dfc8a7]">
+        <Link to={href} className="featured-product-card__image block overflow-hidden bg-[#dfc8a7]">
           <div className="aspect-[1.18/1] overflow-hidden">
             {product.imageUrl ? <img
               src={product.imageUrl}
@@ -316,12 +316,12 @@ function ProductCard({ product }: { product: Product }) {
           <path d="M50 91C31 77 22 60 26 43c4-16 16-26 24-34 8 8 20 18 24 34 4 17-5 34-24 48Z" />
           <path d="M50 18v67M50 38c-9-7-14-8-20-7M50 50c11-8 17-9 24-7M50 63c-9-6-15-7-21-5" />
         </svg>
-        <p className="relative text-[12px] font-medium uppercase tracking-[0.15em] text-[#7a624c]">{product.material}</p>
+        <p className="featured-product-card__meta relative text-[12px] font-medium uppercase tracking-[0.15em] text-[#7a624c]">{product.material}</p>
         <Link to={href} className="relative mt-2 block">
           <h3 className="text-[17px] font-semibold leading-snug text-[#241a13] transition-colors hover:text-[#7a4e20] md:text-lg">{product.name}</h3>
         </Link>
         <div className="relative mt-1.5 flex items-baseline gap-2">
-          <p className="text-base font-semibold text-[#9a6b1f]">{money(product.price)}</p>
+          <p className="featured-product-card__price text-base font-semibold text-[#9a6b1f]">{money(product.price)}</p>
         </div>
         <div className="relative mt-4 flex items-center justify-between border-t border-[#9a6b1f]/15 pt-3">
           <button

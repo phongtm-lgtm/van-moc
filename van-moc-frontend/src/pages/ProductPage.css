@@ -1,5 +1,5 @@
 /* Scoped catalog refinements; shared home cards are intentionally unaffected. */
-.shop-page { --shop-brown: #33251d; --shop-body: #66584b; --shop-line: #e6d8c7; }
+.shop-page { --shop-brown: var(--vm-card-title); --shop-body: var(--vm-card-muted); --shop-line: var(--vm-card-border); }
 .shop-page .shop-catalog { background-image: linear-gradient(rgba(255,250,238,.86), rgba(249,240,223,.87)), url('/image/textures/van-moc-paper-bg.png'); }
 .shop-page .shop-catalog__inner { grid-template-columns: 14rem minmax(0, 1fr); gap: 1.75rem; }
 .shop-page .shop-results { min-width: 0; }
@@ -11,8 +11,8 @@
 .shop-page .shop-category-list button { width: 100%; margin: 0; min-height: 2.75rem; padding: .55rem .65rem; overflow-wrap: anywhere; }
 .shop-page .shop-category-list button.is-active { background: #eee2d1; border-left-color: #704326; color: #33251d; }
 .shop-page .shop-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem 1rem; align-items: stretch; }
-.shop-page .shop-product-card { display: flex; flex-direction: column; border: 1px solid var(--shop-line); border-radius: .35rem; background: #fffdf8; overflow: hidden; cursor: default; }
-.shop-page .shop-product-card__media { aspect-ratio: 1; border-radius: 0; background: #eee5d9; box-shadow: none; }
+.shop-page .shop-product-card { display: flex; flex-direction: column; border: 1px solid var(--shop-line); border-radius: .35rem; background: var(--vm-card-surface); overflow: hidden; cursor: default; }
+.shop-page .shop-product-card__media { aspect-ratio: 1; border-radius: 0; background: var(--vm-card-image); box-shadow: none; }
 .shop-page .shop-product-card__media img { filter: none; }
 .shop-page .shop-product-card:hover .shop-product-card__media img { filter: none; transform: none; }
 .shop-page .shop-product-card__wash { display: none; }
