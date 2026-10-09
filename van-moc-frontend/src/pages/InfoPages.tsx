@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Gift, Heart, MessageCircle, PencilLine, Sparkles } from 'lucide-react'
+import { MessengerIcon } from '../components/MessengerIcon'
+import { ArrowRight, Gift, Heart, PencilLine, Sparkles } from 'lucide-react'
 import './CustomOrderHero.css'
 
 const MESSENGER_URL = 'https://m.me/vanmoc2026'
@@ -75,7 +76,7 @@ export function CustomOrderPage() {
         <h1 id="craft-hero-title">Mỗi ý tưởng, một dấu ấn riêng</h1>
         <p className="craft-lead">Từ một kỷ niệm, một lời nhắn hay một hình mẫu bạn yêu thích, Vân Mộc cùng bạn biến ý tưởng cá nhân thành món đồ sừng thủ công mang ý nghĩa riêng.</p>
         <div className="craft-hero__actions">
-          <a className="craft-button craft-button--primary" href={MESSENGER_URL} target="_blank" rel="noopener noreferrer"><MessageCircle size={18} aria-hidden="true" />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
+          <a className="craft-button craft-button--primary" href={MESSENGER_URL} target="_blank" rel="noopener noreferrer"><MessengerIcon />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
           <Link className="craft-text-link" to="/shop">Khám phá sản phẩm <ArrowRight size={17} aria-hidden="true" /></Link>
         </div>
       </div>
@@ -96,7 +97,7 @@ export function CustomOrderPage() {
       </div>
     </section>
 
-    <section className="px-5 pb-20 md:px-8 md:pb-28"><div className="container mx-auto rounded-3xl bg-[#57331f] px-6 py-12 text-center text-[#fff5e6] md:px-12 md:py-16"><p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#e8c9a3]">Cùng Vân Mộc tạo nên nét riêng</p><h2 className="mt-4 font-serif text-3xl italic md:text-4xl">Bạn có một ý tưởng riêng?</h2><p className="mx-auto mt-4 max-w-xl leading-relaxed text-[#f0dfcd]">Hãy kể Vân Mộc nghe về món đồ bạn mong muốn. Gửi ảnh mẫu, số lượng hoặc thời gian dự kiến để cùng bắt đầu cuộc trò chuyện.</p><a href={MESSENGER_URL} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#fff3dd] px-7 py-3 font-semibold text-[#57331f] transition-colors hover:bg-white"><MessageCircle size={19} aria-hidden="true" /> Nhắn tin cho Vân Mộc <ArrowRight size={17} aria-hidden="true" /></a></div></section>
+    <section className="px-5 pb-20 md:px-8 md:pb-28"><div className="container mx-auto rounded-3xl bg-[#57331f] px-6 py-12 text-center text-[#fff5e6] md:px-12 md:py-16"><p className="text-xs font-semibold uppercase tracking-[0.25em] text-[#e8c9a3]">Cùng Vân Mộc tạo nên nét riêng</p><h2 className="mt-4 font-serif text-3xl italic md:text-4xl">Bạn có một ý tưởng riêng?</h2><p className="mx-auto mt-4 max-w-xl leading-relaxed text-[#f0dfcd]">Hãy kể Vân Mộc nghe về món đồ bạn mong muốn. Gửi ảnh mẫu, số lượng hoặc thời gian dự kiến để cùng bắt đầu cuộc trò chuyện.</p><a href={MESSENGER_URL} target="_blank" rel="noopener noreferrer" className="mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#fff3dd] px-7 py-3 font-semibold text-[#57331f] transition-colors hover:bg-white"><MessengerIcon /> Nhắn tin cho Vân Mộc <ArrowRight size={17} aria-hidden="true" /></a></div></section>
   </main>
 }
 
