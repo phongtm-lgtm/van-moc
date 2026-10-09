@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState, type TouchEvent } from 'react'
-import { createPortal } from 'react-dom'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import { ChevronDown, ChevronLeft, ChevronRight, Gift, Minus, PackageCheck, Plus, ShieldCheck, ShoppingCart, Truck, X, ZoomIn, Play } from 'lucide-react'
+import { ChevronDown, ChevronLeft, ChevronRight, Gift, Minus, PackageCheck, Plus, ShieldCheck, ShoppingCart, Truck, Play } from 'lucide-react'
 import { useCart } from '../hooks/useCart'
 import { api, isUuid, type ProductDetail } from '../api/catalog'
 
@@ -30,10 +29,6 @@ export function ProductDetailPage() {
   const [notice, setNotice] = useState('')
   const [retry, setRetry] = useState(0)
   const [activeImage, setActiveImage] = useState(0)
-  const [isZoomOpen, setIsZoomOpen] = useState(false)
-  const lightboxRef = useRef<HTMLDivElement>(null)
-  const zoomButtonRef = useRef<HTMLButtonElement>(null)
-  const touchStart = useRef<{ x: number; y: number } | null>(null)
   const [quantity, setQuantity] = useState(1)
   const [engravingEnabled, setEngravingEnabled] = useState(false)
   const [engravingText, setEngravingText] = useState('')
@@ -66,7 +61,7 @@ export function ProductDetailPage() {
   useEffect(() => {
     const controller = new AbortController()
     // oxlint-disable-next-line react/set-state-in-effect -- reset resource-specific state while loading a different product
-    setProduct(null); setLoading(true); setError(''); setNotice(''); setQuantity(1); setEngravingEnabled(false); setEngravingText(''); setActiveImage(0); setIsZoomOpen(false)
+    setProduct(null); setLoading(true); setError(''); setNotice(''); setQuantity(1); setEngravingEnabled(false); setEngravingText(''); setActiveImage(0)
     if (!id || (!isUuid(id) && !/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(id))) { setError('Không tìm thấy sản phẩm.'); setLoading(false); return () => controller.abort() }
     api<EngravingFontInfo[]>('/api/engraving-fonts', controller.signal).then(items => { if (!controller.signal.aborted) setFontCatalog(items) }).catch(() => {})
     api<ProductDetail>(isUuid(id) ? `/api/products/${id}` : `/api/products/by-slug/${encodeURIComponent(id)}`, controller.signal).then(value => {
@@ -85,28 +80,6 @@ export function ProductDetailPage() {
     if (selected && strip && selected.offsetLeft + selected.offsetWidth > strip.scrollLeft + strip.clientWidth)
       strip.scrollTo({ left: selected.offsetLeft + selected.offsetWidth - strip.clientWidth, behavior: 'smooth' })
   }, [activeImage, product])
-  useEffect(() => {
-    if (!isZoomOpen) return
-    const previousOverflow = document.body.style.overflow
-    const previousHtmlOverflow = document.documentElement.style.overflow
-    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : zoomButtonRef.current
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') { event.preventDefault(); setIsZoomOpen(false) }
-      if (imageCount > 1 && event.key === 'ArrowLeft') { event.preventDefault(); setActiveImage(cur => (cur - 1 + imageCount) % imageCount) }
-      if (imageCount > 1 && event.key === 'ArrowRight') { event.preventDefault(); setActiveImage(cur => (cur + 1) % imageCount) }
-      if (event.key === 'Tab') {
-        const buttons = Array.from(lightboxRef.current?.querySelectorAll<HTMLButtonElement>('button:not(:disabled):not([tabindex="-1"])') ?? [])
-        const first = buttons[0], last = buttons.at(-1)
-        if (!first || !last) return
-        if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus() }
-        else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus() }
-      }
-    }
-    document.body.style.overflow = 'hidden'; document.documentElement.style.overflow = 'hidden'
-    lightboxRef.current?.querySelector<HTMLButtonElement>('.pdp-lightbox__close')?.focus()
-    window.addEventListener('keydown', handleKeyDown)
-    return () => { document.body.style.overflow = previousOverflow; document.documentElement.style.overflow = previousHtmlOverflow; window.removeEventListener('keydown', handleKeyDown); previousFocus?.focus() }
-  }, [isZoomOpen, imageCount])
   if (loading || !product) return <article className="pdp"><div className="pdp__inner">
     {loading ? <p role="status">Đang tải sản phẩm…</p> : <p role="alert">{error} <button type="button" onClick={() => setRetry(v => v + 1)}>Thử lại</button></p>}
     <button type="button" className="pdp-back" onClick={() => navigate('/shop')}><ChevronLeft size={17} />Quay lại</button>
@@ -130,15 +103,6 @@ export function ProductDetailPage() {
   const previewLabel = engravingText || 'Vân Mộc'
   const active = product.images[activeImage]
   const changeImage = (dir: -1 | 1) => { if (imageCount) setActiveImage(cur => (cur + dir + imageCount) % imageCount) }
-  const startSwipe = (event: TouchEvent) => { touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY } }
-  const endSwipe = (event: TouchEvent) => {
-    const start = touchStart.current
-    touchStart.current = null
-    if (!start || imageCount < 2) return
-    const dx = event.changedTouches[0].clientX - start.x
-    const dy = event.changedTouches[0].clientY - start.y
-    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy) * 1.2) changeImage(dx < 0 ? 1 : -1)
-  }
   const addProductToCart = async (buyNow = false) => {
     try {
       await addItem({ id: product.id, name: product.name, price: product.price, image: (active?.mediaType !== 'VIDEO' ? active?.url : product.images.find(image => image.mediaType !== 'VIDEO')?.url) || '' }, quantity,
@@ -163,13 +127,12 @@ export function ProductDetailPage() {
         <section className="pdp-gallery" aria-label="Ảnh và video sản phẩm">
           <div className="pdp-gallery__main">
             {active ? active.mediaType === 'VIDEO' ? <video key={active.id} src={active.url} controls playsInline preload="metadata" aria-label={`Video ${product.name}`} /> : <GalleryImage key={active.id} src={active.url} alt={active.altText || product.name} /> : <span className="pdp-gallery__fallback">Chưa có ảnh</span>}
-            <button ref={zoomButtonRef} type="button" className="pdp-gallery__zoom" disabled={!active} onClick={() => setIsZoomOpen(true)} aria-label="Phóng to ảnh sản phẩm"><ZoomIn size={18} /></button>
             {imageCount > 1 && <><button type="button" className="pdp-gallery__arrow pdp-gallery__arrow--prev" onClick={() => changeImage(-1)} aria-label="Ảnh trước"><ChevronLeft size={20} /></button>
             <button type="button" className="pdp-gallery__arrow pdp-gallery__arrow--next" onClick={() => changeImage(1)} aria-label="Ảnh tiếp"><ChevronRight size={20} /></button></>}
           </div>
           <div className="pdp-gallery__thumbs" role="list">{product.images.map((image, index) => <button role="listitem" type="button" key={image.id}
             className={activeImage === index ? 'is-active' : ''} onClick={() => setActiveImage(index)} aria-label={`Xem ${image.mediaType === 'VIDEO' ? 'video' : 'ảnh'} ${index + 1}`} aria-pressed={activeImage === index}>
-            {image.mediaType === 'VIDEO' ? <span className="pdp-video-thumb"><Play size={22} /><span>Video</span></span> : <GalleryImage key={image.url} src={image.url} alt={`${product.name} ${index + 1}`} />}</button>)}</div>
+             {image.mediaType === 'VIDEO' ? <span className="pdp-video-thumb"><video src={`${image.url}#t=0.1`} preload="metadata" muted playsInline aria-hidden="true" /><Play size={22} fill="currentColor" aria-hidden="true" /></span> : <GalleryImage key={image.url} src={image.url} alt={`${product.name} ${index + 1}`} />}</button>)}</div>
         </section>
         <section className="pdp-info" aria-label="Thông tin sản phẩm">
           <h1 className="pdp-info__title">{product.name}</h1>
@@ -224,17 +187,6 @@ export function ProductDetailPage() {
         </section>
       </div>
     </div>
-    {isZoomOpen && active && createPortal(<div ref={lightboxRef} className="pdp-lightbox" role="dialog" aria-modal="true" aria-label={`Ảnh phóng to ${product.name}`}>
-      <button type="button" className="pdp-lightbox__backdrop" tabIndex={-1} onClick={() => setIsZoomOpen(false)} aria-label="Đóng ảnh phóng to" />
-      <div className="pdp-lightbox__frame">
-        <div className="pdp-lightbox__toolbar"><span className="pdp-lightbox__counter" aria-live="polite">{activeImage + 1} / {imageCount}</span><button type="button" className="pdp-lightbox__close" onClick={() => setIsZoomOpen(false)} aria-label="Đóng ảnh phóng to"><X size={22} /></button></div>
-        <div className="pdp-lightbox__viewer" onTouchStart={startSwipe} onTouchEnd={endSwipe}>
-          {imageCount > 1 && <button type="button" className="pdp-lightbox__arrow" onClick={() => changeImage(-1)} aria-label="Ảnh trước"><ChevronLeft size={26} /></button>}
-          <div className="pdp-lightbox__content">{active.mediaType === 'VIDEO' ? <video key={active.id} src={active.url} controls playsInline preload="metadata" aria-label={`Video ${product.name}`} /> : <GalleryImage key={active.id} src={active.url} alt={active.altText || product.name} />}</div>
-          {imageCount > 1 && <button type="button" className="pdp-lightbox__arrow" onClick={() => changeImage(1)} aria-label="Ảnh tiếp"><ChevronRight size={26} /></button>}
-        </div>
-      </div>
-    </div>, document.body)}
     <div className="pdp-sticky-bar" aria-label="Thêm vào giỏ hàng nhanh"><div className="pdp-sticky-bar__price"><PackageCheck size={15} aria-hidden />{formatPrice(totalPrice)}
       {engravingEnabled && <span className="pdp-sticky-bar__engraving-note">(bao gồm phí khắc)</span>}</div>
       <button type="button" className="pdp-sticky-bar__btn" disabled={Boolean(disabled)} onClick={() => void addProductToCart()}><ShoppingCart size={17} />Thêm vào giỏ</button>
