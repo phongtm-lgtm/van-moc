@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { AlertCircle, ArrowDownToLine, ChevronDown, ChevronLeft, ChevronRight, Copy, EyeOff, FolderOpen, Image, MoreHorizontal, Package, PackageCheck, PackageX, Pencil, Plus, Search, Settings2, Trash2, Warehouse, X } from 'lucide-react'
+import { AlertCircle, ArrowDownToLine, ChevronDown, ChevronLeft, ChevronRight, Copy, EyeOff, FolderOpen, Image, MoreHorizontal, Package, PackageCheck, PackageX, Pencil, Plus, Search, Settings2, Star, Trash2, Warehouse, X } from 'lucide-react'
 import { accountApi } from '@/api/account'
 import { type Product, type Page } from '@/api/products'
 import { money } from '@/api/orders'
@@ -37,6 +37,8 @@ export default function ProductsPage() {
   const [refresh, setRefresh] = useState(0)
   const [hiding, setHiding] = useState<string | null>(null)
   const hideLock = useRef(false)
+  const [featuring, setFeaturing] = useState<string | null>(null)
+  const featureLock = useRef(false)
   const [stockProduct, setStockProduct] = useState<Product | null>(null)
   const [threshold, setThreshold] = useState(readThreshold)
   const [thresholdDraft, setThresholdDraft] = useState(String(threshold))
@@ -75,7 +77,7 @@ export default function ProductsPage() {
   const clear = () => { setSearch(''); update(defaultQuery) }
   const reload = () => { setLoading(true); setRefresh(value => value + 1) }
   const hide = async (product: Product) => {
-    if (hideLock.current) return
+    if (hideLock.current || featureLock.current) return
     hideLock.current = true; setHiding(product.id); setActionError(''); setNotice('')
     try {
       await accountApi(`/api/admin/products/${product.id}`, 'PATCH', { ...product.details, active: false })
@@ -83,8 +85,19 @@ export default function ProductsPage() {
     } catch (cause) { setActionError((cause as Error).message) }
     finally { hideLock.current = false; setHiding(null) }
   }
+  const toggleFeatured = async (product: Product) => {
+    if (featureLock.current || hideLock.current) return
+    featureLock.current = true; setFeaturing(product.id); setActionError(''); setNotice('')
+    try {
+      await accountApi(`/api/admin/products/${product.id}`, 'PATCH', {
+        ...product.details, featured: !product.details.featured,
+      })
+      setNotice(`Đã ${product.details.featured ? 'bỏ' : 'chọn'} “${product.details.name}” ${product.details.featured ? 'khỏi' : 'làm sản phẩm nổi bật trên'} trang chủ.`)
+    } catch (cause) { setActionError(`${(cause as Error).message} Danh sách đã được tải lại; vui lòng thử lại nếu cần.`) }
+    finally { featureLock.current = false; setFeaturing(null); reload() }
+  }
   const remove = async (product: Product) => {
-    if (hideLock.current || !window.confirm(`Xóa vĩnh viễn “${product.details.name}”? Sản phẩm sẽ biến mất khỏi cửa hàng và danh sách quản trị. Không thể hoàn tác.`)) return
+    if (hideLock.current || featureLock.current || !window.confirm(`Xóa vĩnh viễn “${product.details.name}”? Sản phẩm sẽ biến mất khỏi cửa hàng và danh sách quản trị. Không thể hoàn tác.`)) return
     hideLock.current = true; setHiding(product.id); setActionError(''); setNotice('')
     try {
       await accountApi(`/api/admin/products/${product.id}?version=${product.details.version}`, 'DELETE')
@@ -123,18 +136,19 @@ export default function ProductsPage() {
       {filtersActive && <div className="products-filter-summary"><span>{loading ? 'Đang lọc sản phẩm…' : error ? 'Đang áp dụng bộ lọc' : `${data?.totalElements.toLocaleString('vi-VN') ?? 0} sản phẩm phù hợp`}{query.search && <> · “{query.search}”</>}</span><button type="button" onClick={clear}><X size={15} />Xóa bộ lọc</button></div>}
 
       {error ? <div className="products-empty" role="alert"><AlertCircle size={32} /><h2>Chưa tải được sản phẩm</h2><p>{error}</p><button className="products-button" onClick={reload}>Thử lại</button></div> : <>
-        <div className="products-table-scroll" tabIndex={0} role="region" aria-label="Danh sách sản phẩm, cuộn ngang để xem đầy đủ"><table className="products-table" aria-busy={loading}><caption className="products-sr-only">Danh sách sản phẩm với giá bán, tồn kho và trạng thái</caption><thead><tr><th scope="col">Sản phẩm</th><th scope="col">SKU</th><th scope="col" className="is-number">Giá bán</th><th scope="col">Tồn kho</th><th scope="col">Trạng thái</th><th scope="col"><span className="products-sr-only">Thao tác</span></th></tr></thead><tbody>
-          {loading ? Array.from({ length: 6 }, (_, index) => <tr key={index} aria-hidden="true"><td><div className="products-name-cell"><span className="products-skeleton products-thumb-skeleton" /><div className="products-skeleton-lines"><span className="products-skeleton" /><span className="products-skeleton" /></div></div></td>{Array.from({ length: 5 }, (_, cell) => <td key={cell}><span className="products-skeleton products-cell-skeleton" /></td>)}</tr>) : data?.content.map(product => <tr key={product.id}>
+        <div className="products-table-scroll" tabIndex={0} role="region" aria-label="Danh sách sản phẩm, cuộn ngang để xem đầy đủ"><table className="products-table" aria-busy={loading}><caption className="products-sr-only">Danh sách sản phẩm với giá bán, tồn kho, trạng thái và sản phẩm nổi bật</caption><thead><tr><th scope="col">Sản phẩm</th><th scope="col">SKU</th><th scope="col" className="is-number">Giá bán</th><th scope="col">Tồn kho</th><th scope="col">Trạng thái</th><th scope="col">Trang chủ</th><th scope="col"><span className="products-sr-only">Thao tác</span></th></tr></thead><tbody>
+          {loading ? Array.from({ length: 6 }, (_, index) => <tr key={index} aria-hidden="true"><td><div className="products-name-cell"><span className="products-skeleton products-thumb-skeleton" /><div className="products-skeleton-lines"><span className="products-skeleton" /><span className="products-skeleton" /></div></div></td>{Array.from({ length: 6 }, (_, cell) => <td key={cell}><span className="products-skeleton products-cell-skeleton" /></td>)}</tr>) : data?.content.map(product => <tr key={product.id}>
             <td><div className="products-name-cell"><Thumbnail product={product} /><div><Link className="products-name" to={`/products/${product.id}`}>{product.details.name}</Link><span className="products-category-name">{categories.find(category => category.id === product.details.categoryId)?.name || product.details.material}</span></div></div></td>
             <td><span className="products-sku">{product.details.code}</span></td><td className="is-number products-price">{money(product.details.price)}</td>
             <td><div className="products-stock-cell"><strong>{product.stock.toLocaleString('vi-VN')}</strong>{product.stock === 0 ? <span className="products-stock-label is-empty">Hết hàng</span> : product.stock < threshold ? <span className="products-stock-label is-low"><AlertCircle size={14} />Sắp hết</span> : <span className="products-stock-label">Còn hàng</span>}</div></td>
-            <td><span className={`products-status${product.details.active ? ' is-active' : ''}`}><span />{product.details.active ? 'Đang bán' : 'Đã ẩn'}</span></td>
+             <td><span className={`products-status${product.details.active ? ' is-active' : ''}`}><span />{product.details.active ? 'Đang bán' : 'Đã ẩn'}</span></td>
+             <td><button type="button" className={`products-feature-button${product.details.featured ? ' is-featured' : ''}`} aria-label={`${product.details.featured ? 'Bỏ nổi bật' : 'Chọn nổi bật'}: ${product.details.name}`} aria-pressed={product.details.featured} title={!product.details.active ? 'Sản phẩm đang ẩn sẽ không xuất hiện trên trang chủ' : undefined} disabled={!!featuring || !!hiding || loading} onClick={() => void toggleFeatured(product)}><Star size={16} fill={product.details.featured ? 'currentColor' : 'none'} />{featuring === product.id ? 'Đang lưu…' : product.details.featured ? 'Nổi bật' : 'Chọn'}</button></td>
             <td className="products-row-actions">{hiding === product.id ? <span role="status">Đang ẩn…</span> : <ProductActionMenu label={`Thao tác cho ${product.details.name}`} className="products-icon-button products-more-button" trigger={<MoreHorizontal size={21} />} items={[
               { label: 'Chỉnh sửa', icon: <Pencil size={17} />, to: `/products/${product.id}` },
-              { label: 'Cập nhật tồn kho', icon: <Warehouse size={17} />, onClick: () => setStockProduct(product) },
+               { label: 'Cập nhật tồn kho', icon: <Warehouse size={17} />, onClick: () => setStockProduct(product) },
               { label: 'Sao chép', icon: <Copy size={17} />, to: `/products/new?copy=${product.id}` },
-               { label: product.details.active ? 'Ẩn sản phẩm' : 'Sản phẩm đã ẩn', icon: <EyeOff size={17} />, onClick: () => void hide(product), disabled: !product.details.active || !!hiding, danger: true },
-               { label: 'Xóa vĩnh viễn', icon: <Trash2 size={17} />, onClick: () => void remove(product), disabled: !!hiding, danger: true },
+                { label: product.details.active ? 'Ẩn sản phẩm' : 'Sản phẩm đã ẩn', icon: <EyeOff size={17} />, onClick: () => void hide(product), disabled: !product.details.active || !!hiding || !!featuring, danger: true },
+                { label: 'Xóa vĩnh viễn', icon: <Trash2 size={17} />, onClick: () => void remove(product), disabled: !!hiding || !!featuring, danger: true },
             ]} />}</td>
           </tr>)}
         </tbody></table></div>
