@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { MessengerIcon } from '../components/MessengerIcon'
 import './CustomOrderHero.css'
+import './StoryPage.css'
 import { BRAND } from '../brand'
 
 const MESSENGER_URL = BRAND.messenger
@@ -45,13 +46,67 @@ function InfoPage({ eyebrow, title, description, image, imageAlt, sections, acti
 }
 
 export function VillagesPage() {
-  return <InfoPage eyebrow="Câu chuyện làng nghề" title="Làng nghề Thụy Ứng"
-    description="Từ đôi tay của người thợ, chất liệu sừng tự nhiên trở thành những vật dụng mang dấu ấn riêng. Vân Mộc tiếp nối câu chuyện thủ công ấy qua từng sản phẩm."
-    image="/image/truy-xuat/lang-nghe-thuy-ung.jpg" imageAlt="Làng nghề Thụy Ứng"
-    sections={[
-      { title: 'Gìn giữ nghề truyền thống', text: 'Kỹ thuật chế tác được truyền qua nhiều thế hệ, từ chọn chất liệu, tạo hình đến mài nhẵn và đánh bóng bằng tay.' },
-      { title: 'Mỗi đường vân một câu chuyện', text: 'Sắc độ và đường vân tự nhiên khiến mỗi chiếc lược, mỗi chiếc trâm đều có vẻ đẹp không trùng lặp.' },
-    ]} action={{ label: 'Khám phá sản phẩm', to: '/shop' }} />
+  const storyImage = (name: string) => `/image/VanMoc/${encodeURIComponent('Trang Câu chuyện')}/${encodeURIComponent(name)}`
+
+  return <main className="story-page">
+    <section className="story-hero" aria-labelledby="story-title">
+      <div className="story-hero__inner">
+        <div className="story-hero__copy">
+          <p className="story-eyebrow">Vân Mộc · Câu chuyện làng nghề</p>
+          <h1 id="story-title">Từ làng nghề <em>Thụy Ứng</em> đến Vân Mộc</h1>
+          <span className="story-rule" aria-hidden="true">✦</span>
+          <p>Ở nơi những đôi tay khéo léo thổi hồn vào chất liệu sừng tự nhiên, một câu chuyện được tiếp nối qua từng đường vân, từng món đồ nhỏ bé.</p>
+          <a href="#khoi-nguon" className="story-hero__link">Khám phá câu chuyện <ArrowRight size={18} aria-hidden="true" /></a>
+        </div>
+        <div className="story-hero__image-wrap"><img src={storyImage('01 Khởi nguồn làng nghề.jpg')} alt="Hình ảnh mở đầu câu chuyện làng nghề Thụy Ứng" className="story-hero__image" /></div>
+      </div>
+    </section>
+
+    <div className="story-divider" aria-hidden="true"><span>✦</span></div>
+
+    <section className="story-intro" id="khoi-nguon">
+      <p className="story-eyebrow">01 / Khởi nguồn</p>
+      <h2>Một làng nghề, <em>nhiều thế hệ</em> gìn giữ</h2>
+      <p>Làng nghề Thụy Ứng là nơi nghề chế tác sừng được truyền từ thế hệ này sang thế hệ khác. Từ việc chọn chất liệu, tạo hình đến mài nhẵn và đánh bóng, mỗi công đoạn đều cần sự kiên nhẫn và đôi tay lành nghề.</p>
+    </section>
+
+    <section className="story-chapter story-chapter--warm">
+      <div className="story-chapter__image"><img src={storyImage('02 Đôi tay người thợ.jpg')} alt="Đôi tay người thợ trong quá trình chế tác thủ công" loading="lazy" /></div>
+      <div className="story-chapter__content">
+        <p className="story-eyebrow">02 / Con người</p>
+        <h2>Qua đôi tay <em>người thợ</em></h2>
+        <span className="story-chapter__line" aria-hidden="true" />
+        <p>Không có hai đường vân nào hoàn toàn giống nhau. Người thợ lắng nghe chất liệu, tỉ mỉ tạo hình và hoàn thiện từng chi tiết để vẻ đẹp vốn có của sừng được hiện diện trọn vẹn.</p>
+        <p>Đó là sự chăm chút lặng lẽ làm nên nét riêng của mỗi chiếc lược, chiếc trâm Vân Mộc.</p>
+      </div>
+    </section>
+
+    <section className="story-quote" aria-label="Tinh thần Vân Mộc">
+      <span aria-hidden="true">✦</span>
+      <blockquote>“Vân nguyên bản, <em>nét riêng bạn.</em>”</blockquote>
+      <p>Mỗi món đồ mang theo dấu vân của tự nhiên và câu chuyện của người làm ra nó.</p>
+    </section>
+
+    <section className="story-chapter story-chapter--reverse">
+      <div className="story-chapter__image"><img src={storyImage('03 Từ  truyền thống đến hiện đại.jpg')} alt="Sản phẩm Vân Mộc kết nối nghề truyền thống với đời sống hiện đại" loading="lazy" /></div>
+      <div className="story-chapter__content">
+        <p className="story-eyebrow">03 / Tiếp nối</p>
+        <h2>Từ truyền thống <em>đến hôm nay</em></h2>
+        <span className="story-chapter__line" aria-hidden="true" />
+        <p>Vân Mộc tiếp nối tinh thần của làng nghề bằng những vật dụng gần gũi với đời sống. Giữ lại vẻ đẹp nguyên bản của chất liệu, đồng thời chăm chút kiểu dáng để mỗi sản phẩm có thể đồng hành cùng bạn mỗi ngày.</p>
+      </div>
+    </section>
+
+    <section className="story-finale">
+      <div className="story-finale__image"><img src={storyImage('04 Câu chuyện Vân Mộc.jpg')} alt="Câu chuyện Vân Mộc qua sản phẩm thủ công" loading="lazy" /></div>
+      <div className="story-finale__content">
+        <p className="story-eyebrow">04 / Vân Mộc</p>
+        <h2>Câu chuyện vẫn <em>đang tiếp diễn</em></h2>
+        <p>Từ làng nghề đến bàn tay bạn, mỗi sản phẩm là một cách để trân trọng chất liệu tự nhiên và công sức của người thợ. Hãy tìm món đồ mang dấu vân dành riêng cho mình.</p>
+        <Link to="/shop" className="story-button">Khám phá sản phẩm <ArrowRight size={18} aria-hidden="true" /></Link>
+      </div>
+    </section>
+  </main>
 }
 
 export function AboutPage() {
