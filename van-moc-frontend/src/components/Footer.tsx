@@ -86,7 +86,6 @@ export function Footer() {
                 </Link>
               </li>
             ))}
-            <li><Link to="/custom-order" className="hover:text-[#c9973a] transition-colors">Chế tác theo yêu cầu</Link></li>
           </ul>
         </div>
 

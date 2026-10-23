@@ -1,18 +1,8 @@
 import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
-import { ArrowRight } from 'lucide-react'
-import { MessengerIcon } from '../components/MessengerIcon'
-import './CustomOrderHero.css'
 import './StoryPage.css'
 import './AboutPage.css'
 import { BRAND } from '../brand'
-
-const CRAFT_STEPS = [
-  { number: '01', title: 'Gửi hình mẫu', description: 'Chia sẻ hình ảnh, bản phác thảo hoặc ý tưởng về món đồ bạn mong muốn.' },
-  { number: '02', title: 'Nhận tư vấn', description: 'Cùng Vân Mộc trao đổi về kiểu dáng, chất liệu, số lượng và thời gian dự kiến.' },
-  { number: '03', title: 'Xác nhận thiết kế', description: 'Thống nhất thiết kế và các chi tiết phù hợp trước khi bắt đầu chế tác.' },
-  { number: '04', title: 'Chế tác thủ công', description: 'Người thợ tỉ mỉ tạo hình và hoàn thiện từng chi tiết theo phương án đã thống nhất.' },
-]
 
 type InfoPageProps = {
   eyebrow: string
@@ -172,26 +162,6 @@ export function AboutPage() {
       <div className="about-values__grid">
         {values.map((value, index) => <article key={value.title}><span>{String(index + 1).padStart(2, '0')}</span><h3>{value.title}</h3><p>{value.text}</p></article>)}
       </div>
-    </section>
-  </div>
-}
-
-export function CustomOrderPage() {
-  return <div className="craft-page">
-    <section className="craft-process" aria-labelledby="craft-process-title">
-      <h1 id="craft-process-title">Từ ý tưởng đến tác phẩm</h1>
-      <ol className="craft-process__steps">
-        {CRAFT_STEPS.map(step => <li className="craft-process__step" key={step.number}>
-          <span className="craft-process__number" aria-hidden="true">{step.number}</span>
-          <h3>{step.title}</h3>
-          <p>{step.description}</p>
-        </li>)}
-      </ol>
-    </section>
-    <section className="craft-consult" aria-labelledby="craft-consult-title">
-      <h2 id="craft-consult-title">Cùng Vân Mộc tạo nên dấu ấn riêng</h2>
-      <p>Chia sẻ ý tưởng của bạn để chúng mình tư vấn sản phẩm và cách thể hiện phù hợp.</p>
-      <a className="craft-button" href={BRAND.messenger} target="_blank" rel="noopener noreferrer"><MessengerIcon />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
     </section>
   </div>
 }

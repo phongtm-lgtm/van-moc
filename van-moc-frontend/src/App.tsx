@@ -13,7 +13,7 @@ import { CheckoutPage } from './pages/CheckoutPage'
 import { AccountLayout } from './components/AccountLayout'
 import { OrderHistoryPage } from './pages/OrderHistoryPage'
 import { OrderDetailPage } from './pages/OrderDetailPage'
-import { AboutPage, ContactPage, CustomOrderPage, VillagesPage } from './pages/InfoPages'
+import { AboutPage, ContactPage, VillagesPage } from './pages/InfoPages'
 import { PolicyPage } from './pages/PolicyPages'
 import { Seo } from './components/Seo'
 import { DigitalTechnologyPage } from './pages/DigitalTechnologyPage'
@@ -63,7 +63,7 @@ export default function App() {
           <Route path="/gioi-thieu" element={<AboutPage />} />
           <Route path="/truy-xuat" element={<TraceabilityPage />} />
           <Route path="/quy-dinh" element={<PolicyPage />} />
-          <Route path="/custom-order" element={<CustomOrderPage />} />
+          <Route path="/custom-order" element={<Navigate to="/cong-nghe-so" replace />} />
           <Route path="/cong-nghe-so" element={<DigitalTechnologyPage />} />
           <Route path="/lien-he" element={<ContactPage />} />
           <Route path="/login" element={<><HomePage /><LoginPage /></>} />

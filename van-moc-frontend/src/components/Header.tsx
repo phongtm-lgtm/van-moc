@@ -8,7 +8,6 @@ const NAV = [
   { label: 'Trang chủ', href: '/' },
   { label: 'Câu Chuyện', href: '/villages' },
   { label: 'Sản phẩm', href: '/shop' },
-  { label: 'Chế tác riêng', href: '/custom-order' },
   { label: 'Công nghệ laser', href: '/cong-nghe-so' },
   { label: 'Về chúng tôi', href: '/gioi-thieu' },
   { label: 'Truy xuất', href: '/truy-xuat' },

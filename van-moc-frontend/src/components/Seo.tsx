@@ -7,7 +7,6 @@ const pages: Record<string, [string, string]> = {
   '/shop': ['Sản phẩm', 'Khám phá sản phẩm thủ công từ sừng tự nhiên, thông tin giá và lựa chọn khắc tên tại Vân Mộc.'],
   '/villages': ['Câu chuyện làng nghề Thụy Ứng', 'Câu chuyện chất liệu sừng tự nhiên và nghề thủ công truyền thống cùng Vân Mộc.'],
   '/gioi-thieu': ['Về Vân Mộc', 'Tìm hiểu Vân Mộc và tinh thần gìn giữ vẻ đẹp nguyên bản của sản phẩm sừng thủ công.'],
-  '/custom-order': ['Chế tác theo yêu cầu', 'Trao đổi ý tưởng và nhận tư vấn sản phẩm sừng thủ công cá nhân hóa cùng Vân Mộc.'],
   '/lien-he': ['Liên hệ', 'Liên hệ Vân Mộc qua hotline 0981835096, email vanmoc2026@gmail.com và Fanpage chính thức.'],
   '/quy-dinh': ['Chính sách mua hàng', 'Thông tin đặt hàng, khắc tên, thanh toán, giao hàng và hỗ trợ sau mua tại Vân Mộc.'],
   '/chinh-sach-bao-mat': ['Chính sách bảo mật', 'Thông tin về xử lý dữ liệu tài khoản, địa chỉ, đơn hàng và yêu cầu bảo vệ dữ liệu tại Vân Mộc.'],

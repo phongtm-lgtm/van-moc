@@ -941,7 +941,7 @@ export function HomePage() {
 
             <div className="relative z-10 mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
-                to="/custom-order"
+                to="/cong-nghe-so"
                 className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-[#5a301a] px-8 py-3 text-sm font-semibold text-[#fff3dd] transition-colors hover:bg-[#3f2517]"
               >
                 Gửi yêu cầu chế tác
