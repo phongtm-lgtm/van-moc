@@ -4,6 +4,7 @@ import { ArrowRight } from 'lucide-react'
 import { MessengerIcon } from '../components/MessengerIcon'
 import './CustomOrderHero.css'
 import './StoryPage.css'
+import './AboutPage.css'
 import { BRAND } from '../brand'
 
 const MESSENGER_URL = BRAND.messenger
@@ -110,13 +111,53 @@ export function VillagesPage() {
 }
 
 export function AboutPage() {
-  return <InfoPage eyebrow="Về chúng tôi" title="Vân Mộc — Vân nguyên bản, nét riêng bạn"
-    description="Vân Mộc mang vẻ đẹp nguyên bản của chất liệu sừng vào đời sống qua những sản phẩm thủ công từ làng nghề Thụy Ứng."
-    image="/image/nghe-nhan-che-tac.jpg" imageAlt="Sản phẩm thủ công từ làng nghề Thụy Ứng"
-    sections={[
-      { title: 'Tôn trọng chất liệu', text: 'Chúng tôi trân trọng màu sắc và đường vân vốn có của từng chất liệu, để nét riêng tự nhiên hiện diện trong mỗi sản phẩm.' },
-      { title: 'Chế tác tận tâm', text: 'Từ tuyển chọn đến hoàn thiện, từng công đoạn đều được thực hiện cẩn thận để tạo nên sản phẩm chỉn chu.' },
-    ]} action={{ label: 'Xem câu chuyện làng nghề', to: '/villages' }} />
+  const aboutImage = (name: string) => `/image/VanMoc/${encodeURIComponent('Trang Về Chúng Tôi')}/${encodeURIComponent(name)}`
+
+  return <div className="about-page">
+    <section className="about-hero" aria-labelledby="about-title">
+      <div className="about-hero__inner">
+        <p className="about-eyebrow">Về chúng tôi · Vân Mộc</p>
+        <h1 id="about-title">Vẻ đẹp nguyên bản.<br /><em>Nét riêng của bạn.</em></h1>
+        <span className="about-accent" aria-hidden="true" />
+        <p>Vân Mộc ra đời từ sự trân trọng dành cho nghề chế tác sừng Thụy Ứng. Chúng mình mong những món đồ thủ công mang vẻ đẹp tự nhiên ấy được hiện diện gần gũi hơn trong đời sống hôm nay.</p>
+        <a href="#ten-van-moc" className="about-hero__link">Tìm hiểu về Vân Mộc <ArrowRight size={18} aria-hidden="true" /></a>
+      </div>
+    </section>
+
+    <section className="about-intro" id="ten-van-moc">
+      <p className="about-eyebrow">Tên gọi của chúng mình</p>
+      <h2>Hai chữ, một điều <em>chúng mình tin tưởng</em></h2>
+      <p>“Vân” là dấu ấn không trùng lặp của tự nhiên. “Mộc” là sự chân thành, mộc mạc của bàn tay người thợ. Cùng nhau, hai chữ ấy tạo nên cách Vân Mộc nhìn về từng sản phẩm mình làm ra.</p>
+    </section>
+
+    <section className="about-meaning" aria-label="Ý nghĩa tên Vân Mộc">
+      <article className="about-meaning__item">
+        <div className="about-meaning__copy"><span className="about-meaning__number">01 / Vân</span><h2>Mỗi đường vân, <em>một nét riêng</em></h2><p>Chất liệu sừng mang những sắc độ và đường vân tự nhiên không chiếc nào giống chiếc nào. Vân Mộc trân trọng vẻ đẹp ấy, để mỗi món đồ giữ lại dấu ấn vốn có của mình.</p></div>
+        <img src={aboutImage('Vân.jpg')} alt="Vân – vẻ đẹp độc bản của đường vân sừng tự nhiên" loading="lazy" />
+      </article>
+      <article className="about-meaning__item about-meaning__item--reverse">
+        <div className="about-meaning__copy"><span className="about-meaning__number">02 / Mộc</span><h2>Mộc mạc từ <em>đôi tay người thợ</em></h2><p>“Mộc” nhắc chúng mình về sự giản dị và bền bỉ của nghề thủ công Thụy Ứng. Từng công đoạn được thực hiện cẩn thận để chất liệu tự nhiên trở thành một món đồ gần gũi, chỉn chu.</p></div>
+        <img src={aboutImage('Mộc.jpg')} alt="Mộc – tinh thần mộc mạc của nghề thủ công Thụy Ứng" loading="lazy" />
+      </article>
+    </section>
+
+    <section className="about-values" aria-labelledby="about-values-title">
+      <p className="about-eyebrow">Điều Vân Mộc trân trọng</p>
+      <h2 id="about-values-title">Gìn giữ giá trị cũ, <em>kể tiếp câu chuyện mới</em></h2>
+      <div className="about-values__grid">
+        <article><span>01</span><h3>Nguyên bản</h3><p>Tôn trọng màu sắc, đường vân và nét đẹp riêng vốn có của chất liệu tự nhiên.</p></article>
+        <article><span>02</span><h3>Tận tâm</h3><p>Chăm chút từ lựa chọn chất liệu đến tạo hình, mài nhẵn và hoàn thiện.</p></article>
+        <article><span>03</span><h3>Tiếp nối</h3><p>Đưa tinh thần nghề thủ công Thụy Ứng đến gần hơn với đời sống hiện đại.</p></article>
+      </div>
+    </section>
+
+    <section className="about-cta">
+      <p className="about-eyebrow">Vân nguyên bản, nét riêng bạn</p>
+      <h2>Cùng Vân Mộc <em>kể tiếp câu chuyện</em></h2>
+      <p>Khám phá những sản phẩm mang dấu vân tự nhiên và sự chăm chút của đôi tay người thợ.</p>
+      <div className="about-cta__actions"><Link to="/shop" className="about-button">Khám phá sản phẩm <ArrowRight size={17} aria-hidden="true" /></Link><Link to="/villages" className="about-cta__link">Câu chuyện làng nghề <ArrowRight size={17} aria-hidden="true" /></Link></div>
+    </section>
+  </div>
 }
 
 export function CustomOrderPage() {
