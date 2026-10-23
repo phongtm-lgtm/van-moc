@@ -25,7 +25,7 @@ export function DigitalTechnologyPage() {
       <div className="digital-craft-hero__copy">
         <p className="digital-craft-hero__eyebrow">DỊCH VỤ KHẮC &amp; ĐÁNH DẤU LASER</p>
         <h1 id="digital-craft-title">Mỗi ý tưởng, một dấu ấn riêng.</h1>
-        <p className="digital-craft-hero__lead">Từ ý tưởng của bạn và đôi tay người thợ, Vân Mộc tạo nên những món đồ sừng thủ công mang câu chuyện riêng.</p>
+        <p className="digital-craft-hero__lead">Cá nhân hoá món đồ theo cách của bạn</p>
         <a className="digital-craft-hero__button" href={BRAND.messenger} target="_blank" rel="noopener noreferrer"><MessengerIcon />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
       </div>
     </section>
