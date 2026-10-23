@@ -112,50 +112,69 @@ export function VillagesPage() {
 
 export function AboutPage() {
   const aboutImage = (name: string) => `/image/VanMoc/${encodeURIComponent('Trang Về Chúng Tôi')}/${encodeURIComponent(name)}`
+  const strategies = [
+    'Gìn giữ kỹ thuật chế tác truyền thống',
+    'Chú trọng chất lượng, vẻ đẹp tự nhiên và thân thiện với môi trường',
+    'Bao bì hiện đại, giản dị, phù hợp làm quà, biếu tặng',
+    'Ứng dụng công nghệ khắc laser theo yêu cầu, cho phép khách hàng khắc tên hoặc thông điệp riêng lên sản phẩm, góp phần gia tăng giá trị cá nhân hóa, ý nghĩa tinh thần và sự độc đáo cho mỗi món quà.',
+    'Tích hợp công nghệ NFC khám phá câu chuyện làng nghề và hành trình chế tác sản phẩm.',
+  ]
+  const values = [
+    { title: 'Trân trọng giá trị truyền thống', text: 'Gìn giữ kỹ thuật chế tác thủ công và những giá trị văn hóa được lưu truyền qua nhiều thế hệ tại làng nghề Thụy Ứng.' },
+    { title: 'Tôn trọng vẻ đẹp nguyên bản', text: 'Trân trọng những đường vân, sắc độ và đặc tính tự nhiên của chất liệu sừng bò châu Phi, tạo nên nét riêng cho mỗi sản phẩm.' },
+    { title: 'Tỉ mỉ trong từng sản phẩm', text: 'Đề cao sự khéo léo, cẩn trọng và tâm huyết của người thợ trong từng công đoạn chế tác, hoàn thiện sản phẩm.' },
+    { title: 'Chân thành trong từng giá trị', text: 'Lấy sự chân thành làm nền tảng trong cách giới thiệu sản phẩm, kể câu chuyện làng nghề và kết nối với khách hàng.' },
+    { title: 'Trách nhiệm với di sản làng nghề', text: 'Ý thức trách nhiệm trong việc gìn giữ, tôn vinh nghề truyền thống và góp phần lan tỏa những giá trị tốt đẹp của làng nghề Thụy Ứng.' },
+  ]
 
   return <div className="about-page">
     <section className="about-hero" aria-labelledby="about-title">
       <div className="about-hero__inner">
-        <p className="about-eyebrow">Về chúng tôi · Vân Mộc</p>
-        <h1 id="about-title">Vẻ đẹp nguyên bản.<br /><em>Nét riêng của bạn.</em></h1>
+        <p className="about-eyebrow">Về chúng tôi</p>
+        <h1 id="about-title">Vân Mộc – Vân nguyên bản,<br /><em>Nét riêng bạn</em></h1>
         <span className="about-accent" aria-hidden="true" />
-        <p>Vân Mộc ra đời từ sự trân trọng dành cho nghề chế tác sừng Thụy Ứng. Chúng mình mong những món đồ thủ công mang vẻ đẹp tự nhiên ấy được hiện diện gần gũi hơn trong đời sống hôm nay.</p>
-        <a href="#ten-van-moc" className="about-hero__link">Tìm hiểu về Vân Mộc <ArrowRight size={18} aria-hidden="true" /></a>
+        <p>Vân Mộc được hình thành từ tình yêu dành cho những giá trị thủ công truyền thống và mong muốn gìn giữ tinh hoa của làng nghề sừng Thụy Ứng, Thường Tín, Hà Nội. Với Vân Mộc, mỗi sản phẩm không chỉ mang giá trị sử dụng mà còn là sự kết tinh của chất liệu tự nhiên, đôi bàn tay khéo léo và tâm huyết của những người thợ làng nghề.</p>
+        <a href="#cau-chuyen-van-moc" className="about-hero__link">Tìm hiểu về Vân Mộc <ArrowRight size={18} aria-hidden="true" /></a>
       </div>
     </section>
 
-    <section className="about-intro" id="ten-van-moc">
-      <p className="about-eyebrow">Tên gọi của chúng mình</p>
-      <h2>Hai chữ, một điều <em>chúng mình tin tưởng</em></h2>
-      <p>“Vân” là dấu ấn không trùng lặp của tự nhiên. “Mộc” là sự chân thành, mộc mạc của bàn tay người thợ. Cùng nhau, hai chữ ấy tạo nên cách Vân Mộc nhìn về từng sản phẩm mình làm ra.</p>
+    <section className="about-intro" id="cau-chuyen-van-moc">
+      <p className="about-eyebrow">Câu chuyện của chúng tôi</p>
+      <h2>Câu chuyện <em>Vân Mộc</em></h2>
+      <p>Thụy Ứng là làng nghề nổi tiếng với truyền thống chế tác sừng, nơi những kỹ thuật thủ công được gìn giữ và truyền lại qua nhiều thế hệ. Từ chất liệu sừng bò châu Phi với những đường vân và sắc độ tự nhiên riêng biệt, người thợ tỉ mỉ tạo nên những sản phẩm như lược, trâm cài tóc và các món phụ kiện thủ công mang đậm dấu ấn của làng nghề.</p>
+      <p>Vân Mộc ra đời với mong muốn gìn giữ và lan tỏa những giá trị ấy. Chúng tôi trân trọng từng công đoạn chế tác, sự khéo léo của người thợ và câu chuyện văn hóa ẩn sau mỗi sản phẩm. Thông qua việc giới thiệu các sản phẩm thủ công từ sừng tự nhiên, Vân Mộc hy vọng sẽ giúp nhiều người hiểu hơn, yêu hơn và trân trọng hơn nghề truyền thống của quê hương.</p>
     </section>
 
-    <section className="about-meaning" aria-label="Ý nghĩa tên Vân Mộc">
-      <article className="about-meaning__item">
-        <div className="about-meaning__copy"><span className="about-meaning__number">01 / Vân</span><h2>Mỗi đường vân, <em>một nét riêng</em></h2><p>Chất liệu sừng mang những sắc độ và đường vân tự nhiên không chiếc nào giống chiếc nào. Vân Mộc trân trọng vẻ đẹp ấy, để mỗi món đồ giữ lại dấu ấn vốn có của mình.</p></div>
-        <img src={aboutImage('Vân.jpg')} alt="Vân – vẻ đẹp độc bản của đường vân sừng tự nhiên" loading="lazy" />
-      </article>
-      <article className="about-meaning__item about-meaning__item--reverse">
-        <div className="about-meaning__copy"><span className="about-meaning__number">02 / Mộc</span><h2>Mộc mạc từ <em>đôi tay người thợ</em></h2><p>“Mộc” nhắc chúng mình về sự giản dị và bền bỉ của nghề thủ công Thụy Ứng. Từng công đoạn được thực hiện cẩn thận để chất liệu tự nhiên trở thành một món đồ gần gũi, chỉn chu.</p></div>
-        <img src={aboutImage('Mộc.jpg')} alt="Mộc – tinh thần mộc mạc của nghề thủ công Thụy Ứng" loading="lazy" />
-      </article>
+    <section className="about-meaning" aria-label="Vân và Mộc">
+      <img src={aboutImage('Vân.jpg')} alt="Chữ Vân – đường vân nguyên bản" loading="lazy" />
+      <img src={aboutImage('Mộc.jpg')} alt="Chữ Mộc – nét mộc mạc của người thợ" loading="lazy" />
+    </section>
+
+    <section className="about-direction" aria-label="Sứ mệnh và tầm nhìn">
+      <div className="about-direction__grid">
+        <article><p className="about-eyebrow">Sứ mệnh</p><h2>Gìn giữ tinh hoa – <em>Lan tỏa giá trị</em></h2><p>Vân Mộc mang sứ mệnh gìn giữ và phát huy những giá trị truyền thống của nghề chế tác sừng tại làng nghề Thụy Ứng. Thông qua các sản phẩm thủ công từ sừng bò châu Phi, chúng tôi mong muốn tôn vinh sự khéo léo, tỉ mỉ và tâm huyết của người thợ, đồng thời đưa vẻ đẹp của nghề truyền thống đến gần hơn với cộng đồng, đặc biệt là thế hệ trẻ.</p></article>
+        <article><p className="about-eyebrow">Tầm nhìn</p><h2>Tiếp nối truyền thống – <em>Vươn xa giá trị Việt</em></h2><p>Vân Mộc hướng đến trở thành thương hiệu gắn liền với những sản phẩm thủ công từ sừng tự nhiên và tinh hoa làng nghề Thụy Ứng. Chúng tôi mong muốn góp phần nâng cao sự trân trọng của cộng đồng đối với nghề thủ công truyền thống, để những giá trị văn hóa lâu đời tiếp tục được gìn giữ, lan tỏa và nối dài qua các thế hệ.</p></article>
+      </div>
+    </section>
+
+    <section className="about-strategy" aria-labelledby="about-strategy-title">
+      <p className="about-eyebrow">Hướng đi của Vân Mộc</p>
+      <h2 id="about-strategy-title">Chiến lược <em>phát triển</em></h2>
+      <div className="about-strategy__viewport">
+        <div className="about-strategy__track">
+          {[0, 1].map(copy => <div className="about-strategy__group" aria-hidden={copy === 1 ? true : undefined} key={copy}>
+            {strategies.map((strategy, index) => <div className="about-strategy__card" key={strategy}><span>{String(index + 1).padStart(2, '0')}</span><p>{strategy}</p></div>)}
+          </div>)}
+        </div>
+      </div>
     </section>
 
     <section className="about-values" aria-labelledby="about-values-title">
       <p className="about-eyebrow">Điều Vân Mộc trân trọng</p>
-      <h2 id="about-values-title">Gìn giữ giá trị cũ, <em>kể tiếp câu chuyện mới</em></h2>
+      <h2 id="about-values-title">Giá trị <em>cốt lõi</em></h2>
       <div className="about-values__grid">
-        <article><span>01</span><h3>Nguyên bản</h3><p>Tôn trọng màu sắc, đường vân và nét đẹp riêng vốn có của chất liệu tự nhiên.</p></article>
-        <article><span>02</span><h3>Tận tâm</h3><p>Chăm chút từ lựa chọn chất liệu đến tạo hình, mài nhẵn và hoàn thiện.</p></article>
-        <article><span>03</span><h3>Tiếp nối</h3><p>Đưa tinh thần nghề thủ công Thụy Ứng đến gần hơn với đời sống hiện đại.</p></article>
+        {values.map((value, index) => <article key={value.title}><span>{String(index + 1).padStart(2, '0')}</span><h3>{value.title}</h3><p>{value.text}</p></article>)}
       </div>
-    </section>
-
-    <section className="about-cta">
-      <p className="about-eyebrow">Vân nguyên bản, nét riêng bạn</p>
-      <h2>Cùng Vân Mộc <em>kể tiếp câu chuyện</em></h2>
-      <p>Khám phá những sản phẩm mang dấu vân tự nhiên và sự chăm chút của đôi tay người thợ.</p>
-      <div className="about-cta__actions"><Link to="/shop" className="about-button">Khám phá sản phẩm <ArrowRight size={17} aria-hidden="true" /></Link><Link to="/villages" className="about-cta__link">Câu chuyện làng nghề <ArrowRight size={17} aria-hidden="true" /></Link></div>
     </section>
   </div>
 }
