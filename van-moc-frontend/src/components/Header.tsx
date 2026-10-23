@@ -8,9 +8,9 @@ const NAV = [
   { label: 'Trang chủ', href: '/' },
   { label: 'Câu Chuyện', href: '/villages' },
   { label: 'Sản phẩm', href: '/shop' },
-  { label: 'Chế tác riêng', href: '/custom-order' },
+  { label: 'Công nghệ laser', href: '/custom-order' },
   { label: 'Về chúng tôi', href: '/gioi-thieu' },
-  { label: 'Truy xuất', href: '/truy-xuat' },
+  { label: 'Hành trình chế tác', href: '/truy-xuat' },
 ]
 
 export function Header() {
@@ -29,7 +29,7 @@ export function Header() {
           />
         </Link>
 
-        <nav className="hidden flex-1 items-center justify-center gap-1 md:flex">
+        <nav className="hidden min-w-0 flex-1 items-center justify-center gap-1 xl:flex">
           {NAV.map((item) => {
             const active = pathname === item.href
             return (
@@ -37,7 +37,7 @@ export function Header() {
                 key={item.href}
                 to={item.href}
                 aria-current={active ? 'page' : undefined}
-                className={`relative border-0 outline-none focus-visible:after:scale-x-100 focus-visible:after:h-0.5 px-4 py-2 text-base font-medium transition-colors after:absolute after:left-4 after:right-4 after:bottom-0 after:h-px after:origin-left after:bg-[#a84a32] after:transition-transform ${
+                className={`relative whitespace-nowrap border-0 outline-none focus-visible:after:scale-x-100 focus-visible:after:h-0.5 px-3 2xl:px-4 py-2 text-sm 2xl:text-base font-medium transition-colors after:absolute after:left-3 2xl:after:left-4 after:right-3 2xl:after:right-4 after:bottom-0 after:h-px after:origin-left after:bg-[#a84a32] after:transition-transform ${
                   active
                     ? 'text-[#4a2a1a] after:scale-x-100'
                     : 'text-[#5a4033] after:scale-x-0 hover:text-[#3a2116] hover:after:scale-x-100'
@@ -52,7 +52,7 @@ export function Header() {
         <div className="header-account-position">
           <AccountDropdown onOpen={() => setOpen(false)} />
         </div>
-        <div className="hidden shrink-0 items-center gap-4 md:flex">
+        <div className="hidden shrink-0 items-center gap-4 xl:flex">
           <Link
             to="/cart"
             aria-label="Giỏ hàng"
@@ -63,7 +63,7 @@ export function Header() {
           </Link>
         </div>
 
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-3 xl:hidden">
           <Link
             to="/cart"
             aria-label="Giỏ hàng"
@@ -86,7 +86,7 @@ export function Header() {
       </div>
 
       {open && (
-        <div id="mobile-navigation" className="border-t border-[#7a5138]/12 bg-[#f7ebdd] px-4 pb-6 pt-3 shadow-[0_20px_40px_rgba(58,33,22,0.14)] md:hidden">
+        <div id="mobile-navigation" className="border-t border-[#7a5138]/12 bg-[#f7ebdd] px-4 pb-6 pt-3 shadow-[0_20px_40px_rgba(58,33,22,0.14)] xl:hidden">
           <p className="mb-3 px-3 pt-1 text-[9px] font-semibold uppercase tracking-[0.24em] text-[#9a6a32]">Khám phá Vân Mộc</p>
           {NAV.map((item) => (
             <Link
