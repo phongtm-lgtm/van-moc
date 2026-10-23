@@ -20,7 +20,7 @@
 .digital-intro__heading > * { position: relative; }
 .digital-intro .digital-eyebrow, .digital-gallery .digital-eyebrow { justify-content: center; }
 .digital-intro h2, .digital-gallery h2, .digital-split h2, .digital-cta h2 { margin: 18px 0 22px; font-size: clamp(2.4rem, 4vw, 4.2rem); letter-spacing: -.035em; }
-.digital-intro h2 { color: #354525; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; }
+.digital-intro h2 { color: #50301f; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; }
 .digital-intro__heading .digital-eyebrow::before, .digital-intro__heading .digital-eyebrow::after { content: ''; width: 30px; height: 1px; background: #ad7750; }
 .digital-intro__tagline { color: #725437; font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 600; }
 .digital-intro__heading > p:not(.digital-eyebrow) { max-width: 800px; margin: 18px auto 0; color: #685140; line-height: 1.85; }
@@ -31,8 +31,8 @@
 .digital-feature svg { color: #a65b37; }
 .digital-feature h3 { margin: 22px 0 12px; font-family: Georgia, serif; font-size: 1.5rem; }
 .digital-feature p { color: #685140; line-height: 1.75; }
-.digital-split { position: relative; background: #283d33; color: #fff2dd; }
-.digital-split::before { content: ''; position: absolute; inset: 0; opacity: .15; pointer-events: none; background: repeating-radial-gradient(ellipse at 95% 5%, transparent 0 34px, #d9b77d 36px 38px, transparent 40px 62px); }
+.digital-split { position: relative; background: #4b3224; color: #fff2dd; }
+.digital-split::before { content: ''; position: absolute; inset: 0; opacity: .1; pointer-events: none; background: url('/image/textures/van-moc-paper-craft-bg.png') center / cover no-repeat; }
 .digital-split__inner { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 5vw, 5rem); max-width: 1380px; margin: auto; padding: clamp(4rem, 7vw, 7rem) 5vw; }
 .digital-split__image { overflow: hidden; border: 1px solid #bb9c61; border-radius: 20px; background: #847247; }
 .digital-split__image img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
