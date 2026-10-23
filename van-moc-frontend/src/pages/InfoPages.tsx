@@ -126,10 +126,9 @@ export function AboutPage() {
 
   return <div className="about-page">
     <section className="about-hero" aria-labelledby="about-title">
+      <img className="about-hero__banner" src="/image/VanMoc/banner%20V%C3%A2n%20M%E1%BB%99c.png" alt="Vân Mộc – làng nghề Thụy Ứng, sản phẩm sừng thủ công và thông điệp Vân nguyên bản, nét riêng bạn" />
       <div className="about-hero__inner">
-        <p className="about-eyebrow">Về chúng tôi</p>
-        <h1 id="about-title">Vân Mộc – Vân nguyên bản,<br /><em>Nét riêng bạn</em></h1>
-        <span className="about-accent" aria-hidden="true" />
+        <h1 id="about-title" className="sr-only">Về Vân Mộc – Vân nguyên bản, nét riêng bạn</h1>
         <p>Vân Mộc được hình thành từ tình yêu dành cho những giá trị thủ công truyền thống và mong muốn gìn giữ tinh hoa của làng nghề sừng Thụy Ứng, Thường Tín, Hà Nội. Với Vân Mộc, mỗi sản phẩm không chỉ mang giá trị sử dụng mà còn là sự kết tinh của chất liệu tự nhiên, đôi bàn tay khéo léo và tâm huyết của những người thợ làng nghề.</p>
         <a href="#cau-chuyen-van-moc" className="about-hero__link">Tìm hiểu về Vân Mộc <ArrowRight size={18} aria-hidden="true" /></a>
       </div>
