@@ -534,20 +534,17 @@ export function HomePage() {
           <div className="home-hero__copy">
             <div className="home-hero__eyebrow">
               <span aria-hidden />
-              Thủ công từ làng nghề Thụy Ứng
+              Hành trình chế tác · Làng nghề Thụy Ứng
             </div>
             <p className="home-hero__brand">
               Vân Mộc
             </p>
             <div className="home-hero__rule" aria-hidden />
             <h1 className="home-hero__title">
-              Tinh hoa thủ công
-              <br />
-              từ làng nghề Thụy Ứng
+              Chạm để mở ra câu chuyện.
             </h1>
             <p className="home-hero__description">
-              Chế tác từ sừng tự nhiên, lưu giữ vẻ đẹp truyền thống trong từng chiếc lược và trâm
-              cài.
+              Khám phá chất liệu sừng tự nhiên, hành trình chế tác và tinh hoa nghề sừng Thụy Ứng.
             </p>
             <div className="home-hero__actions">
               <Link
@@ -557,12 +554,12 @@ export function HomePage() {
                 Khám phá sản phẩm
                 <ArrowRight size={14} />
               </Link>
-              <Link
-                to="/villages"
+              <a
+                href="#hanh-trinh-che-tac"
                 className="home-hero__cta home-hero__cta--secondary"
               >
-                Câu chuyện làng nghề
-              </Link>
+                Hành trình chế tác
+              </a>
             </div>
           </div>
         </div>
@@ -712,7 +709,7 @@ export function HomePage() {
       </section>
 
       {/* 01 · Chất liệu */}
-       <section className="bg-paper-sand overflow-hidden py-14 md:py-20">
+      <section id="hanh-trinh-che-tac" className="bg-paper-sand overflow-hidden py-14 md:py-20 scroll-mt-16 md:scroll-mt-20">
          <SectionDecor variant="warm" />
          <div className="relative z-10 container mx-auto px-5 md:px-8">
            <Reveal className="mx-auto mb-10 max-w-2xl space-y-3 text-center md:mb-14">
