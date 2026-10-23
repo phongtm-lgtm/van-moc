@@ -16,6 +16,7 @@ import { OrderDetailPage } from './pages/OrderDetailPage'
 import { AboutPage, ContactPage, CustomOrderPage, VillagesPage } from './pages/InfoPages'
 import { PolicyPage } from './pages/PolicyPages'
 import { Seo } from './components/Seo'
+import { DigitalTechnologyPage } from './pages/DigitalTechnologyPage'
 
 function Placeholder({ title }: { title: string }) {
   return (
@@ -63,6 +64,7 @@ export default function App() {
           <Route path="/truy-xuat" element={<TraceabilityPage />} />
           <Route path="/quy-dinh" element={<PolicyPage />} />
           <Route path="/custom-order" element={<CustomOrderPage />} />
+          <Route path="/cong-nghe-so" element={<DigitalTechnologyPage />} />
           <Route path="/lien-he" element={<ContactPage />} />
           <Route path="/login" element={<><HomePage /><LoginPage /></>} />
           <Route path="/chinh-sach-bao-mat" element={<PolicyPage privacyPolicy />} />
