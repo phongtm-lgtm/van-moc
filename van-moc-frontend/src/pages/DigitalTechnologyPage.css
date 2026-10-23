@@ -25,22 +25,18 @@
 .digital-intro__tagline { color: #725437; font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 600; }
 .digital-intro__heading > p:not(.digital-eyebrow) { max-width: 800px; margin: 18px auto 0; color: #685140; line-height: 1.85; }
 .digital-gallery > p:not(.digital-eyebrow) { max-width: 730px; margin: 0 auto; color: #685140; line-height: 1.8; }
-.digital-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1380px; margin: 0 auto; padding: 90px 5vw 0; text-align: left; }
-.digital-feature { min-height: 315px; padding: 32px; border: 1px solid #d9c5a7; border-radius: 12px; background: #fffaf0; box-shadow: 0 14px 32px #51331c0a; }
-.digital-feature__number { display: block; margin-bottom: 36px; color: #ad7750; font-size: .8rem; letter-spacing: .16em; }
-.digital-feature svg { color: #a65b37; }
-.digital-feature h3 { margin: 22px 0 12px; font-family: Georgia, serif; font-size: 1.5rem; }
-.digital-feature p { color: #685140; line-height: 1.75; }
 .digital-split { position: relative; background: #4b3224; color: #fff2dd; }
 .digital-split::before { content: ''; position: absolute; inset: 0; opacity: .1; pointer-events: none; background: url('/image/textures/van-moc-paper-craft-bg.png') center / cover no-repeat; }
-.digital-split__inner { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 5vw, 5rem); max-width: 1380px; margin: auto; padding: clamp(4rem, 7vw, 7rem) 5vw; }
-.digital-split__image { display: flex; align-items: center; justify-content: center; min-height: 340px; padding: 1.5rem; border: 1px solid #bb9c61; border-radius: 20px; background: #6a4a30; }
-.digital-split__image img { display: block; width: auto; max-width: 100%; height: auto; border-radius: 10px; }
+.digital-split__inner { position: relative; display: grid; grid-template-columns: minmax(0, 340px) minmax(0, 1fr); align-items: center; gap: clamp(2rem, 5vw, 5rem); max-width: 1100px; margin: auto; padding: clamp(4rem, 7vw, 7rem) 5vw; }
+.digital-split__image { overflow: hidden; width: 100%; border: 1px solid #bb9c61; border-radius: 16px; }
+.digital-split__image img { display: block; width: 100%; height: auto; }
 .digital-split__copy { max-width: 670px; }
 .digital-split .digital-eyebrow { color: #e0bb88; }
 .digital-split em { color: #e6b78c; }
 .digital-split__copy > p:not(.digital-eyebrow) { line-height: 1.9; color: #f0dcc4; }
 .digital-split__copy .digital-split__closing { margin-top: 1.5rem; color: #e6b78c; font-style: italic; }
+.digital-gallery > p:not(.digital-eyebrow) { max-width: 850px; margin: 1rem auto 0; }
+.digital-gallery .digital-gallery__lead { color: #50301f; font-size: clamp(1.15rem, 2vw, 1.5rem); font-weight: 600; }
 .digital-gallery__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 46px; }
 .digital-gallery figure { margin: 0; overflow: hidden; border-radius: 10px; background: #ecddc8; }
 .digital-gallery img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; transition: transform .3s; }
@@ -53,16 +49,13 @@
 .digital-cta .digital-button { background: #f2d1a6; color: #4b3224; }
 .digital-cta .digital-button:hover { background: white; }
 @media (max-width: 900px) {
-  .digital-features { gap: 12px; }
-  .digital-feature { padding: 23px; }
+  .digital-gallery__grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 700px) {
   .digital-craft-hero { padding-top: calc(4rem + 3rem); }
   .digital-intro, .digital-gallery { padding: 75px 7%; }
-  .digital-features { grid-template-columns: 1fr; gap: 14px; padding: 75px 7% 0; }
-  .digital-feature { min-height: 0; }
-  .digital-feature__number { margin-bottom: 20px; }
   .digital-split__inner { grid-template-columns: 1fr; padding: 65px 7%; }
+  .digital-split__image { max-width: 340px; margin: 0 auto; }
   .digital-gallery__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .digital-cta { padding: 0 5% 75px; }
   .digital-cta > div { padding: 60px 7%; }

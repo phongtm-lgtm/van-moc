@@ -1,15 +1,9 @@
-import { ArrowRight, Fingerprint, PenLine, ScanLine } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { BRAND } from '../brand'
 import { MessengerIcon } from '../components/MessengerIcon'
 import './DigitalTechnologyPage.css'
 
 const image = (name: string) => `/image/VanMoc/${encodeURIComponent('Trang Công Nghệ Laser')}/${encodeURIComponent(name)}`
-
-const features = [
-  { icon: PenLine, number: '01', title: 'Từ ý tưởng của bạn', text: 'Một cái tên, lời nhắn hay hình vẽ nhỏ có thể trở thành dấu ấn riêng trên món đồ bạn chọn.' },
-  { icon: ScanLine, number: '02', title: 'Khắc laser tinh tế', text: 'Công nghệ khắc laser giúp thể hiện những chi tiết nhỏ trên bề mặt sản phẩm một cách chỉn chu.' },
-  { icon: Fingerprint, number: '03', title: 'Mỗi món đồ một nét riêng', text: 'Đường vân tự nhiên của sừng kết hợp cùng nội dung cá nhân hóa tạo nên món quà dành riêng cho bạn.' },
-]
 
 const gallery = [
   'Dấu ấn mang tính cá nhân 1.png',
@@ -51,19 +45,11 @@ export function DigitalTechnologyPage() {
       </div>
     </section>
 
-    <section className="digital-features" aria-label="Cá nhân hóa sản phẩm bằng công nghệ laser">
-      {features.map(({ icon: Icon, number, title, text }) => <article className="digital-feature" key={number}>
-        <span className="digital-feature__number">{number} / 03</span>
-        <Icon size={32} strokeWidth={1.4} aria-hidden="true" />
-        <h3>{title}</h3>
-        <p>{text}</p>
-      </article>)}
-    </section>
-
     <section className="digital-gallery" aria-labelledby="digital-gallery-title">
-      <p className="digital-eyebrow">Cảm hứng dành cho bạn</p>
       <h2 id="digital-gallery-title">Dấu ấn mang tính <em>cá nhân</em></h2>
-      <p>Khám phá những cách lưu giữ một cái tên, một kỷ niệm hay lời nhắn trên món đồ gần gũi mỗi ngày.</p>
+      <p className="digital-gallery__lead">Không chỉ là một món đồ, mà còn là câu chuyện của riêng bạn.</p>
+      <p>Một cái tên thân thuộc, ngày tháng đáng nhớ, chữ ký hay hình vẽ yêu thích đều có thể trở thành dấu ấn riêng trên món đồ bạn trân trọng.</p>
+      <p>Tại Vân Mộc, bạn có thể bắt đầu từ một ý tưởng có sẵn hoặc chia sẻ mong muốn của mình để cùng tìm ra cách thể hiện phù hợp. Từ kiểu chữ, biểu tượng đến cách sắp xếp các chi tiết, mỗi thiết kế đều hướng đến việc phản ánh cá tính và câu chuyện riêng của bạn.</p>
       <div className="digital-gallery__grid">{gallery.map((name, index) => <figure key={name}><img src={image(name)} alt={`Gợi ý cá nhân hóa sản phẩm Vân Mộc ${index + 1}`} loading="lazy" /></figure>)}</div>
     </section>
 
