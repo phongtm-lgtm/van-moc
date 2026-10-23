@@ -534,17 +534,20 @@ export function HomePage() {
           <div className="home-hero__copy">
             <div className="home-hero__eyebrow">
               <span aria-hidden />
-              Hành trình chế tác · Làng nghề Thụy Ứng
+              Thủ công từ làng nghề Thụy Ứng
             </div>
             <p className="home-hero__brand">
               Vân Mộc
             </p>
             <div className="home-hero__rule" aria-hidden />
             <h1 className="home-hero__title">
-              Chạm để mở ra câu chuyện.
+              Tinh hoa thủ công
+              <br />
+              từ làng nghề Thụy Ứng
             </h1>
             <p className="home-hero__description">
-              Khám phá chất liệu sừng tự nhiên, hành trình chế tác và tinh hoa nghề sừng Thụy Ứng.
+              Chế tác từ sừng tự nhiên, lưu giữ vẻ đẹp truyền thống trong từng chiếc lược và trâm
+              cài.
             </p>
             <div className="home-hero__actions">
               <Link
@@ -554,12 +557,12 @@ export function HomePage() {
                 Khám phá sản phẩm
                 <ArrowRight size={14} />
               </Link>
-              <a
-                href="#hanh-trinh-che-tac"
+              <Link
+                to="/villages"
                 className="home-hero__cta home-hero__cta--secondary"
               >
-                Hành trình chế tác
-              </a>
+                Câu chuyện làng nghề
+              </Link>
             </div>
           </div>
         </div>
@@ -708,16 +711,11 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 01 · Chất liệu */}
-      <section id="hanh-trinh-che-tac" className="bg-paper-sand overflow-hidden py-14 md:py-20 scroll-mt-16 md:scroll-mt-20">
-         <SectionDecor variant="warm" />
-         <div className="relative z-10 container mx-auto px-5 md:px-8">
-           <Reveal className="mx-auto mb-10 max-w-2xl space-y-3 text-center md:mb-14">
-             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#9a6b1f]">Hành trình chế tác</p>
-             <h2 className="text-2xl leading-tight tracking-wide text-[#241a13] md:text-3xl lg:text-[34px]">Chạm để mở ra câu chuyện.</h2>
-             <p className="text-sm leading-relaxed text-[#3f3228] md:text-base">Khám phá chất liệu sừng tự nhiên, hành trình chế tác và tinh hoa nghề sừng Thụy Ứng.</p>
-           </Reveal>
-           <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-6 xl:gap-10">
+      {/* Giá trị sản phẩm — editorial layout */}
+      <section className="bg-paper-sand overflow-hidden py-14 md:py-20">
+        <SectionDecor variant="warm" />
+        <div className="relative z-10 container mx-auto px-5 md:px-8">
+          <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-12 lg:gap-6 xl:gap-10">
             {/* Left: rounded rectangular craft frame */}
             <Reveal className="lg:col-span-5 xl:col-span-6">
               <figure className="material-frame mx-auto max-w-md md:max-w-[500px] lg:max-w-[480px]">
@@ -725,7 +723,7 @@ export function HomePage() {
                   <div className="material-frame__inner">
                     <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[1.35rem] md:rounded-[1.75rem]">
                       <img
-                        src="/image/truy-xuat/chat-lieu-sung.jpg"
+                        src="/image/products/luoc-rang-thua.jpg"
                         alt="Cận cảnh chất liệu sừng tự nhiên với đường vân độc bản"
                         className="size-full object-cover object-center"
                       />
@@ -793,13 +791,13 @@ export function HomePage() {
             <div className="lg:col-span-7 xl:col-span-6 space-y-8 md:space-y-10">
               <Reveal>
                 <div className="space-y-3 max-w-xl">
-                   <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#9a6b1f]">01 · Chất liệu</p>
-                   <h2 className="text-2xl leading-tight tracking-wide text-[#241a13] md:text-3xl lg:text-[34px]">
-                     Vẻ đẹp tự nhiên, dấu ấn thủ công
-                   </h2>
+                  <h2 className="text-2xl leading-tight tracking-wide text-[#241a13] md:text-3xl lg:text-[34px]">
+                    Vẻ đẹp đến từ chất liệu nguyên bản
+                  </h2>
                   <div className="w-12 h-px bg-[#9a6b1f]" />
                   <p className="text-sm leading-relaxed text-[#3f3228] md:text-base">
-                     Sừng tự nhiên thu hút bởi những sắc độ và đường vân không hoàn toàn giống nhau. Từ tông màu sáng đến nâu trầm, mỗi phần chất liệu có đặc điểm riêng, tạo nên diện mạo khác biệt cho từng sản phẩm. Với Vân Mộc, vẻ đẹp ấy không nằm ở sự đồng nhất tuyệt đối, mà ở những chi tiết tự nhiên khiến mỗi chiếc lược, mỗi món phụ kiện mang một nét riêng.
+                    Vân Mộc mang vẻ đẹp tự nhiên của chất liệu sừng vào từng sản phẩm, để mỗi đường
+                    vân, sắc màu đều kể một câu chuyện riêng.
                   </p>
                 </div>
               </Reveal>
@@ -824,18 +822,15 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* 02 · Hành trình chế tác */}
+      {/* Quy trình chế tác */}
       <section className="bg-paper-mist overflow-hidden py-14 md:py-20">
         <SectionDecor variant="light" />
         <div className="relative z-10 container mx-auto px-5 md:px-8 space-y-7 md:space-y-10">
           <Reveal>
-             <div className="mx-auto max-w-3xl space-y-3 text-center">
-               <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#9a6b1f]">02 · Hành trình chế tác</p>
-               <SectionHeading
-                 title="Từ chất liệu đến thành phẩm"
-                 description="Để trở thành một sản phẩm hoàn chỉnh, sừng cần trải qua những công đoạn chế tác phù hợp với đặc tính của chất liệu. Từ tạo hình đến mài nhẵn và hoàn thiện bề mặt, mỗi bước đều góp phần tạo nên hình dáng, cảm giác khi cầm nắm và diện mạo của sản phẩm. Đằng sau thành phẩm là kỹ năng, kinh nghiệm và sự tỉ mỉ của người thợ trong từng thao tác."
-               />
-             </div>
+            <SectionHeading
+              title="Qua đôi tay người thợ"
+              description="Mỗi sản phẩm trải qua nhiều công đoạn để giữ được vẻ đẹp của chất liệu và sự chỉn chu trong từng chi tiết."
+            />
           </Reveal>
           {/* Desktop: ngang · Mobile: dọc */}
           <Reveal>
@@ -861,48 +856,9 @@ export function HomePage() {
                 </li>
               ))}
             </ol>
-           </Reveal>
-         </div>
-       </section>
-
-       {/* 03 · Tinh tế trong từng chi tiết */}
-       <section className="bg-paper-cream overflow-hidden py-14 md:py-20">
-         <SectionDecor variant="light" />
-         <div className="relative z-10 container mx-auto grid items-center gap-9 px-5 md:px-8 lg:grid-cols-2 lg:gap-14">
-           <Reveal className="order-2 space-y-4 lg:order-1">
-             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#9a6b1f]">03 · Tinh tế trong từng chi tiết</p>
-             <h2 className="text-2xl leading-tight tracking-wide text-[#241a13] md:text-3xl lg:text-[34px]">Nét đẹp trong từng chi tiết</h2>
-             <div className="h-px w-12 bg-[#9a6b1f]" aria-hidden />
-             <p className="max-w-xl text-sm leading-relaxed text-[#3f3228] md:text-base">
-               Từ đường nét tạo hình đến bề mặt được hoàn thiện, mỗi chi tiết đều góp phần tạo nên vẻ đẹp và trải nghiệm sử dụng của sản phẩm. Vân Mộc trân trọng những giá trị đến từ chất liệu tự nhiên và sự chăm chút trong chế tác, để những vật dụng quen thuộc trở thành món đồ có nét đẹp riêng, gần gũi và bền lâu.
-             </p>
-           </Reveal>
-           <Reveal className="order-1 lg:order-2">
-             <img src="/image/truy-xuat/che-tac-danh-bong.jpg" alt="Người thợ hoàn thiện bề mặt sản phẩm sừng" loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-cover shadow-[0_12px_35px_rgba(63,42,26,0.12)]" />
-           </Reveal>
-         </div>
-       </section>
-
-       {/* 04 · Hướng dẫn bảo quản: ảnh trái, nội dung phải */}
-       <section className="bg-paper-sand overflow-hidden py-14 md:py-20">
-         <SectionDecor variant="warm" />
-         <div className="relative z-10 container mx-auto grid items-center gap-9 px-5 md:px-8 lg:grid-cols-2 lg:gap-14">
-           <Reveal>
-             <img src="/image/products/luoc-rang-thua.jpg" alt="Lược sừng tự nhiên được chăm sóc và bảo quản đúng cách" loading="lazy" className="mx-auto aspect-[4/3] w-full max-w-xl rounded-2xl object-cover shadow-[0_12px_35px_rgba(63,42,26,0.12)]" />
-           </Reveal>
-           <Reveal className="space-y-4">
-             <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[#9a6b1f]">04 · Hướng dẫn bảo quản</p>
-             <h2 className="text-2xl leading-tight tracking-wide text-[#241a13] md:text-3xl lg:text-[34px]">Chăm sóc để sử dụng lâu dài</h2>
-             <div className="h-px w-12 bg-[#9a6b1f]" aria-hidden />
-             <p className="text-sm leading-relaxed text-[#3f3228] md:text-base">Sừng tự nhiên cần được chăm sóc đúng cách để duy trì vẻ đẹp theo thời gian.</p>
-             <ul className="list-disc space-y-3 pl-5 text-sm leading-relaxed text-[#3f3228] marker:text-[#9a6b1f] md:text-base">
-               <li>Tránh để sản phẩm tiếp xúc lâu với nước hoặc môi trường ẩm.</li>
-               <li>Hạn chế nhiệt độ cao và ánh nắng trực tiếp trong thời gian dài.</li>
-               <li>Lau sạch bằng khăn mềm sau khi sử dụng và bảo quản ở nơi khô thoáng.</li>
-             </ul>
-           </Reveal>
-         </div>
-       </section>
+          </Reveal>
+        </div>
+      </section>
 
       {/* Chế tác theo yêu cầu */}
       <section className="custom-craft-section py-16 md:py-24">
