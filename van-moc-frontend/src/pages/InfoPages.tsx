@@ -1,13 +1,10 @@
 import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
 import { ArrowRight } from 'lucide-react'
-import { MessengerIcon } from '../components/MessengerIcon'
 import './CustomOrderHero.css'
 import './StoryPage.css'
 import './AboutPage.css'
 import { BRAND } from '../brand'
-
-const MESSENGER_URL = BRAND.messenger
 
 const CRAFT_STEPS = [
   { number: '01', title: 'Gửi hình mẫu', description: 'Chia sẻ hình ảnh, bản phác thảo hoặc ý tưởng về món đồ bạn mong muốn.' },
@@ -181,18 +178,8 @@ export function AboutPage() {
 
 export function CustomOrderPage() {
   return <div className="craft-page">
-    <section className="craft-hero" aria-labelledby="craft-hero-title">
-      <div className="craft-hero__copy">
-        <p className="craft-eyebrow">Chế tác riêng cùng Vân Mộc</p>
-        <h1 id="craft-hero-title">Mỗi ý tưởng, một dấu ấn riêng.</h1>
-        <p className="craft-lead">Từ ý tưởng của bạn và đôi tay người thợ, Vân Mộc tạo nên những món đồ sừng thủ công mang câu chuyện riêng.</p>
-        <div className="craft-hero__actions">
-          <a className="craft-button craft-button--primary" href={MESSENGER_URL} target="_blank" rel="noopener noreferrer"><MessengerIcon />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
-        </div>
-      </div>
-    </section>
     <section className="craft-process" aria-labelledby="craft-process-title">
-      <h2 id="craft-process-title">Từ ý tưởng đến tác phẩm</h2>
+      <h1 id="craft-process-title">Từ ý tưởng đến tác phẩm</h1>
       <ol className="craft-process__steps">
         {CRAFT_STEPS.map(step => <li className="craft-process__step" key={step.number}>
           <span className="craft-process__number" aria-hidden="true">{step.number}</span>

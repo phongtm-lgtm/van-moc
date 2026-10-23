@@ -1,6 +1,7 @@
 import { ArrowRight, Fingerprint, PenLine, ScanLine, Sparkles } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { BRAND } from '../brand'
+import { MessengerIcon } from '../components/MessengerIcon'
 import './DigitalTechnologyPage.css'
 
 const image = (name: string) => `/image/VanMoc/${encodeURIComponent('Trang Công Nghệ Laser')}/${encodeURIComponent(name)}`
@@ -20,6 +21,14 @@ const gallery = [
 
 export function DigitalTechnologyPage() {
   return <div className="digital-page">
+    <section className="digital-craft-hero" aria-labelledby="digital-craft-title">
+      <div className="digital-craft-hero__copy">
+        <p className="digital-craft-hero__eyebrow">Chế tác riêng cùng Vân Mộc</p>
+        <h1 id="digital-craft-title">Mỗi ý tưởng, một dấu ấn riêng.</h1>
+        <p className="digital-craft-hero__lead">Từ ý tưởng của bạn và đôi tay người thợ, Vân Mộc tạo nên những món đồ sừng thủ công mang câu chuyện riêng.</p>
+        <a className="digital-craft-hero__button" href={BRAND.messenger} target="_blank" rel="noopener noreferrer"><MessengerIcon />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
+      </div>
+    </section>
     <section className="digital-hero" aria-labelledby="digital-title">
       <div className="digital-hero__content">
         <p className="digital-eyebrow"><Sparkles size={16} aria-hidden="true" /> Truyền thống gặp công nghệ</p>

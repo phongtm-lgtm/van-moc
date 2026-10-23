@@ -2,8 +2,16 @@
 .digital-page h1, .digital-page h2, .digital-page h3 { line-height: 1.17; }
 .digital-page h1, .digital-page h2 { font-family: Georgia, 'Times New Roman', serif; }
 .digital-page em { color: #ac6942; font-weight: 400; }
+.digital-craft-hero { padding: calc(5rem + clamp(3.5rem, 7vw, 6rem)) 1.5rem clamp(3rem, 5vw, 4.5rem); text-align: center; background-color: #faf5e9; background-image: linear-gradient(rgba(255, 248, 231, .68), rgba(247, 237, 217, .72)), url('/image/textures/van-moc-paper-craft-bg.png'); background-position: center; background-size: cover; }
+.digital-craft-hero__copy { width: min(100%, 900px); margin: auto; }
+.digital-craft-hero__eyebrow { margin: 0; color: #8b653e; font-size: .69rem; font-weight: 700; letter-spacing: .22em; line-height: 1.7; text-transform: uppercase; }
+.digital-craft-hero h1 { margin: 1.5rem 0; font-family: var(--font-display); font-size: clamp(2.7rem, 5vw, 4.8rem); font-weight: 400; letter-spacing: -.035em; line-height: 1.17; text-wrap: balance; }
+.digital-craft-hero__lead { max-width: 590px; margin: 0 auto; color: #675243; font-size: clamp(.97rem, 1.1vw, 1.08rem); line-height: 1.85; }
+.digital-craft-hero__button { display: inline-flex; min-height: 3.25rem; align-items: center; justify-content: center; gap: .7rem; margin-top: 2rem; padding: .8rem 1.45rem; border-radius: 100px; background: #50301f; color: #fff7e9; font-size: .86rem; font-weight: 600; text-decoration: none; transition: background-color 180ms ease; }
+.digital-craft-hero__button:hover { background: #75452a; color: #fff; }
+.digital-craft-hero__button:focus-visible { outline: 2px solid #956b40; outline-offset: 4px; }
 .digital-eyebrow { display: flex; align-items: center; gap: 10px; color: #ad7750; font-size: .76rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
-.digital-hero { min-height: 680px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 7%; padding: 140px max(5vw, calc((100vw - 1280px)/2)) 90px; background: radial-gradient(circle at 85% 45%, #f2debf, transparent 45%), #f8edda; }
+.digital-hero { min-height: 680px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 7%; padding: 90px max(5vw, calc((100vw - 1280px)/2)); background: radial-gradient(circle at 85% 45%, #f2debf, transparent 45%), #f8edda; }
 .digital-hero__content { max-width: 620px; }
 .digital-hero h1 { margin: 27px 0; font-size: clamp(3.3rem, 5.7vw, 6.5rem); letter-spacing: -.045em; }
 .digital-hero__content > p:not(.digital-eyebrow) { max-width: 520px; font-size: 1.12rem; line-height: 1.85; color: #634d3b; }
@@ -42,13 +50,14 @@
 .digital-cta .digital-button { background: #f2d1a6; color: #4b3224; }
 .digital-cta .digital-button:hover { background: white; }
 @media (max-width: 900px) {
-  .digital-hero { gap: 36px; padding: 120px 6% 95px; min-height: 0; }
+  .digital-hero { gap: 36px; padding: 95px 6%; min-height: 0; }
   .digital-hero__stamp { width: 110px; height: 110px; left: -20px; font-size: .8rem; }
   .digital-features { gap: 12px; }
   .digital-feature { padding: 23px; }
 }
 @media (max-width: 700px) {
-  .digital-hero { grid-template-columns: 1fr; padding: 110px 7% 75px; gap: 50px; }
+  .digital-craft-hero { padding-top: calc(4rem + 3rem); }
+  .digital-hero { grid-template-columns: 1fr; padding: 75px 7%; gap: 50px; }
   .digital-hero h1 { font-size: clamp(3rem, 12vw, 4.8rem); }
   .digital-hero__visual { max-width: 450px; width: calc(100% - 25px); }
   .digital-hero__visual img { max-height: 430px; }
@@ -63,3 +72,4 @@
   .digital-cta { padding: 0 5% 75px; }
   .digital-cta > div { padding: 60px 7%; }
 }
+@media (prefers-reduced-motion: reduce) { .digital-craft-hero__button { transition: none; } }

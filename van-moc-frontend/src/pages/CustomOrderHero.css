@@ -65,8 +65,8 @@
 .craft-button:hover { background: #75452a; color: white; }
 .craft-button:focus-visible { outline: 2px solid #956b40; outline-offset: 4px; }
 
-.craft-process { width: min(100% - 3rem, 1240px); margin: 0 auto; padding: 1rem 0 clamp(4rem, 7vw, 6rem); }
-.craft-process h2 { margin: 0 0 2rem; text-align: center; font-size: clamp(1.9rem, 3vw, 2.7rem); letter-spacing: -0.025em; line-height: 1.3; }
+.craft-process { width: min(100% - 3rem, 1240px); margin: 0 auto; padding: 3rem 0 clamp(4rem, 7vw, 6rem); }
+.craft-process h1 { margin: 0 0 2rem; text-align: center; font-size: clamp(1.9rem, 3vw, 2.7rem); letter-spacing: -0.025em; line-height: 1.3; }
 .craft-process__steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; margin: 0; padding: 0; list-style: none; }
 .craft-process__step { padding: 1.6rem 1.4rem 1.8rem; border: 1px solid #d8c9b5; border-radius: 2px; }
 .craft-process__number { display: block; margin-bottom: 1.4rem; color: #8b653e; font-family: var(--font-display); font-size: 2.7rem; line-height: 1; letter-spacing: -0.04em; }
