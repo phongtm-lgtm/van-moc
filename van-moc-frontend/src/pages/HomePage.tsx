@@ -579,7 +579,7 @@ export function HomePage() {
           <Reveal>
             <SectionHeading
               title="Vẹn nguyên bản, nét riêng bạn"
-              description="Vân Mộc tiếp nối nghề chế tác sừng truyền thống của làng Thụy Ứng, gìn giữ vẻ đẹp nguyên bản của chất liệu qua đôi tay và kinh nghiệm của người thợ."
+              description="Vân Mộc được hình thành từ tình yêu với làng nghề truyền thống Thụy Ứng – nơi hơn 400 năm gìn giữ tinh hoa chế tác sừng. Mỗi sản phẩm là sự kết tinh giữa bàn tay khéo léo của người thợ, giá trị di sản và hơi thở hiện đại, mang đến những món phụ kiện thủ công tinh xảo, đậm đà bản sắc người con đất Việt."
             />
           </Reveal>
 
