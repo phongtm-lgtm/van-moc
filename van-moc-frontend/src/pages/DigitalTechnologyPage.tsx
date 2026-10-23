@@ -1,6 +1,7 @@
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, ClipboardCheck, MessageCircle, PackageCheck, ScanLine } from 'lucide-react'
 import { BRAND } from '../brand'
 import { MessengerIcon } from '../components/MessengerIcon'
+import { SectionDecor } from '../components/SectionDecor'
 import './DigitalTechnologyPage.css'
 
 const image = (name: string) => `/image/VanMoc/${encodeURIComponent('Trang Công Nghệ Laser')}/${encodeURIComponent(name)}`
@@ -12,9 +13,17 @@ const gallery = [
   'Dấu ấn mang tính cá nhân 4.png',
 ]
 
+const process = [
+  { icon: MessageCircle, title: 'Chia sẻ ý tưởng', text: 'Gửi cho Vân Mộc hình ảnh sản phẩm, nội dung cần khắc hoặc mẫu thiết kế bạn yêu thích qua Messenger.' },
+  { icon: ClipboardCheck, title: 'Tư vấn và hoàn thiện thiết kế', text: 'Vân Mộc kiểm tra chất liệu, vị trí thể hiện và khả năng gia công, sau đó trao đổi để thống nhất phương án, chi phí và thời gian thực hiện.' },
+  { icon: ScanLine, title: 'Tiến hành gia công', text: 'Sau khi xác nhận nội dung, thiết kế và các thông tin cần thiết, sản phẩm được đưa vào quá trình khắc laser theo phương án đã thống nhất.' },
+  { icon: PackageCheck, title: 'Hoàn thiện và bàn giao', text: 'Thành phẩm được kiểm tra trước khi bàn giao, để mỗi chi tiết thể hiện đúng tinh thần của thiết kế đã duyệt.' },
+]
+
 export function DigitalTechnologyPage() {
   return <div className="digital-page">
-    <section className="digital-craft-hero" aria-labelledby="digital-craft-title">
+    <section className="digital-craft-hero bg-paper-warm" aria-labelledby="digital-craft-title">
+      <SectionDecor variant="warm" showMotif />
       <div className="digital-craft-hero__copy">
         <p className="digital-craft-hero__eyebrow">DỊCH VỤ KHẮC &amp; ĐÁNH DẤU LASER</p>
         <h1 id="digital-craft-title">Mỗi ý tưởng, một dấu ấn riêng.</h1>
@@ -22,7 +31,8 @@ export function DigitalTechnologyPage() {
         <a className="digital-craft-hero__button" href={BRAND.messenger} target="_blank" rel="noopener noreferrer"><MessengerIcon />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
       </div>
     </section>
-    <section className="digital-intro" id="kham-pha" aria-labelledby="digital-intro-title">
+    <section className="digital-intro bg-paper-sand" id="kham-pha" aria-labelledby="digital-intro-title">
+      <SectionDecor variant="warm" showMotif />
       <div className="digital-intro__heading">
         <p className="digital-eyebrow">Ứng dụng công nghệ laser</p>
         <h2 id="digital-intro-title">Công nghệ laser Vân Mộc</h2>
@@ -32,7 +42,8 @@ export function DigitalTechnologyPage() {
       </div>
     </section>
 
-    <section className="digital-split" aria-labelledby="digital-split-title">
+    <section className="digital-split bg-paper-wine" aria-labelledby="digital-split-title">
+      <SectionDecor variant="wine" />
       <div className="digital-split__inner">
         <div className="digital-split__image"><img src={image('độ tinh tế trong từng đường nét.jpg')} alt="Chi tiết chữ được khắc trên sản phẩm Vân Mộc" loading="lazy" /></div>
         <div className="digital-split__copy">
@@ -45,7 +56,8 @@ export function DigitalTechnologyPage() {
       </div>
     </section>
 
-    <section className="digital-gallery" aria-labelledby="digital-gallery-title">
+    <section className="digital-gallery bg-paper-grain" aria-labelledby="digital-gallery-title">
+      <SectionDecor variant="warm" showMotif />
       <h2 id="digital-gallery-title">Dấu ấn mang tính <em>cá nhân</em></h2>
       <p className="digital-gallery__lead">Không chỉ là một món đồ, mà còn là câu chuyện của riêng bạn.</p>
       <p>Một cái tên thân thuộc, ngày tháng đáng nhớ, chữ ký hay hình vẽ yêu thích đều có thể trở thành dấu ấn riêng trên món đồ bạn trân trọng.</p>
@@ -53,11 +65,23 @@ export function DigitalTechnologyPage() {
       <div className="digital-gallery__grid">{gallery.map((name, index) => <figure key={name}><img src={image(name)} alt={`Gợi ý cá nhân hóa sản phẩm Vân Mộc ${index + 1}`} loading="lazy" /></figure>)}</div>
     </section>
 
-    <section className="digital-cta" aria-labelledby="digital-cta-title">
-      <div>
-        <p className="digital-eyebrow">Bắt đầu từ ý tưởng của bạn</p>
-        <h2 id="digital-cta-title">Cùng Vân Mộc tạo nên <em>nét riêng</em></h2>
-        <p>Chia sẻ điều bạn muốn khắc, chúng mình sẽ cùng bạn trao đổi về sản phẩm và cách thể hiện phù hợp.</p>
+    <section className="digital-process bg-paper-sand" aria-labelledby="digital-process-title">
+      <SectionDecor variant="warm" showMotif />
+      <h2 id="digital-process-title">Từ ý tưởng đến <em>thành phẩm</em></h2>
+      <ol className="digital-process__steps">
+        {process.map(({ icon: Icon, title, text }, index) => <li className="digital-process__step" key={title}>
+          <span className="digital-process__number">{String(index + 1).padStart(2, '0')}</span>
+          <Icon size={30} strokeWidth={1.5} aria-hidden="true" />
+          <h3>{title}</h3>
+          <p>{text}</p>
+        </li>)}
+      </ol>
+    </section>
+
+    <section className="digital-cta bg-paper-warm" aria-labelledby="digital-cta-title">
+      <div className="bg-paper-wine">
+        <SectionDecor variant="wine" />
+        <h2 id="digital-cta-title">Ý tưởng của bạn, sự chăm chút của Vân Mộc — <em>cùng tạo nên một dấu ấn riêng.</em></h2>
         <a href={BRAND.messenger} target="_blank" rel="noopener noreferrer" className="digital-button">Trao đổi với Vân Mộc <ArrowRight size={18} aria-hidden="true" /></a>
       </div>
     </section>

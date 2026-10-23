@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import type { ReactNode } from 'react'
 import { ArrowRight } from 'lucide-react'
+import { MessengerIcon } from '../components/MessengerIcon'
 import './CustomOrderHero.css'
 import './StoryPage.css'
 import './AboutPage.css'
@@ -128,9 +129,9 @@ export function AboutPage() {
     <section className="about-hero" aria-labelledby="about-title">
       <img className="about-hero__banner" src="/image/VanMoc/banner%20V%C3%A2n%20M%E1%BB%99c.png" alt="Vân Mộc – làng nghề Thụy Ứng, sản phẩm sừng thủ công và thông điệp Vân nguyên bản, nét riêng bạn" />
       <div className="about-hero__inner">
-        <h1 id="about-title" className="sr-only">Về Vân Mộc – Vân nguyên bản, nét riêng bạn</h1>
+        <p className="about-eyebrow">Về chúng tôi</p>
+        <h1 id="about-title">Vân Mộc – Vân nguyên bản, Nét riêng bạn</h1>
         <p>Vân Mộc được hình thành từ tình yêu dành cho những giá trị thủ công truyền thống và mong muốn gìn giữ tinh hoa của làng nghề sừng Thụy Ứng, Thường Tín, Hà Nội. Với Vân Mộc, mỗi sản phẩm không chỉ mang giá trị sử dụng mà còn là sự kết tinh của chất liệu tự nhiên, đôi bàn tay khéo léo và tâm huyết của những người thợ làng nghề.</p>
-        <a href="#cau-chuyen-van-moc" className="about-hero__link">Tìm hiểu về Vân Mộc <ArrowRight size={18} aria-hidden="true" /></a>
       </div>
     </section>
 
@@ -186,6 +187,11 @@ export function CustomOrderPage() {
           <p>{step.description}</p>
         </li>)}
       </ol>
+    </section>
+    <section className="craft-consult" aria-labelledby="craft-consult-title">
+      <h2 id="craft-consult-title">Cùng Vân Mộc tạo nên dấu ấn riêng</h2>
+      <p>Chia sẻ ý tưởng của bạn để chúng mình tư vấn sản phẩm và cách thể hiện phù hợp.</p>
+      <a className="craft-button" href={BRAND.messenger} target="_blank" rel="noopener noreferrer"><MessengerIcon />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
     </section>
   </div>
 }
