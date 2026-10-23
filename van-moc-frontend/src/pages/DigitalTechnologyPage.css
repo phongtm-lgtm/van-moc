@@ -34,8 +34,8 @@
 .digital-split { position: relative; background: #4b3224; color: #fff2dd; }
 .digital-split::before { content: ''; position: absolute; inset: 0; opacity: .1; pointer-events: none; background: url('/image/textures/van-moc-paper-craft-bg.png') center / cover no-repeat; }
 .digital-split__inner { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 5vw, 5rem); max-width: 1380px; margin: auto; padding: clamp(4rem, 7vw, 7rem) 5vw; }
-.digital-split__image { overflow: hidden; border: 1px solid #bb9c61; border-radius: 20px; background: #847247; }
-.digital-split__image img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.digital-split__image { display: flex; align-items: center; justify-content: center; min-height: 340px; padding: 1.5rem; border: 1px solid #bb9c61; border-radius: 20px; background: #6a4a30; }
+.digital-split__image img { display: block; width: auto; max-width: 100%; height: auto; border-radius: 10px; }
 .digital-split__copy { max-width: 670px; }
 .digital-split .digital-eyebrow { color: #e0bb88; }
 .digital-split em { color: #e6b78c; }
