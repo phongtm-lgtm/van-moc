@@ -1,6 +1,9 @@
 .craft-page {
   --craft-header-height: 5rem;
-  background: #faf5e9;
+  background-color: #faf5e9;
+  background-image: linear-gradient(rgba(255, 248, 231, 0.68), rgba(247, 237, 217, 0.72)), url('/image/textures/van-moc-paper-craft-bg.png');
+  background-position: center;
+  background-size: cover;
   color: #382519;
   padding-top: var(--craft-header-height);
 }
