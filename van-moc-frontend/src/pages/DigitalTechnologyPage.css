@@ -11,33 +11,36 @@
 .digital-craft-hero__button:hover { background: #75452a; color: #fff; }
 .digital-craft-hero__button:focus-visible { outline: 2px solid #956b40; outline-offset: 4px; }
 .digital-eyebrow { display: flex; align-items: center; gap: 10px; color: #ad7750; font-size: .76rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
-.digital-hero { min-height: 680px; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 7%; padding: 90px max(5vw, calc((100vw - 1280px)/2)); background: radial-gradient(circle at 85% 45%, #f2debf, transparent 45%), #f8edda; }
-.digital-hero__content { max-width: 620px; }
-.digital-hero h1 { margin: 27px 0; font-size: clamp(3.3rem, 5.7vw, 6.5rem); letter-spacing: -.045em; }
-.digital-hero__content > p:not(.digital-eyebrow) { max-width: 520px; font-size: 1.12rem; line-height: 1.85; color: #634d3b; }
 .digital-button { display: inline-flex; align-items: center; justify-content: center; gap: 16px; margin-top: 32px; padding: 15px 27px; border-radius: 40px; background: #59351f; color: #fff7e9; font-weight: 600; transition: transform .2s, background .2s; }
 .digital-button:hover { background: #8c5131; transform: translateY(-3px); }
-.digital-hero__visual { position: relative; max-width: 570px; width: 100%; justify-self: center; }
-.digital-hero__visual img { display: block; width: 100%; aspect-ratio: 4 / 5; max-height: 570px; border-radius: 48% 48% 8px 8px; object-fit: cover; box-shadow: 22px 28px 0 #dfc59f; }
-.digital-hero__stamp { position: absolute; bottom: -28px; left: -44px; display: grid; place-items: center; width: 150px; height: 150px; border-radius: 50%; background: #703c2a; border: 6px solid #fbf3e6; color: #fff4e2; text-align: center; font-family: Georgia, serif; font-style: italic; line-height: 1.5; transform: rotate(-12deg); }
 .digital-intro, .digital-gallery { max-width: 1380px; margin: auto; padding: 110px 5vw; text-align: center; scroll-margin-top: 85px; }
+.digital-intro { max-width: none; background: radial-gradient(circle at 10% 30%, #f4dfbd 0, transparent 30%), radial-gradient(circle at 90% 40%, #f5e7d1 0, transparent 32%), #fbf6ec; }
+.digital-intro__heading { position: relative; max-width: 890px; margin: 0 auto; }
+.digital-intro__heading::before { content: 'Vân Mộc'; position: absolute; top: -.55em; left: 50%; width: max-content; max-width: 100%; transform: translateX(-50%); color: #a7793c0d; font-family: Georgia, serif; font-style: italic; font-size: clamp(5rem, 15vw, 13rem); line-height: 1; white-space: nowrap; pointer-events: none; }
+.digital-intro__heading > * { position: relative; }
 .digital-intro .digital-eyebrow, .digital-gallery .digital-eyebrow { justify-content: center; }
 .digital-intro h2, .digital-gallery h2, .digital-split h2, .digital-cta h2 { margin: 18px 0 22px; font-size: clamp(2.4rem, 4vw, 4.2rem); letter-spacing: -.035em; }
-.digital-intro__lead, .digital-gallery > p:not(.digital-eyebrow) { max-width: 730px; margin: 0 auto; color: #685140; line-height: 1.8; }
-.digital-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; margin-top: 55px; text-align: left; }
+.digital-intro h2 { color: #354525; font-family: var(--font-display); font-weight: 700; text-transform: uppercase; }
+.digital-intro__heading .digital-eyebrow::before, .digital-intro__heading .digital-eyebrow::after { content: ''; width: 30px; height: 1px; background: #ad7750; }
+.digital-intro__tagline { color: #725437; font-size: clamp(1.2rem, 2vw, 1.6rem); font-weight: 600; }
+.digital-intro__heading > p:not(.digital-eyebrow) { max-width: 800px; margin: 18px auto 0; color: #685140; line-height: 1.85; }
+.digital-gallery > p:not(.digital-eyebrow) { max-width: 730px; margin: 0 auto; color: #685140; line-height: 1.8; }
+.digital-features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; max-width: 1380px; margin: 0 auto; padding: 90px 5vw 0; text-align: left; }
 .digital-feature { min-height: 315px; padding: 32px; border: 1px solid #d9c5a7; border-radius: 12px; background: #fffaf0; box-shadow: 0 14px 32px #51331c0a; }
 .digital-feature__number { display: block; margin-bottom: 36px; color: #ad7750; font-size: .8rem; letter-spacing: .16em; }
 .digital-feature svg { color: #a65b37; }
 .digital-feature h3 { margin: 22px 0 12px; font-family: Georgia, serif; font-size: 1.5rem; }
 .digital-feature p { color: #685140; line-height: 1.75; }
-.digital-split { display: grid; grid-template-columns: 1fr 1fr; align-items: center; background: #4b3224; color: #fff2dd; }
-.digital-split__image { height: 100%; min-height: 550px; }
-.digital-split__image img { display: block; height: 100%; width: 100%; object-fit: cover; }
-.digital-split__copy { max-width: 670px; padding: 85px 9%; }
+.digital-split { position: relative; background: #283d33; color: #fff2dd; }
+.digital-split::before { content: ''; position: absolute; inset: 0; opacity: .15; pointer-events: none; background: repeating-radial-gradient(ellipse at 95% 5%, transparent 0 34px, #d9b77d 36px 38px, transparent 40px 62px); }
+.digital-split__inner { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(2rem, 5vw, 5rem); max-width: 1380px; margin: auto; padding: clamp(4rem, 7vw, 7rem) 5vw; }
+.digital-split__image { overflow: hidden; border: 1px solid #bb9c61; border-radius: 20px; background: #847247; }
+.digital-split__image img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.digital-split__copy { max-width: 670px; }
 .digital-split .digital-eyebrow { color: #e0bb88; }
 .digital-split em { color: #e6b78c; }
 .digital-split__copy > p:not(.digital-eyebrow) { line-height: 1.9; color: #f0dcc4; }
-.digital-text-link { display: inline-flex; gap: 13px; align-items: center; margin-top: 32px; padding-bottom: 8px; border-bottom: 1px solid #e6b78c; color: #f5d4ab; font-weight: 600; }
+.digital-split__copy .digital-split__closing { margin-top: 1.5rem; color: #e6b78c; font-style: italic; }
 .digital-gallery__grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 46px; }
 .digital-gallery figure { margin: 0; overflow: hidden; border-radius: 10px; background: #ecddc8; }
 .digital-gallery img { display: block; width: 100%; aspect-ratio: 3 / 4; object-fit: cover; transition: transform .3s; }
@@ -50,24 +53,16 @@
 .digital-cta .digital-button { background: #f2d1a6; color: #4b3224; }
 .digital-cta .digital-button:hover { background: white; }
 @media (max-width: 900px) {
-  .digital-hero { gap: 36px; padding: 95px 6%; min-height: 0; }
-  .digital-hero__stamp { width: 110px; height: 110px; left: -20px; font-size: .8rem; }
   .digital-features { gap: 12px; }
   .digital-feature { padding: 23px; }
 }
 @media (max-width: 700px) {
   .digital-craft-hero { padding-top: calc(4rem + 3rem); }
-  .digital-hero { grid-template-columns: 1fr; padding: 75px 7%; gap: 50px; }
-  .digital-hero h1 { font-size: clamp(3rem, 12vw, 4.8rem); }
-  .digital-hero__visual { max-width: 450px; width: calc(100% - 25px); }
-  .digital-hero__visual img { max-height: 430px; }
   .digital-intro, .digital-gallery { padding: 75px 7%; }
-  .digital-features { grid-template-columns: 1fr; gap: 14px; margin-top: 36px; }
+  .digital-features { grid-template-columns: 1fr; gap: 14px; padding: 75px 7% 0; }
   .digital-feature { min-height: 0; }
   .digital-feature__number { margin-bottom: 20px; }
-  .digital-split { grid-template-columns: 1fr; }
-  .digital-split__image { min-height: 0; height: 340px; }
-  .digital-split__copy { padding: 65px 7%; }
+  .digital-split__inner { grid-template-columns: 1fr; padding: 65px 7%; }
   .digital-gallery__grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
   .digital-cta { padding: 0 5% 75px; }
   .digital-cta > div { padding: 60px 7%; }

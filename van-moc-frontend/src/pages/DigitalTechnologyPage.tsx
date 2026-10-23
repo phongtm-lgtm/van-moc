@@ -1,5 +1,4 @@
-import { ArrowRight, Fingerprint, PenLine, ScanLine, Sparkles } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { ArrowRight, Fingerprint, PenLine, ScanLine } from 'lucide-react'
 import { BRAND } from '../brand'
 import { MessengerIcon } from '../components/MessengerIcon'
 import './DigitalTechnologyPage.css'
@@ -29,41 +28,36 @@ export function DigitalTechnologyPage() {
         <a className="digital-craft-hero__button" href={BRAND.messenger} target="_blank" rel="noopener noreferrer"><MessengerIcon />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
       </div>
     </section>
-    <section className="digital-hero" aria-labelledby="digital-title">
-      <div className="digital-hero__content">
-        <p className="digital-eyebrow"><Sparkles size={16} aria-hidden="true" /> Truyền thống gặp công nghệ</p>
-        <h1 id="digital-title">Công nghệ số <em>Vân Mộc</em></h1>
-        <p>Giữ trọn vẻ đẹp nguyên bản của sừng, thêm vào đó dấu ấn chỉ thuộc về bạn. Vân Mộc kết hợp đôi tay người thợ với công nghệ khắc laser để mỗi món đồ kể một câu chuyện riêng.</p>
-        <a href="#kham-pha" className="digital-button">Khám phá hành trình <ArrowRight size={18} aria-hidden="true" /></a>
-      </div>
-      <div className="digital-hero__visual">
-        <img src={image('Vân Mộc che tac rieng(1).png')} alt="Sản phẩm chế tác riêng của Vân Mộc" />
-        <span className="digital-hero__stamp">Vân nguyên bản<br />Nét riêng bạn</span>
-      </div>
-    </section>
-
     <section className="digital-intro" id="kham-pha" aria-labelledby="digital-intro-title">
-      <p className="digital-eyebrow">Ứng dụng công nghệ số</p>
-      <h2 id="digital-intro-title">Từ chất liệu tự nhiên đến <em>dấu ấn cá nhân</em></h2>
-      <p className="digital-intro__lead">Công nghệ không thay thế sự khéo léo của người thợ. Đó là một cách để ý tưởng của bạn hiện diện rõ nét hơn trên sản phẩm thủ công.</p>
-      <div className="digital-features">
-        {features.map(({ icon: Icon, number, title, text }) => <article className="digital-feature" key={number}>
-          <span className="digital-feature__number">{number} / 03</span>
-          <Icon size={32} strokeWidth={1.4} aria-hidden="true" />
-          <h3>{title}</h3>
-          <p>{text}</p>
-        </article>)}
+      <div className="digital-intro__heading">
+        <p className="digital-eyebrow">Ứng dụng công nghệ laser</p>
+        <h2 id="digital-intro-title">Công nghệ laser Vân Mộc</h2>
+        <p className="digital-intro__tagline">Công nghệ hiện đại, lưu giữ dấu ấn riêng</p>
+        <p>Tại Vân Mộc, công nghệ laser mở ra cách mới để cá nhân hóa những món đồ thân thuộc. Bằng việc ứng dụng tia laser trong quá trình khắc và đánh dấu trên bề mặt vật liệu phù hợp, chúng tôi giúp tên riêng, hình vẽ, chữ ký và những thông điệp ý nghĩa trở thành dấu ấn độc đáo trên từng sản phẩm.</p>
+        <p>Từ một cái tên nhỏ đến một biểu tượng mang ý nghĩa riêng, mỗi chi tiết đều được thực hiện dựa trên thiết kế đã thống nhất, chú trọng sự chỉn chu và tính thẩm mỹ.</p>
       </div>
     </section>
 
     <section className="digital-split" aria-labelledby="digital-split-title">
-      <div className="digital-split__image"><img src={image('độ tinh tế trong từng đường nét.jpg')} alt="Chi tiết chế tác thể hiện sự tinh tế trong từng đường nét" loading="lazy" /></div>
-      <div className="digital-split__copy">
-        <p className="digital-eyebrow">Tinh tế trong từng đường nét</p>
-        <h2 id="digital-split-title">Khi kỹ thuật mới <em>gặp bàn tay thủ công</em></h2>
-        <p>Mỗi chất liệu sừng có sắc độ và đường vân khác nhau. Vân Mộc lắng nghe ý tưởng của bạn, cân nhắc vị trí và nội dung khắc để dấu ấn cá nhân hòa cùng vẻ đẹp vốn có của sản phẩm.</p>
-        <Link to="/custom-order" className="digital-text-link">Tìm hiểu chế tác riêng <ArrowRight size={18} aria-hidden="true" /></Link>
+      <div className="digital-split__inner">
+        <div className="digital-split__image"><img src={image('độ tinh tế trong từng đường nét.jpg')} alt="Chi tiết chữ được khắc trên sản phẩm Vân Mộc" loading="lazy" /></div>
+        <div className="digital-split__copy">
+          <p className="digital-eyebrow">Độ tinh tế trong từng chi tiết</p>
+          <h2 id="digital-split-title">Chỉn chu từ <em>đường nét nhỏ nhất.</em></h2>
+          <p>Một nét chữ, một biểu tượng hay một họa tiết nhỏ đều có thể tạo nên sự khác biệt. Với công nghệ laser, Vân Mộc chăm chút từng chi tiết trong quá trình gia công, từ việc căn chỉnh thiết kế đến lựa chọn vị trí thể hiện phù hợp trên bề mặt sản phẩm.</p>
+          <p>Mỗi đường nét được thực hiện với sự tỉ mỉ, hướng đến thành phẩm hài hòa với chất liệu và giữ trọn tinh thần của thiết kế ban đầu.</p>
+          <p className="digital-split__closing">Bởi đôi khi, chính những điều nhỏ bé lại tạo nên giá trị riêng biệt.</p>
+        </div>
       </div>
+    </section>
+
+    <section className="digital-features" aria-label="Cá nhân hóa sản phẩm bằng công nghệ laser">
+      {features.map(({ icon: Icon, number, title, text }) => <article className="digital-feature" key={number}>
+        <span className="digital-feature__number">{number} / 03</span>
+        <Icon size={32} strokeWidth={1.4} aria-hidden="true" />
+        <h3>{title}</h3>
+        <p>{text}</p>
+      </article>)}
     </section>
 
     <section className="digital-gallery" aria-labelledby="digital-gallery-title">
