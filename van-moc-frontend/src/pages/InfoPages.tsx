@@ -126,41 +126,48 @@ export function AboutPage() {
     </section>
 
     <section className="about-intro" id="cau-chuyen-van-moc">
-      <p className="about-eyebrow">Câu chuyện của chúng tôi</p>
-      <h2>Câu chuyện <em>Vân Mộc</em></h2>
-      <p>Thụy Ứng là làng nghề nổi tiếng với truyền thống chế tác sừng, nơi những kỹ thuật thủ công được gìn giữ và truyền lại qua nhiều thế hệ. Từ chất liệu sừng bò châu Phi với những đường vân và sắc độ tự nhiên riêng biệt, người thợ tỉ mỉ tạo nên những sản phẩm như lược, trâm cài tóc và các món phụ kiện thủ công mang đậm dấu ấn của làng nghề.</p>
-      <p>Vân Mộc ra đời với mong muốn gìn giữ và lan tỏa những giá trị ấy. Chúng tôi trân trọng từng công đoạn chế tác, sự khéo léo của người thợ và câu chuyện văn hóa ẩn sau mỗi sản phẩm. Thông qua việc giới thiệu các sản phẩm thủ công từ sừng tự nhiên, Vân Mộc hy vọng sẽ giúp nhiều người hiểu hơn, yêu hơn và trân trọng hơn nghề truyền thống của quê hương.</p>
-    </section>
-
-    <section className="about-meaning" aria-label="Vân và Mộc">
-      <img src={aboutImage('Vân.jpg')} alt="Chữ Vân – đường vân nguyên bản" loading="lazy" />
-      <img src={aboutImage('Mộc.jpg')} alt="Chữ Mộc – nét mộc mạc của người thợ" loading="lazy" />
-    </section>
-
-    <section className="about-direction" aria-label="Sứ mệnh và tầm nhìn">
-      <div className="about-direction__grid">
-        <article><p className="about-eyebrow">Sứ mệnh</p><h2>Gìn giữ tinh hoa – <em>Lan tỏa giá trị</em></h2><p>Vân Mộc mang sứ mệnh gìn giữ và phát huy những giá trị truyền thống của nghề chế tác sừng tại làng nghề Thụy Ứng. Thông qua các sản phẩm thủ công từ sừng bò châu Phi, chúng tôi mong muốn tôn vinh sự khéo léo, tỉ mỉ và tâm huyết của người thợ, đồng thời đưa vẻ đẹp của nghề truyền thống đến gần hơn với cộng đồng, đặc biệt là thế hệ trẻ.</p></article>
-        <article><p className="about-eyebrow">Tầm nhìn</p><h2>Tiếp nối truyền thống – <em>Vươn xa giá trị Việt</em></h2><p>Vân Mộc hướng đến trở thành thương hiệu gắn liền với những sản phẩm thủ công từ sừng tự nhiên và tinh hoa làng nghề Thụy Ứng. Chúng tôi mong muốn góp phần nâng cao sự trân trọng của cộng đồng đối với nghề thủ công truyền thống, để những giá trị văn hóa lâu đời tiếp tục được gìn giữ, lan tỏa và nối dài qua các thế hệ.</p></article>
-      </div>
-    </section>
-
-    <section className="about-strategy" aria-labelledby="about-strategy-title">
-      <p className="about-eyebrow">Hướng đi của Vân Mộc</p>
-      <h2 id="about-strategy-title">Chiến lược <em>phát triển</em></h2>
-      <div className="about-strategy__viewport">
-        <div className="about-strategy__track">
-          {[0, 1].map(copy => <div className="about-strategy__group" aria-hidden={copy === 1 ? true : undefined} key={copy}>
-            {strategies.map((strategy, index) => <div className="about-strategy__card" key={strategy}><span>{String(index + 1).padStart(2, '0')}</span><p>{strategy}</p></div>)}
-          </div>)}
+      <div className="about-intro__inner">
+        <div className="about-intro__copy">
+          <p className="about-eyebrow">Câu chuyện của chúng tôi</p>
+          <h2>Câu chuyện <em>Vân Mộc</em></h2>
+          <div className="about-intro__prose">
+            <p>Thụy Ứng là làng nghề nổi tiếng với truyền thống chế tác sừng, nơi những kỹ thuật thủ công được gìn giữ và truyền lại qua nhiều thế hệ. Từ chất liệu sừng bò châu Phi với những đường vân và sắc độ tự nhiên riêng biệt, người thợ tỉ mỉ tạo nên những sản phẩm như lược, trâm cài tóc và các món phụ kiện thủ công mang đậm dấu ấn của làng nghề.</p>
+            <p>Vân Mộc ra đời với mong muốn gìn giữ và lan tỏa những giá trị ấy. Chúng tôi trân trọng từng công đoạn chế tác, sự khéo léo của người thợ và câu chuyện văn hóa ẩn sau mỗi sản phẩm. Thông qua việc giới thiệu các sản phẩm thủ công từ sừng tự nhiên, Vân Mộc hy vọng sẽ giúp nhiều người hiểu hơn, yêu hơn và trân trọng hơn nghề truyền thống của quê hương.</p>
+          </div>
+        </div>
+        <div className="about-meaning" aria-label="Vân và Mộc">
+          <img src={aboutImage('Vân.jpg')} alt="Chữ Vân – đường vân nguyên bản" loading="lazy" />
+          <img src={aboutImage('Mộc.jpg')} alt="Chữ Mộc – nét mộc mạc của người thợ" loading="lazy" />
         </div>
       </div>
     </section>
 
+    <section className="about-direction" aria-label="Sứ mệnh và tầm nhìn">
+      <div className="about-direction__grid">
+        <article><span className="about-direction__number" aria-hidden="true">01</span><p className="about-eyebrow">Sứ mệnh</p><h2>Gìn giữ tinh hoa – <em>Lan tỏa giá trị</em></h2><p>Vân Mộc mang sứ mệnh gìn giữ và phát huy những giá trị truyền thống của nghề chế tác sừng tại làng nghề Thụy Ứng. Thông qua các sản phẩm thủ công từ sừng bò châu Phi, chúng tôi mong muốn tôn vinh sự khéo léo, tỉ mỉ và tâm huyết của người thợ, đồng thời đưa vẻ đẹp của nghề truyền thống đến gần hơn với cộng đồng, đặc biệt là thế hệ trẻ.</p></article>
+        <article><span className="about-direction__number" aria-hidden="true">02</span><p className="about-eyebrow">Tầm nhìn</p><h2>Tiếp nối truyền thống – <em>Vươn xa giá trị Việt</em></h2><p>Vân Mộc hướng đến trở thành thương hiệu gắn liền với những sản phẩm thủ công từ sừng tự nhiên và tinh hoa làng nghề Thụy Ứng. Chúng tôi mong muốn góp phần nâng cao sự trân trọng của cộng đồng đối với nghề thủ công truyền thống, để những giá trị văn hóa lâu đời tiếp tục được gìn giữ, lan tỏa và nối dài qua các thế hệ.</p></article>
+      </div>
+    </section>
+
+    <section className="about-strategy" aria-labelledby="about-strategy-title">
+      <div className="about-strategy__inner">
+        <div className="about-strategy__heading">
+          <p className="about-eyebrow">Hướng đi của Vân Mộc</p>
+          <h2 id="about-strategy-title">Chiến lược <em>phát triển</em></h2>
+        </div>
+        <ol className="about-strategy__timeline">
+          {strategies.map((strategy, index) => <li key={strategy}><span className="about-strategy__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><p>{strategy}</p></li>)}
+        </ol>
+      </div>
+    </section>
+
     <section className="about-values" aria-labelledby="about-values-title">
-      <p className="about-eyebrow">Điều Vân Mộc trân trọng</p>
-      <h2 id="about-values-title">Giá trị <em>cốt lõi</em></h2>
-      <div className="about-values__grid">
-        {values.map((value, index) => <article key={value.title}><span>{String(index + 1).padStart(2, '0')}</span><h3>{value.title}</h3><p>{value.text}</p></article>)}
+      <div className="about-values__inner">
+        <p className="about-eyebrow">Điều Vân Mộc trân trọng</p>
+        <h2 id="about-values-title">Giá trị <em>cốt lõi</em></h2>
+        <div className="about-values__list">
+          {values.map((value, index) => <article key={value.title}><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span><h3>{value.title}</h3><p>{value.text}</p></article>)}
+        </div>
       </div>
     </section>
   </div>
