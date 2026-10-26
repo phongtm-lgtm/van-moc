@@ -820,6 +820,101 @@ h2 *,
   stroke-linejoin: round;
 }
 
+/* Customer feedback: photo-and-quote cards in Vân Mộc's paper-and-ink palette. */
+.feedback-card {
+  display: grid;
+  grid-template-columns: 43% minmax(0, 1fr);
+  min-height: 15rem;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid rgba(154, 107, 31, 0.38);
+  border-radius: 1rem;
+  background: #fff8e7;
+  box-shadow: 0 10px 25px rgba(63, 42, 26, 0.1);
+}
+
+.feedback-card__media {
+  min-width: 0;
+  overflow: hidden;
+  background: #d9bc8d;
+}
+
+.feedback-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.feedback-card__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-width: 0;
+  padding: 1.2rem 1rem;
+  background: linear-gradient(155deg, #4d3223, #332219);
+  color: #fff2dc;
+}
+
+.feedback-card__content h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.feedback-card__content blockquote {
+  margin: 0;
+  font-size: 0.78rem;
+  font-style: italic;
+  line-height: 1.7;
+  color: rgba(255, 242, 220, 0.9);
+}
+
+/* Four shopping-service cards replacing the old partners carousel. */
+.home-services-section {
+  border-top: 1px solid rgba(154, 107, 31, 0.14);
+}
+
+.home-service-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  height: 100%;
+  min-height: 10rem;
+  padding: 1.3rem 1.15rem;
+  border: 1px solid rgba(154, 107, 31, 0.38);
+  border-radius: 1rem;
+  background: linear-gradient(150deg, #fff8e7, #f5e7cf);
+  box-shadow: 0 9px 24px rgba(63, 42, 26, 0.08);
+  color: #241a13;
+}
+
+.home-service-card__icon {
+  display: grid;
+  width: 3.2rem;
+  height: 3.2rem;
+  flex: none;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(154, 107, 31, 0.12);
+  color: #9a6b1f;
+}
+
+.home-service-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+
+.home-service-card p {
+  margin: 0;
+  font-size: 0.78rem;
+  line-height: 1.6;
+  color: #3f3228;
+}
+
 /* Featured products: native horizontal carousel with an editorial card treatment. */
 .featured-products-track {
   display: flex;
@@ -923,29 +1018,9 @@ h2 *,
   }
 }
 
-/* Bespoke service: layered studio scrapbook paired with a handmade-paper panel. */
+/* Personalization section uses the same warm paper as the rest of the homepage. */
 .custom-craft-section {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
   border-block: 1px solid rgba(154, 107, 31, 0.14);
-  background-color: #f3e6cf;
-  background-image:
-    linear-gradient(108deg, rgba(247, 236, 214, 0.82), rgba(255, 248, 231, 0.38)),
-    url('/image/textures/van-moc-paper-craft-bg.png');
-  background-position: center;
-  background-size: cover;
-}
-
-.custom-craft-grain {
-  position: absolute;
-  inset: 0;
-  z-index: -1;
-  opacity: 0.26;
-  background-image:
-    radial-gradient(ellipse at 10% 14%, rgba(102, 66, 37, 0.11), transparent 30%),
-    radial-gradient(ellipse at 90% 76%, rgba(154, 107, 31, 0.1), transparent 34%);
-  pointer-events: none;
 }
 
 .custom-craft-mountains {
@@ -3639,7 +3714,7 @@ h2 *,
 .tx {
   position: relative;
   overflow: clip;
-  background: #f5f1e9;
+  background: #fff8e7;
   color: #3a2116;
 }
 
@@ -3664,11 +3739,13 @@ h2 *,
 .tx-section {
   position: relative;
   z-index: 1;
-  padding: clamp(2.5rem, 5vw, 4rem) 0;
+  padding: clamp(2rem, 4vw, 3.25rem) 0;
 }
 
-.tx-section--soft {
-  background: rgba(232, 220, 200, 0.35);
+.tx-section > .tx-wrap,
+.tx-artisan > .tx-wrap {
+  position: relative;
+  z-index: 1;
 }
 
 .tx-heading {
@@ -4007,8 +4084,7 @@ h2 *,
 .tx-artisan {
   position: relative;
   z-index: 1;
-  padding: clamp(2.25rem, 4vw, 3.25rem) 0;
-  background: rgba(228, 214, 192, 0.42);
+  padding: clamp(2rem, 3.5vw, 3rem) 0;
   border-block: 1px solid rgba(122, 81, 56, 0.1);
 }
 

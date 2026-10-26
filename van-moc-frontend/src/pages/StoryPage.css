@@ -1,54 +1,182 @@
-.story-page { background: #fbf7ed; color: #302416; overflow: hidden; }
-.story-page h1, .story-page h2, .story-page blockquote { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
-.story-page em { font-style: italic; color: #a87934; }
-.story-eyebrow { margin: 0 0 22px; font-size: 11px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: #a87934; }
-.story-hero { background: #243b2c; color: #fff8e9; padding: 125px max(5vw, 24px) 85px; }
-.story-hero__inner { max-width: 1350px; margin: auto; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(40px, 7vw, 110px); }
-.story-hero__copy { padding: 30px 0; }
-.story-hero h1 { font-size: clamp(48px, 5.5vw, 88px); line-height: 1.06; letter-spacing: -.035em; max-width: 720px; margin: 0; }
-.story-hero h1 em { color: #dec396; }
-.story-hero__copy > p:not(.story-eyebrow) { max-width: 490px; font-size: 16px; line-height: 1.9; color: #ede6d7; }
-.story-rule { display: flex; align-items: center; gap: 14px; max-width: 200px; color: #d8b977; margin: 25px 0; }
-.story-rule::before, .story-rule::after { content: ''; height: 1px; flex: 1; background: #ad986b; }
-.story-hero__link { display: inline-flex; align-items: center; gap: 12px; margin-top: 25px; color: #e7ce9d; text-decoration: none; border-bottom: 1px solid currentColor; padding-bottom: 8px; font-size: 13px; font-weight: 700; letter-spacing: .06em; }
-.story-hero__link:hover { color: #fff; }
-.story-hero__image-wrap { height: clamp(420px, 42vw, 610px); overflow: hidden; border-radius: 48% 48% 4px 4px; border: 1px solid rgba(239,220,174,.6); padding: 9px; }
-.story-hero__image { width: 100%; height: 100%; object-fit: cover; border-radius: 48% 48% 2px 2px; }
-.story-divider { display: flex; align-items: center; justify-content: center; gap: 20px; color: #b18b53; padding: 21px 20px; }
-.story-divider::before, .story-divider::after { content: ''; height: 1px; width: min(27vw, 240px); background: linear-gradient(90deg, transparent, #cbb994); }
-.story-divider::after { transform: rotate(180deg); }
-.story-intro { max-width: 820px; text-align: center; margin: 0 auto; padding: 75px 24px 110px; scroll-margin-top: 90px; }
-.story-intro h2, .story-chapter h2, .story-finale h2 { font-size: clamp(39px, 4.2vw, 68px); line-height: 1.13; letter-spacing: -.035em; margin: 0 0 26px; }
-.story-intro > p:last-child { max-width: 650px; margin: auto; font-size: 16px; line-height: 1.9; color: #625548; }
-.story-chapter { display: grid; grid-template-columns: 1fr 1fr; min-height: 600px; background: #f0e8d9; }
-.story-chapter--reverse { background: #fbf7ed; }
-.story-chapter--reverse .story-chapter__image { order: 2; }
-.story-chapter__image { min-height: 560px; overflow: hidden; }
-.story-chapter__image img, .story-finale__image img { width: 100%; height: 100%; object-fit: cover; }
-.story-chapter__content { align-self: center; width: min(100%, 620px); padding: 85px clamp(32px, 7vw, 120px); }
-.story-chapter__line { display: block; width: 72px; height: 2px; background: #aa7a3b; margin: 28px 0; }
-.story-chapter__content > p:not(.story-eyebrow), .story-finale__content > p:not(.story-eyebrow) { line-height: 1.9; color: #625548; font-size: 15px; margin: 0 0 18px; }
-.story-quote { padding: 100px 24px; background: #243b2c; text-align: center; color: #fff8e9; }
-.story-quote > span { color: #dbb980; font-size: 24px; }
-.story-quote blockquote { margin: 22px auto; font-size: clamp(37px, 5vw, 72px); line-height: 1.2; }
-.story-quote blockquote em { color: #dfc391; }
-.story-quote p { color: #ddd6c7; line-height: 1.8; }
-.story-finale { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(40px, 7vw, 110px); max-width: 1350px; padding: 105px 24px 120px; margin: 0 auto; }
-.story-finale__image { height: clamp(360px, 42vw, 570px); overflow: hidden; }
-.story-finale__content { max-width: 560px; }
-.story-button { display: inline-flex; align-items: center; gap: 14px; margin-top: 25px; background: #573923; color: #fff8e9; padding: 17px 28px; text-decoration: none; font-size: 13px; font-weight: 700; transition: background .2s, transform .2s; }
-.story-button:hover { background: #243b2c; transform: translateY(-2px); }
-@media (max-width: 767px) {
-  .story-hero { padding: 115px 22px 70px; }
-  .story-hero__inner, .story-chapter, .story-finale { grid-template-columns: 1fr; }
-  .story-hero__inner { gap: 30px; }
-  .story-hero__copy { padding: 0; }
-  .story-hero__image-wrap { height: 410px; max-width: 520px; width: 100%; margin: auto; }
-  .story-intro { padding: 65px 24px 85px; }
-  .story-chapter__image { min-height: 0; height: 360px; }
-  .story-chapter--reverse .story-chapter__image { order: 0; }
-  .story-chapter__content { padding: 60px 25px 70px; }
-  .story-quote { padding: 80px 24px; }
-  .story-finale { padding: 75px 24px 95px; gap: 40px; }
-  .story-finale__image { height: 360px; }
+.story-page {
+  background: #fff8e7;
+  color: #241a13;
+  overflow: hidden;
+}
+
+.story-hero {
+  padding: 7.5rem 1.5rem 5rem;
+  background: #f7edd9 url('/image/textures/van-moc-paper-craft-bg.png') center / cover;
+}
+
+.story-hero__inner {
+  display: grid;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  max-width: 1350px;
+  margin: auto;
+}
+
+.story-eyebrow {
+  margin: 0 0 1.25rem;
+  color: #9a6b1f;
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  line-height: 1.5;
+}
+
+.story-hero h1 {
+  max-width: 620px;
+  margin: 0;
+}
+
+.story-hero h1 span {
+  display: block;
+  font-family: var(--font-sans);
+  font-size: clamp(1.8rem, 2.8vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: -.035em;
+  line-height: 1.3;
+}
+
+.story-hero h1 span + span {
+  margin-top: 1.5rem;
+  color: #5a301a;
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.35vw, 2.35rem);
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.35;
+}
+
+.story-rule {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 190px;
+  margin: 1.6rem 0;
+  color: #9a6b1f;
+}
+
+.story-rule::before, .story-rule::after {
+  content: '';
+  height: 1px;
+  flex: 1;
+  background: #9a6b1f;
+}
+
+.story-hero__video-wrap {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 2px solid #e8d5b7;
+  border-radius: .6rem;
+  background: #342217;
+  box-shadow: 0 12px 28px rgba(63, 42, 26, .13);
+  scroll-margin-top: 6rem;
+}
+
+.story-hero__video-wrap video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: #342217;
+}
+
+.story-chapters { padding: 0; }
+
+.story-chapter {
+  display: grid;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  padding: clamp(3.5rem, 6vw, 6rem) max(1.5rem, calc((100vw - 1250px) / 2));
+  scroll-margin-top: 6rem;
+}
+
+.story-chapter > * {
+  position: relative;
+  z-index: 1;
+}
+
+.story-chapter__image {
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border: .45rem solid #fff8e7;
+  border-radius: .9rem;
+  background: #e8d5b7;
+  box-shadow: 0 10px 28px rgba(63, 42, 26, .13);
+}
+
+.story-chapter__image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.story-chapter__content h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 2.5vw, 2.65rem);
+  font-weight: 400;
+  line-height: 1.2;
+}
+
+.story-chapter__line {
+  display: block;
+  width: 3rem;
+  height: 1px;
+  margin: 1.3rem 0;
+  background: #9a6b1f;
+}
+
+.story-chapter__content > p:not(.story-eyebrow) {
+  margin: 0 0 1rem;
+  color: #3f3228;
+  font-size: .95rem;
+  line-height: 1.8;
+}
+
+.story-chapter__content > p:last-child { margin-bottom: 0; }
+
+.story-ending {
+  padding: clamp(4rem, 7vw, 7rem) 1.5rem;
+  background: #fff8e7;
+  text-align: center;
+}
+
+.story-ending__card {
+  max-width: 760px;
+  margin: auto;
+  padding: clamp(1.75rem, 4vw, 3rem);
+  border: 1px solid rgba(154, 107, 31, .18);
+  border-radius: .75rem;
+  background: linear-gradient(rgba(255, 248, 231, .18), rgba(255, 248, 231, .18)), url('/image/textures/van-moc-paper-grain.png') center / cover;
+}
+
+.story-ending h2 {
+  margin: 0 0 1rem;
+  color: #5a301a;
+  font-family: var(--font-sans);
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-weight: 700;
+  line-height: 1.3;
+}
+.story-ending p {
+  margin: 0;
+  color: #5c4939;
+  font-family: var(--font-sans);
+  font-size: clamp(.95rem, 1.3vw, 1.1rem);
+  line-height: 1.8;
+}
+
+@media (min-width: 900px) {
+  .story-hero__inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 899px) {
+  .story-hero { padding: 6.5rem 1.25rem 3.5rem; }
+  .story-chapter { grid-template-columns: 1fr; padding: 3rem 1.25rem; }
+  .story-ending { padding: 4rem 1.25rem; }
 }

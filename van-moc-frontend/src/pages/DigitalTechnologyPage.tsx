@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { ArrowRight, ClipboardCheck, MessageCircle, PackageCheck, ScanLine } from 'lucide-react'
 import { BRAND } from '../brand'
 import { MessengerIcon } from '../components/MessengerIcon'
@@ -21,6 +23,19 @@ const process = [
 ]
 
 export function DigitalTechnologyPage() {
+  const { hash } = useLocation()
+
+  useEffect(() => {
+    if (!hash) return
+    const id = hash.replace(/^#/, '')
+    const el = document.getElementById(id)
+    if (!el) return
+    const frame = window.requestAnimationFrame(() => {
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+    return () => window.cancelAnimationFrame(frame)
+  }, [hash])
+
   return <div className="digital-page">
     <section className="digital-craft-hero bg-paper-warm" aria-labelledby="digital-craft-title">
       <SectionDecor variant="warm" showMotif />

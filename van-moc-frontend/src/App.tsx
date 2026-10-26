@@ -63,8 +63,9 @@ export default function App() {
           <Route path="/gioi-thieu" element={<AboutPage />} />
           <Route path="/truy-xuat" element={<TraceabilityPage />} />
           <Route path="/quy-dinh" element={<PolicyPage />} />
-          <Route path="/custom-order" element={<Navigate to="/cong-nghe-so" replace />} />
-          <Route path="/cong-nghe-so" element={<DigitalTechnologyPage />} />
+          <Route path="/custom-order" element={<Navigate to="/cong-nghe-laser" replace />} />
+          <Route path="/cong-nghe-so" element={<Navigate to="/cong-nghe-laser" replace />} />
+          <Route path="/cong-nghe-laser" element={<DigitalTechnologyPage />} />
           <Route path="/lien-he" element={<ContactPage />} />
           <Route path="/login" element={<><HomePage /><LoginPage /></>} />
           <Route path="/chinh-sach-bao-mat" element={<PolicyPage privacyPolicy />} />

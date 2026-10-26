@@ -8,9 +8,9 @@ const NAV = [
   { label: 'Trang chủ', href: '/' },
   { label: 'Câu Chuyện', href: '/villages' },
   { label: 'Sản phẩm', href: '/shop' },
-  { label: 'Công nghệ laser', href: '/cong-nghe-so' },
+  { label: 'Công nghệ laser', href: '/cong-nghe-laser' },
   { label: 'Về chúng tôi', href: '/gioi-thieu' },
-  { label: 'Truy xuất', href: '/truy-xuat' },
+  { label: 'Hành trình chế tác', href: '/truy-xuat' },
 ]
 
 export function Header() {

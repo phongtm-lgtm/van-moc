@@ -4,12 +4,15 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
+  CreditCard,
   Hand,
-  Hourglass,
+  Headset,
   Leaf,
+  PackageCheck,
   Sparkles,
   Star,
-  Waves,
+  Truck,
+  Hourglass,
 } from 'lucide-react'
 import { Reveal } from '../components/Reveal'
 import { ScrollProgress } from '../components/ScrollProgress'
@@ -20,41 +23,41 @@ import { ProductCard } from '../components/ProductCard'
 const BRAND_VALUES = [
   {
     step: '01',
-    title: 'Gìn giữ nghề truyền thống',
-    desc: 'Tiếp nối kỹ thuật chế tác được truyền qua nhiều thế hệ.',
+    title: 'Chất liệu từ thiên nhiên',
+    desc: 'Sử dụng sừng bò châu Phi – chất liệu bền bỉ, quý hiếm, mang vẻ đẹp tự nhiên và độc đáo.',
   },
   {
     step: '02',
-    title: 'Tôn trọng vẻ đẹp tự nhiên',
-    desc: 'Giữ lại màu sắc và đường vân vốn có của từng chất liệu.',
+    title: 'Tinh hoa thủ công truyền thống',
+    desc: 'Được chế tác bởi những nghệ nhân làng nghề Thụy Ứng, với kỹ thuật thủ công tỉ mỉ, khéo léo qua nhiều công đoạn.',
   },
   {
     step: '03',
-    title: 'Chế tác bằng sự tận tâm',
-    desc: 'Mỗi sản phẩm được hoàn thiện qua nhiều công đoạn thủ công.',
+    title: 'Thiết kế hiện đại, gần gũi',
+    desc: 'Kế thừa giá trị truyền thống, kết hợp cùng ngôn ngữ thiết kế tinh tế, phù hợp với phong cách sống hiện đại.',
   },
 ]
 
 const PRODUCT_VALUES = [
   {
     icon: Leaf,
-    title: 'Sừng tự nhiên',
-    desc: 'Màu sắc và đường vân được hình thành tự nhiên, không nhuộm ép.',
-  },
-  {
-    icon: Waves,
-    title: 'Đường vân độc bản',
-    desc: 'Không có hai sản phẩm hoàn toàn giống nhau.',
+    title: 'Chất liệu sừng tự nhiên',
+    desc: 'Mỗi sản phẩm sở hữu màu sắc và đường vân riêng biệt, tôn lên vẻ đẹp nguyên bản của chất liệu.',
   },
   {
     icon: Hand,
-    title: 'Hoàn thiện thủ công',
-    desc: 'Mỗi sản phẩm được mài, tạo hình và đánh bóng tỉ mỉ qua nhiều công đoạn.',
+    title: 'Chế tác thủ công tỉ mỉ',
+    desc: 'Được hoàn thiện qua bàn tay khéo léo của người thợ, chú trọng từng chi tiết và đường nét.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Thiết kế tinh tế, độc đáo',
+    desc: 'Sự giao thoa giữa nét đẹp truyền thống và phong cách hiện đại, phù hợp với nhiều cá tính và phong cách khác nhau.',
   },
   {
     icon: Hourglass,
-    title: 'Bền đẹp theo thời gian',
-    desc: 'Chất liệu sừng có độ bền cao, đồng hành cùng bạn qua nhiều năm.',
+    title: 'Gìn giữ giá trị làng nghề',
+    desc: 'Mỗi sản phẩm góp phần lan tỏa tinh hoa nghề sừng Thụy Ứng và đưa nét đẹp thủ công truyền thống đến gần hơn với thế hệ trẻ.',
   },
 ]
 
@@ -86,31 +89,26 @@ const CRAFT_STEPS = [
   },
 ]
 
-/** mockup: true — thay bằng review thật khi có dữ liệu. */
 const REVIEWS = [
   {
-    mockup: true,
-    quote:
-      'Chiếc lược sừng nhẹ tay, đường vân đẹp và dùng hàng ngày rất êm. Cảm giác khác hẳn lược nhựa thông thường.',
-    name: 'Nguyễn Thu Hà',
-    role: 'Hà Nội',
-    avatar: undefined as string | undefined,
+    name: 'Chí Nguyện',
+    quote: 'Lược sừng rất đẹp, vân tự nhiên độc đáo. Cầm chắc tay và được hoàn thiện tỉ mỉ.',
+    image: '/image/VanMoc/Cảm nhận từ khách hàng (homepage)/Chí Nguyện.jpg',
   },
   {
-    mockup: true,
-    quote:
-      'Trâm cài hoàn thiện tỉ mỉ, màu sắc tự nhiên rất sang. Đeo đi sự kiện nào cũng được hỏi mua ở đâu.',
-    name: 'Lê Minh Anh',
-    role: 'TP. Hồ Chí Minh',
-    avatar: undefined as string | undefined,
+    name: 'Mạnh Phong',
+    quote: 'Mình thích nhất là mỗi sản phẩm có đường vân riêng, nhìn mộc mạc mà vẫn rất tinh tế.',
+    image: '/image/VanMoc/Cảm nhận từ khách hàng (homepage)/Mạnh Phong.jpg',
   },
   {
-    mockup: true,
-    quote:
-      'Mua bộ quà tặng Vân Mộc cho bố mẹ. Đóng gói chỉn chu, món quà mang ý nghĩa làng nghề rất đáng giữ.',
-    name: 'Trần Quốc Bảo',
-    role: 'Đà Nẵng',
-    avatar: undefined as string | undefined,
+    name: 'My Vũ',
+    quote: 'Trâm cài tóc có thiết kế thanh lịch, tạo điểm nhấn nhẹ nhàng cho trang phục của mình.',
+    image: '/image/VanMoc/Cảm nhận từ khách hàng (homepage)/My Vũ.jpg',
+  },
+  {
+    name: 'Quyết Đạt',
+    quote: 'Đẹp nhờ! Cho mua cái này!',
+    image: '/image/VanMoc/Cảm nhận từ khách hàng (homepage)/Quyết Đạt.jpg',
   },
 ]
 
@@ -118,122 +116,47 @@ const CUSTOM_STEPS = [
   {
     step: '01',
     title: 'Gửi hình mẫu',
-    desc: 'Gửi hình ảnh hoặc ý tưởng về sản phẩm bạn mong muốn.',
+    desc: 'Gửi hình ảnh sản phẩm bạn mong muốn được khắc tên.',
   },
   {
     step: '02',
     title: 'Nhận tư vấn',
-    desc: 'Vân Mộc tư vấn kiểu dáng, chất liệu, kích thước phù hợp.',
+    desc: 'Vân Mộc tư vấn kích thước phông chữ, icon phù hợp.',
   },
   {
     step: '03',
     title: 'Xác nhận thiết kế',
-    desc: 'Thống nhất bản thiết kế trước khi chế tác.',
+    desc: 'Thống nhất bản thiết kế trước khi in tên.',
   },
   {
     step: '04',
-    title: 'Chế tác thủ công',
-    desc: 'Nghệ nhân làng nghề Thụy Ứng trực tiếp chế tác, hoàn thiện từng chi tiết.',
+    title: 'In laser',
+    desc: 'Vân Mộc mang đến cửa hàng in tên trực tiếp, theo dõi từng chi tiết.',
   },
 ]
 
-/** Thay logo/tên bằng đơn vị thật khi có. logo: đường dẫn ảnh hoặc undefined. */
-const PARTNERS = [
+const SERVICES = [
   {
-    id: 'lang-nghe',
-    name: 'Làng nghề Thụy Ứng',
-    emblem: 'village' as const,
-    logo: undefined as string | undefined,
-    href: undefined as string | undefined,
+    icon: Truck,
+    title: 'Giao hàng toàn quốc',
+    description: 'Vận chuyển nhanh chóng toàn quốc, thanh toán sau khi nhận hàng.',
   },
   {
-    id: 'hop-tac-xa',
-    name: 'Hợp tác xã thủ công',
-    emblem: 'coop' as const,
-    logo: undefined as string | undefined,
-    href: undefined as string | undefined,
+    icon: PackageCheck,
+    title: 'Đóng gói cẩn thận',
+    description: 'Hộp chống sốc, đệm lót kèm lụa ngăn ngừa trầy xước sản phẩm tối ưu trong suốt chuyến đi dài.',
   },
   {
-    id: 'bao-ton',
-    name: 'Trung tâm bảo tồn di sản',
-    emblem: 'heritage' as const,
-    logo: undefined as string | undefined,
-    href: undefined as string | undefined,
+    icon: CreditCard,
+    title: 'Thanh toán đa dạng',
+    description: 'Chấp nhận thẻ, ví điện tử, hoặc chuyển khoản ngân hàng quét mã QR siêu tốc.',
   },
   {
-    id: 'du-lich',
-    name: 'Du lịch làng nghề',
-    emblem: 'tourism' as const,
-    logo: undefined as string | undefined,
-    href: undefined as string | undefined,
-  },
-  {
-    id: 'nghe-nhan',
-    name: 'Hội nghệ nhân Thụy Ứng',
-    emblem: 'artisan' as const,
-    logo: undefined as string | undefined,
-    href: undefined as string | undefined,
+    icon: Headset,
+    title: 'Hỗ trợ tận tâm 24/7',
+    description: 'Đội ngũ chăm sóc, tư vấn trực hotline xử lý khiếu nại, phản hồi tức thì.',
   },
 ]
-
-type PartnerEmblem = (typeof PARTNERS)[number]['emblem']
-
-function PartnerEmblemMark({ type }: { type: PartnerEmblem }) {
-  const common = {
-    className: 'partner-emblem',
-    viewBox: '0 0 64 64',
-    fill: 'none',
-    'aria-hidden': true as const,
-  }
-
-  switch (type) {
-    case 'village':
-      return (
-        <svg {...common}>
-          <path d="M32 8c-1.5 8-8 14-16 16 8 1.5 14.5 8 16 16 1.5-8 8-14.5 16-16-8-2-14.5-8-16-16Z" stroke="currentColor" strokeWidth="1.35" />
-          <path d="M32 22v28M22 34h20" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
-          <circle cx="32" cy="32" r="22" stroke="currentColor" strokeWidth="1" opacity="0.45" />
-        </svg>
-      )
-    case 'coop':
-      return (
-        <svg {...common}>
-          <path d="M20 42V24l12-10 12 10v18" stroke="currentColor" strokeWidth="1.35" strokeLinejoin="round" />
-          <path d="M26 42V30h12v12" stroke="currentColor" strokeWidth="1.2" />
-          <path d="M16 46h32" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
-          <circle cx="32" cy="32" r="22" stroke="currentColor" strokeWidth="1" opacity="0.45" />
-        </svg>
-      )
-    case 'heritage':
-      return (
-        <svg {...common}>
-          <path d="M18 44V28l14-12 14 12v16" stroke="currentColor" strokeWidth="1.3" strokeLinejoin="round" />
-          <path d="M24 44V34h16v10" stroke="currentColor" strokeWidth="1.15" />
-          <path d="M32 16v6M26 44h12" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
-          <path d="M22 24c3-4 7-6 10-6s7 2 10 6" stroke="currentColor" strokeWidth="1" opacity="0.7" />
-          <circle cx="32" cy="32" r="22" stroke="currentColor" strokeWidth="1" opacity="0.45" />
-        </svg>
-      )
-    case 'tourism':
-      return (
-        <svg {...common}>
-          <path d="M18 40c6-14 12-22 14-22s8 8 14 22" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-          <path d="M22 40h20" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
-          <path d="M32 18v6M26 30h12" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" opacity="0.75" />
-          <circle cx="32" cy="32" r="22" stroke="currentColor" strokeWidth="1" opacity="0.45" />
-        </svg>
-      )
-    case 'artisan':
-      return (
-        <svg {...common}>
-          <path d="M22 40c2-12 6-20 10-24 4 4 8 12 10 24" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" />
-          <path d="M26 36c3-2 6-3 6-3s3 1 6 3" stroke="currentColor" strokeWidth="1.15" strokeLinecap="round" />
-          <path d="M28 28c2.5-1.5 4-2 4-2s1.5.5 4 2" stroke="currentColor" strokeWidth="1.05" strokeLinecap="round" opacity="0.8" />
-          <circle cx="32" cy="32" r="22" stroke="currentColor" strokeWidth="1" opacity="0.45" />
-        </svg>
-      )
-  }
-}
 
 function SectionHeading({
   title,
@@ -271,7 +194,7 @@ function Stars() {
   return (
     <div className="flex gap-0.5" aria-label="5 sao">
       {Array.from({ length: 5 }).map((_, i) => (
-        <Star key={i} size={13} className="text-accent-gold fill-[#9a6b1f]" />
+        <Star key={i} size={13} className="fill-[#e4bb69] text-[#e4bb69]" />
       ))}
     </div>
   )
@@ -391,127 +314,6 @@ function FeaturedProductsCarousel() {
   )
 }
 
-function PartnerCard({
-  name,
-  emblem,
-  logo,
-  href,
-}: (typeof PARTNERS)[number]) {
-  const content = (
-    <>
-      <div className="partner-card__mark">
-        {logo ? (
-          <img src={logo} alt="" className="partner-card__logo" />
-        ) : (
-          <PartnerEmblemMark type={emblem} />
-        )}
-      </div>
-      <p className="partner-card__name">{name}</p>
-    </>
-  )
-
-  if (href) {
-    return (
-      <a
-        href={href}
-        target="_blank"
-        rel="noreferrer"
-        className="partner-card"
-        aria-label={name}
-      >
-        {content}
-      </a>
-    )
-  }
-
-  return (
-    <article className="partner-card" aria-label={name}>
-      {content}
-    </article>
-  )
-}
-
-function PartnersRow() {
-  const trackRef = useRef<HTMLDivElement>(null)
-  const [paused, setPaused] = useState(false)
-  const resumeTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-
-  const pause = () => {
-    setPaused(true)
-    if (resumeTimer.current) clearTimeout(resumeTimer.current)
-  }
-
-  const scheduleResume = () => {
-    if (resumeTimer.current) clearTimeout(resumeTimer.current)
-    resumeTimer.current = setTimeout(() => setPaused(false), 1800)
-  }
-
-  useEffect(() => {
-    return () => {
-      if (resumeTimer.current) clearTimeout(resumeTimer.current)
-    }
-  }, [])
-
-  useEffect(() => {
-    const track = trackRef.current
-    if (!track) return
-
-    const prefersReduced =
-      typeof window !== 'undefined' &&
-      window.matchMedia('(prefers-reduced-motion: reduce)').matches
-
-    if (prefersReduced) return
-
-    let frame = 0
-    let last = performance.now()
-
-    const tick = (now: number) => {
-      const delta = now - last
-      last = now
-
-      if (!paused) {
-        const maxScroll = track.scrollWidth - track.clientWidth
-        if (maxScroll > 4) {
-          track.scrollLeft += delta * 0.018
-          if (track.scrollLeft >= maxScroll - 1) {
-            track.scrollLeft = 0
-          }
-        }
-      }
-
-      frame = requestAnimationFrame(tick)
-    }
-
-    frame = requestAnimationFrame(tick)
-    return () => cancelAnimationFrame(frame)
-  }, [paused])
-
-  return (
-    <div
-      className="partners-row"
-      onMouseEnter={pause}
-      onMouseLeave={() => setPaused(false)}
-      onFocusCapture={pause}
-      onBlurCapture={() => setPaused(false)}
-      onPointerDown={pause}
-      onPointerUp={scheduleResume}
-      onTouchStart={pause}
-      onTouchEnd={scheduleResume}
-    >
-      <div
-        ref={trackRef}
-        className="partners-track"
-        aria-label="Đơn vị đồng hành"
-        tabIndex={0}
-      >
-        {PARTNERS.map((partner) => (
-          <PartnerCard key={partner.id} {...partner} />
-        ))}
-      </div>
-    </div>
-  )
-}
-
 export function HomePage() {
 
   return (
@@ -520,14 +322,11 @@ export function HomePage() {
 
       {/* Hero: editorial split composition with copy left and craft still life right. */}
       <section className="home-hero">
-        <picture>
-          <source media="(max-width: 767px)" srcSet="/assets/herobanner-mobile.png" />
-          <img
-            alt="Vân Mộc — thủ công từ sừng tự nhiên"
-            className="home-hero__image"
-            src="/assets/herobanner.jpg"
-          />
-        </picture>
+        <img
+          alt="Vân Mộc — thủ công từ sừng tự nhiên"
+          className="home-hero__image"
+          src="/image/VanMoc/banner%20V%C3%A2n%20M%E1%BB%99c.png"
+        />
         <div className="home-hero__wash" aria-hidden />
         <div className="home-hero__grain" aria-hidden />
         <div className="home-hero__content">
@@ -650,23 +449,30 @@ export function HomePage() {
               </figure>
             </Reveal>
 
-            <Reveal className="space-y-0 delay-150">
-              {BRAND_VALUES.map((item, index) => (
-                <div
-                  key={item.step}
-                  className={`flex gap-5 md:gap-6 py-4 md:py-5 ${
-                    index < BRAND_VALUES.length - 1 ? 'border-b border-[#9a6b1f]/35' : ''
-                  }`}
-                >
-                  <span className="font-display text-2xl md:text-3xl text-[#9f321f] leading-none shrink-0 w-10">
-                    {item.step}
-                  </span>
-                  <div className="space-y-1.5 pt-0.5">
-                    <h3 className="text-base md:text-lg font-semibold text-[#241a13]">{item.title}</h3>
-                    <p className="text-sm leading-relaxed text-[#3f3228]">{item.desc}</p>
-                  </div>
-                </div>
-              ))}
+            <Reveal className="delay-150 lg:pl-3">
+              <div className="mb-2 border-b border-[#9a6b1f]/35 pb-4 md:mb-3 md:pb-5">
+                <h3 className="font-display text-2xl leading-tight text-[#241a13] md:text-[1.8rem]">
+                  Ba giá trị nổi bật của Vân Mộc
+                </h3>
+              </div>
+              <ol>
+                {BRAND_VALUES.map((item, index) => (
+                  <li
+                    key={item.step}
+                    className={`flex gap-4 py-3.5 md:gap-5 md:py-4 ${
+                      index < BRAND_VALUES.length - 1 ? 'border-b border-[#9a6b1f]/35' : ''
+                    }`}
+                  >
+                    <span className="w-10 shrink-0 font-display text-2xl leading-none text-[#9f321f] md:text-3xl" aria-hidden>
+                      {item.step}
+                    </span>
+                    <div className="min-w-0 space-y-1">
+                      <h4 className="text-base font-semibold text-[#241a13] md:text-lg">{item.title}</h4>
+                      <p className="text-sm leading-relaxed text-[#3f3228]">{item.desc}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </Reveal>
           </div>
 
@@ -723,22 +529,10 @@ export function HomePage() {
                   <div className="material-frame__inner">
                     <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[1.35rem] md:rounded-[1.75rem]">
                       <img
-                        src="/image/products/luoc-rang-thua.jpg"
-                        alt="Cận cảnh chất liệu sừng tự nhiên với đường vân độc bản"
+                        src="/image/VanMoc/Tại sao nên chọn Vân Mộc_ (homepage)/ảnh sản phẩm vân mộc.jpg"
+                        alt="Các sản phẩm thủ công Vân Mộc từ sừng tự nhiên"
                         className="size-full object-cover object-center"
                       />
-                      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#2e1f14]/55 to-transparent" />
-                      <div className="absolute bottom-6 left-5 right-8 z-10 md:bottom-8 md:left-7">
-                        <div className="flex items-start gap-2">
-                          <Sparkles size={12} className="mt-1 shrink-0 text-[#c9973a]" strokeWidth={1.5} />
-                          <div>
-                            <p className="text-sm font-semibold text-[#fff2dc]">Chất liệu nguyên bản</p>
-                            <p className="mt-0.5 text-xs leading-relaxed text-[#fff2dc]/90">
-                              Mỗi đường vân được tạo nên bởi tự nhiên.
-                            </p>
-                          </div>
-                        </div>
-                      </div>
                     </div>
                   </div>
 
@@ -787,17 +581,16 @@ export function HomePage() {
               </figure>
             </Reveal>
 
-            {/* Right: headline + 2×2 values */}
+             {/* Right: headline + 2×2 values */}
             <div className="lg:col-span-7 xl:col-span-6 space-y-8 md:space-y-10">
               <Reveal>
                 <div className="space-y-3 max-w-xl">
                   <h2 className="text-2xl leading-tight tracking-wide text-[#241a13] md:text-3xl lg:text-[34px]">
-                    Vẻ đẹp đến từ chất liệu nguyên bản
+                     Tại sao nên chọn Vân Mộc?
                   </h2>
                   <div className="w-12 h-px bg-[#9a6b1f]" />
                   <p className="text-sm leading-relaxed text-[#3f3228] md:text-base">
-                    Vân Mộc mang vẻ đẹp tự nhiên của chất liệu sừng vào từng sản phẩm, để mỗi đường
-                    vân, sắc màu đều kể một câu chuyện riêng.
+                     Vân Mộc kết hợp tinh hoa chế tác sừng truyền thống của làng nghề Thụy Ứng với phong cách thiết kế hiện đại, tạo nên những món phụ kiện mang dấu ấn riêng.
                   </p>
                 </div>
               </Reveal>
@@ -810,7 +603,7 @@ export function HomePage() {
                         <item.icon size={20} strokeWidth={1.4} />
                       </span>
                       <div className="space-y-1.5 min-w-0">
-                        <h3 className="text-[15px] font-semibold text-[#241a13]">{item.title}</h3>
+                        <h3 className="text-[15px] font-semibold text-[#241a13]">0{i + 1}. {item.title}</h3>
                         <p className="text-sm leading-relaxed text-[#3f3228]">{item.desc}</p>
                       </div>
                     </div>
@@ -831,6 +624,20 @@ export function HomePage() {
               title="Qua đôi tay người thợ"
               description="Mỗi sản phẩm trải qua nhiều công đoạn để giữ được vẻ đẹp của chất liệu và sự chỉn chu trong từng chi tiết."
             />
+          </Reveal>
+          <Reveal>
+            <figure className="material-frame mx-auto max-w-[760px]">
+              <div className="material-frame__border">
+                <div className="material-frame__inner">
+                  <img
+                    src="/image/VanMoc/Qua đôi tay người thợ (homepage)/Cựu chiến binh Nguyễn Văn sử cưa sừng chế tác sản phẩm..jpg"
+                    alt="Người thợ cưa sừng để chế tác sản phẩm"
+                    loading="lazy"
+                    className="block h-auto w-full rounded-[1.2rem] md:rounded-[1.5rem]"
+                  />
+                </div>
+              </div>
+            </figure>
           </Reveal>
           {/* Desktop: ngang · Mobile: dọc */}
           <Reveal>
@@ -860,9 +667,8 @@ export function HomePage() {
         </div>
       </section>
 
-      {/* Chế tác theo yêu cầu */}
-      <section className="custom-craft-section py-16 md:py-24">
-        <div className="custom-craft-grain" aria-hidden />
+      {/* Khắc tên theo yêu cầu */}
+      <section className="custom-craft-section bg-paper-warm py-16 md:py-24">
         <svg className="custom-craft-mountains" viewBox="0 0 420 180" fill="none" aria-hidden>
           <path d="M8 148c42-48 78-78 118-78 28 0 48 18 72 18 36 0 58-38 96-38 34 0 62 28 88 52 14 13 28 24 38 28" />
           <path d="M48 156c36-32 68-54 104-54 30 0 46 16 74 16 40 0 66-34 98-34 24 0 48 18 70 36" />
@@ -870,61 +676,29 @@ export function HomePage() {
         </svg>
 
         <div className="relative z-10 mx-auto grid max-w-[1440px] items-center gap-10 px-5 md:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.08fr)] lg:gap-8 xl:gap-14">
-          <Reveal className="custom-collage-wrap">
-            <p className="custom-collage-label" aria-hidden>
-              Thủ công từ chất liệu thiên nhiên
-            </p>
-
-            <div className="custom-collage" aria-label="Câu chuyện từ ý tưởng đến sản phẩm thủ công">
-              <svg className="custom-flower custom-flower--a" viewBox="0 0 48 48" fill="none" aria-hidden>
-                <circle cx="24" cy="24" r="3.2" fill="currentColor" opacity="0.55" />
-                <path d="M24 8c2.4 5 2.4 9.2 0 14-2.4-4.8-2.4-9 0-14ZM24 26c2.4 5 2.4 9.2 0 14-2.4-4.8-2.4-9 0-14ZM8 24c5-2.4 9.2-2.4 14 0-4.8 2.4-9 2.4-14 0ZM26 24c5-2.4 9.2-2.4 14 0-4.8 2.4-9 2.4-14 0Z" fill="currentColor" opacity="0.72" />
-              </svg>
-              <svg className="custom-flower custom-flower--b" viewBox="0 0 40 40" fill="none" aria-hidden>
-                <circle cx="20" cy="20" r="2.4" fill="currentColor" opacity="0.5" />
-                <path d="M20 7c1.9 4 1.9 7.4 0 11.2C18.1 14.4 18.1 11 20 7ZM20 22c1.9 4 1.9 7.4 0 11.2C18.1 29.4 18.1 26 20 22ZM7 20c4-1.9 7.4-1.9 11.2 0C14.4 21.9 11 21.9 7 20ZM22 20c4-1.9 7.4-1.9 11.2 0C29.4 21.9 26 21.9 22 20Z" fill="currentColor" opacity="0.7" />
-              </svg>
-              <svg className="custom-flower custom-flower--c" viewBox="0 0 36 36" fill="none" aria-hidden>
-                <circle cx="18" cy="18" r="2" fill="currentColor" opacity="0.45" />
-                <path d="M18 6c1.7 3.5 1.7 6.5 0 10-1.7-3.5-1.7-6.5 0-10ZM18 20c1.7 3.5 1.7 6.5 0 10-1.7-3.5-1.7-6.5 0-10ZM6 18c3.5-1.7 6.5-1.7 10 0-3.5 1.7-6.5 1.7-10 0ZM20 18c3.5-1.7 6.5-1.7 10 0-3.5 1.7-6.5 1.7-10 0Z" fill="currentColor" opacity="0.65" />
-              </svg>
-
-              <figure className="custom-photo custom-photo--main">
-                <img
-                  src="/image/products/tram-hoa-sen.jpg"
-                  alt="Những mẫu trâm cài bằng sừng được chạm khắc thủ công"
-                />
-              </figure>
-              <figure className="custom-photo custom-photo--craft">
-                <img
-                  src="/image/nghe-nhan-che-tac.jpg"
-                  alt="Nghệ nhân Thụy Ứng chế tác sản phẩm thủ công"
-                />
-              </figure>
-              <figure className="custom-photo custom-photo--detail">
-                <img
-                  src="/image/products/luoc-rang-thua.jpg"
-                  alt="Chi tiết đường vân và dáng lược sừng hoàn thiện"
-                />
-              </figure>
-
-              <figure className="custom-sketch-note">
-                <img
-                  src="/image/custom-craft-sketch-paper.png"
-                  alt="Từ ý tưởng đến tác phẩm riêng của bạn"
-                />
-              </figure>
-            </div>
+          <Reveal className="min-w-0">
+            <figure className="material-frame mx-auto max-w-[620px]">
+              <div className="material-frame__border">
+                <div className="material-frame__inner">
+                  <img
+                    src="/image/VanMoc/Trang Công Nghệ Laser/Dấu ấn mang tính cá nhân 2.png"
+                    alt="Lược sừng Vân Mộc khắc tên riêng theo yêu cầu"
+                    loading="lazy"
+                    className="block h-auto w-full rounded-[1.2rem] md:rounded-[1.5rem]"
+                  />
+                </div>
+              </div>
+            </figure>
           </Reveal>
 
           <Reveal className="custom-info-panel delay-150">
             <header className="relative z-10 max-w-2xl">
               <div className="flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.28em] text-[#876342] md:text-[11px]">
                 <span className="h-px w-8 bg-[#ad7a38]" />
-                Dịch vụ chế tác riêng
+                Dịch vụ khắc tên riêng
               </div>
               <h2 className="mt-3.5 max-w-xl text-[1.85rem] leading-[1.15] text-[#241a13] md:text-[2.35rem] lg:text-[2.55rem]">
-                Chế tác riêng từ ý tưởng của bạn
+                Khắc tên riêng theo ý tưởng của bạn
               </h2>
 
             </header>
@@ -941,10 +715,10 @@ export function HomePage() {
 
             <div className="relative z-10 mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
-                to="/cong-nghe-so"
+                to="/cong-nghe-laser#kham-pha"
                 className="inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full bg-[#5a301a] px-8 py-3 text-sm font-semibold text-[#fff3dd] transition-colors hover:bg-[#3f2517]"
               >
-                Gửi yêu cầu chế tác
+                Gửi yêu cầu khắc tên
                 <ArrowRight size={15} />
               </Link>
             </div>
@@ -959,86 +733,42 @@ export function HomePage() {
           <Reveal>
             <SectionHeading title="Cảm nhận từ khách hàng" />
           </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
-            {REVIEWS.map((review, i) => (
-              <Reveal
-                key={review.name}
-                className={`${i === 1 ? 'delay-150' : i === 2 ? 'delay-300' : ''} space-y-4 border-t border-[#9a6b1f]/40 pt-6`}
-              >
-                <Stars />
-                <p className="text-sm italic leading-relaxed text-[#3f3228]">&ldquo;{review.quote}&rdquo;</p>
-                <div className="flex items-center gap-3 pt-1">
-                  {review.avatar ? (
-                    <img
-                      src={review.avatar}
-                      alt=""
-                      className="size-9 rounded-full object-cover"
-                    />
-                  ) : null}
-                  <div>
-                    <span className="block text-sm font-semibold text-[#241a13]">{review.name}</span>
-                    <span className="block text-xs text-[#3f3228]">{review.role}</span>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4 xl:gap-4">
+            {REVIEWS.map((review) => (
+              <Reveal key={review.name} className="h-full">
+                <article className="feedback-card">
+                  <div className="feedback-card__media">
+                    <img src={review.image} alt={`Ảnh của ${review.name}`} loading="lazy" />
                   </div>
-                </div>
-                {review.mockup ? (
-                  <span className="sr-only">Nội dung đánh giá mẫu</span>
-                ) : null}
+                  <div className="feedback-card__content">
+                    <h3>{review.name}</h3>
+                    <Stars />
+                    <blockquote>&ldquo;{review.quote}&rdquo;</blockquote>
+                  </div>
+                </article>
               </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Đơn vị đồng hành */}
-      <section className="partners-section overflow-hidden py-16 md:py-20">
-        <div className="partners-section__grain" aria-hidden />
-        <svg className="partners-section__corner partners-section__corner--tl" viewBox="0 0 80 80" fill="none" aria-hidden>
-          <path d="M8 58V18c0-5.5 4.5-10 10-10h40" />
-          <path d="M16 48V24c0-4 3.2-7.2 7.2-7.2H48" />
-          <path d="M16 16l5 5-5 5-5-5 5-5Z" />
-          <path d="M8 34c10 0 18-8 18-18" />
-        </svg>
-        <svg className="partners-section__corner partners-section__corner--tr" viewBox="0 0 80 80" fill="none" aria-hidden>
-          <path d="M8 58V18c0-5.5 4.5-10 10-10h40" />
-          <path d="M16 48V24c0-4 3.2-7.2 7.2-7.2H48" />
-          <path d="M16 16l5 5-5 5-5-5 5-5Z" />
-          <path d="M8 34c10 0 18-8 18-18" />
-        </svg>
-        <svg className="partners-section__corner partners-section__corner--bl" viewBox="0 0 80 80" fill="none" aria-hidden>
-          <path d="M8 58V18c0-5.5 4.5-10 10-10h40" />
-          <path d="M16 48V24c0-4 3.2-7.2 7.2-7.2H48" />
-          <path d="M16 16l5 5-5 5-5-5 5-5Z" />
-          <path d="M8 34c10 0 18-8 18-18" />
-        </svg>
-        <svg className="partners-section__corner partners-section__corner--br" viewBox="0 0 80 80" fill="none" aria-hidden>
-          <path d="M8 58V18c0-5.5 4.5-10 10-10h40" />
-          <path d="M16 48V24c0-4 3.2-7.2 7.2-7.2H48" />
-          <path d="M16 16l5 5-5 5-5-5 5-5Z" />
-          <path d="M8 34c10 0 18-8 18-18" />
-        </svg>
-
-        <div className="relative z-10 container mx-auto px-5 md:px-8 space-y-9 md:space-y-11">
-          <Reveal>
-            <div className="mx-auto max-w-2xl text-center space-y-3">
-              <div className="mx-auto mb-1 flex w-28 items-center gap-2 text-[#9a6b1f]/70" aria-hidden>
-                <span className="h-px flex-1 bg-current" />
-                <span className="size-1.5 rotate-45 border border-current" />
-                <span className="h-px flex-1 bg-current" />
-              </div>
-              <h2 className="text-2xl leading-tight tracking-wide text-[#241a13] md:text-3xl lg:text-[34px]">
-                Đơn vị đồng hành
-              </h2>
-              <div className="mx-auto h-px w-12 bg-[#9a6b1f]" />
-              <p className="mx-auto max-w-xl pt-1 text-sm leading-relaxed text-[#3f3228] md:text-[15px]">
-                Những đối tác đồng hành cùng Vân Mộc gìn giữ và lan tỏa nghề chế tác sừng truyền
-                thống.
-              </p>
-            </div>
-          </Reveal>
-
-          <Reveal>
-            <PartnersRow />
-          </Reveal>
+      {/* Dịch vụ mua sắm */}
+      <section className="home-services-section bg-paper-sand overflow-hidden py-12 md:py-16">
+        <SectionDecor variant="light" />
+        <div className="relative z-10 container mx-auto grid gap-4 px-5 sm:grid-cols-2 md:px-8 xl:grid-cols-4 xl:gap-5">
+          {SERVICES.map((service) => (
+            <Reveal key={service.title} className="h-full">
+              <article className="home-service-card">
+                <span className="home-service-card__icon" aria-hidden>
+                  <service.icon size={24} strokeWidth={1.5} />
+                </span>
+                <div>
+                  <h2>{service.title}</h2>
+                  <p>{service.description}</p>
+                </div>
+              </article>
+            </Reveal>
+          ))}
         </div>
       </section>
     </div>
