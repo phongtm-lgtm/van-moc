@@ -1,12 +1,12 @@
 /* Shared UI type scale. Marketing heroes and engraving previews stay independent. */
 :root {
-  --vm-card-surface: #fffdf8;
-  --vm-card-border: #e6d8c7;
-  --vm-card-title: #33251d;
+  --vm-card-surface: #efe4d2;
+  --vm-card-border: #d4c0a4;
+  --vm-card-title: #3f2a1a;
   --vm-card-price: #704326;
-  --vm-card-muted: #66584b;
+  --vm-card-muted: #7a6554;
   --vm-card-primary: #503522;
-  --vm-card-image: #eee5d9;
+  --vm-card-image: #e2d2bb;
   --vm-type-page: clamp(1.75rem, 2.5vw, 2.25rem);
   --vm-type-section: clamp(1.25rem, 1.7vw, 1.5rem);
   --vm-type-body: .9375rem;

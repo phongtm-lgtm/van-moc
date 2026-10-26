@@ -37,7 +37,7 @@ function InfoPage({ eyebrow, title, description, image, imageAlt, sections, acti
   </div>
 }
 
-const storyCraftVideo = 'https://d2twdjnfr0se0w.cloudfront.net/videos/trailer.mov'
+const storyCraftVideo = '/image/VanMoc/video/Trailer.mov'
 
 export function VillagesPage() {
   const { hash } = useLocation()

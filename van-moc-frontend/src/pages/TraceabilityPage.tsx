@@ -7,7 +7,7 @@ import './TraceabilityPage.css'
 const craftImage = (name: string) =>
   `/image/VanMoc/${encodeURIComponent('Trang Hành Trình Chế Tác')}/${encodeURIComponent(name)}`
 
-const craftVideo = 'https://d2twdjnfr0se0w.cloudfront.net/videos/tinh-hoa-nghe-sung-thuy-ung.mp4'
+const craftVideo = `/image/VanMoc/video/${encodeURIComponent('Tinh hoa nghề sừng Thuỵ Ứng _ Hà Nội đến để yêu.mp4')}`
 const nfcHero = '/image/truy-xuat/nfc-hero.jpg'
 
 const CARE = [

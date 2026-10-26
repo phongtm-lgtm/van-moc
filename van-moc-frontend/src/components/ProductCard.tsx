@@ -29,7 +29,9 @@ export function ProductCard({ product, featured = false }: { product: Product; f
       </div>
     </Link>
     <div className="shop-product-card__body">
-      <div className="shop-product-card__engraving">{product.engravingEnabled ? <span>Có thể khắc tên</span> : null}</div>
+      {product.engravingEnabled ? (
+        <div className="shop-product-card__engraving"><span>Có thể khắc tên</span></div>
+      ) : null}
       <Link to={href} className="shop-product-card__name-link" title={product.name}><h3>{product.name}</h3></Link>
       {!featured && <p className="shop-product-card__description">{product.shortDescription}</p>}
       <div className="shop-product-card__price-row">
