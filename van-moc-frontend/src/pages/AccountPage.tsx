@@ -35,7 +35,7 @@ export function LoginPage() {
       <button ref={closeButton} className="login-dialog__close" type="button" onClick={close} aria-label="Đóng cửa sổ đăng nhập"><X size={25} strokeWidth={1.3} /></button>
       <div className="login-dialog__leaves login-dialog__leaves--top" aria-hidden="true" />
       <div className="login-dialog__leaves login-dialog__leaves--bottom" aria-hidden="true" />
-      <img className="login-dialog__logo" src="/assets/van-moc-logo-dark.png" alt="Vân Mộc" />
+      <img className="login-dialog__logo" src="/assets/Logo.png" alt="Vân Mộc" />
       <div className="login-dialog__rule" aria-hidden="true" />
       <h1 id="login-heading">Đăng nhập</h1>
       {params.get('error') && <p className="login-dialog__error" role="alert">Đăng nhập chưa thành công. Vui lòng thử lại.</p>}

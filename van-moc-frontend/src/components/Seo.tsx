@@ -32,7 +32,7 @@ export function Seo() {
     meta('robots', page || product ? 'index,follow' : 'noindex,follow')
     meta('og:title', title, true); meta('og:description', description, true)
     meta('og:type', 'website', true); meta('og:locale', 'vi_VN', true)
-    meta('og:image', `${BRAND.url}/assets/van-moc-logo-dark.png`, true)
+    meta('og:image', `${BRAND.url}/assets/Logo.png`, true)
     // Filtered listings retain their pagination in the canonical URL.
     const params = new URLSearchParams(search)
     const canonicalParams = new URLSearchParams()

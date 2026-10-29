@@ -51,7 +51,7 @@ export function Footer() {
       <div className="container mx-auto px-5 md:px-8 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-8 pb-12">
         {/* Thương hiệu */}
         <div className="space-y-4 sm:col-span-2 lg:col-span-1">
-          <img src="/assets/van-moc-logo-light.png" alt="Vân Mộc" className="h-14 w-auto max-w-[220px] object-contain object-left" />
+          <img src="/assets/Logo.png" alt="Vân Mộc" className="h-14 w-auto rounded-md bg-[#f7ebdd] px-2 object-contain object-left" />
           <p className="text-sm text-[#fff2dc]/70 leading-relaxed">
             Vân nguyên bản - Nét riêng bạn.
           </p>
