@@ -37,8 +37,6 @@ function InfoPage({ eyebrow, title, description, image, imageAlt, sections, acti
   </div>
 }
 
-const storyCraftVideo = '/image/VanMoc/video/Trailer.mov'
-
 export function VillagesPage() {
   const { hash } = useLocation()
   const storyImage = (name: string) => `/image/VanMoc/${encodeURIComponent('Trang Câu chuyện')}/${encodeURIComponent(name)}`
@@ -100,15 +98,13 @@ export function VillagesPage() {
           <span className="story-rule" aria-hidden="true">✦</span>
         </div>
         <div className="story-hero__video-wrap" id="story-video">
-          <video
-            controls
-            playsInline
-            preload="metadata"
-            aria-label="Video câu chuyện lược sừng Thụy Ứng"
-          >
-            <source src={storyCraftVideo} type="video/quicktime" />
-            Trình duyệt của bạn không hỗ trợ phát video.
-          </video>
+          <iframe
+            src="https://www.youtube-nocookie.com/embed/ZD3Akw4nw1w"
+            title="Câu chuyện lược sừng Thụy Ứng"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            referrerPolicy="strict-origin-when-cross-origin"
+            allowFullScreen
+          />
         </div>
       </div>
     </section>

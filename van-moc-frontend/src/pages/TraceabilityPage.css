@@ -206,10 +206,11 @@
   box-shadow: 0 12px 32px rgba(63, 42, 26, .1);
 }
 
-.tx-video__frame video {
+.tx-video__frame iframe {
   display: block;
   width: 100%;
   aspect-ratio: 16 / 9;
+  border: 0;
   background: #241a13;
 }
 

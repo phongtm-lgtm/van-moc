@@ -76,11 +76,11 @@
   scroll-margin-top: 6rem;
 }
 
-.story-hero__video-wrap video {
+.story-hero__video-wrap iframe {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  border: 0;
   background: #342217;
 }
 

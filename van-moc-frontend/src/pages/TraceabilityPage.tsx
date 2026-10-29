@@ -7,7 +7,6 @@ import './TraceabilityPage.css'
 const craftImage = (name: string) =>
   `/image/VanMoc/${encodeURIComponent('Trang Hành Trình Chế Tác')}/${encodeURIComponent(name)}`
 
-const craftVideo = `/image/VanMoc/video/${encodeURIComponent('Tinh hoa nghề sừng Thuỵ Ứng _ Hà Nội đến để yêu.mp4')}`
 const nfcHero = '/image/truy-xuat/nfc-hero.jpg'
 
 const CARE = [
@@ -107,10 +106,13 @@ export function TraceabilityPage() {
             </p>
           </div>
           <div className="tx-video__frame tx-motion__item">
-            <video controls preload="metadata" playsInline aria-label="Video tinh hoa nghề sừng Thụy Ứng">
-              <source src={craftVideo} type="video/mp4" />
-              Trình duyệt của bạn không hỗ trợ phát video.
-            </video>
+            <iframe
+              src="https://www.youtube-nocookie.com/embed/P3GHqgBDn3k"
+              title="Từ chất liệu đến thành phẩm"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
           </div>
         </div>
       </MotionBlock>
