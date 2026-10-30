@@ -10,6 +10,8 @@
 .digital-craft-hero__button { display: inline-flex; min-height: 3.25rem; align-items: center; justify-content: center; gap: .7rem; margin-top: 2rem; padding: .8rem 1.45rem; border-radius: 100px; background: #5c4030; box-shadow: 0 7px 18px rgba(58, 33, 22, .13); color: var(--color-cream); font-size: .86rem; font-weight: 600; text-decoration: none; transition: background-color 180ms ease; }
 .digital-craft-hero__button:hover { background: #3f2a1a; color: var(--color-cream); }
 .digital-craft-hero__button:focus-visible { outline: 2px solid var(--color-gold); outline-offset: 4px; }
+.digital-craft-feature { position: relative; padding: 0 5vw clamp(3rem, 6vw, 6rem); }
+.digital-craft-feature img { position: relative; z-index: 2; display: block; width: 100%; max-width: 900px; height: auto; margin: 0 auto; border-radius: 16px; box-shadow: 0 12px 30px rgba(58, 33, 22, .16); }
 .digital-eyebrow { display: flex; align-items: center; gap: 10px; color: #9a6b1f; font-size: .76rem; font-weight: 700; letter-spacing: .22em; text-transform: uppercase; }
 .digital-button { display: inline-flex; align-items: center; justify-content: center; gap: 16px; margin-top: 32px; padding: 15px 27px; border-radius: 40px; background: #e8d5b7; color: #3f2a1a; font-weight: 600; box-shadow: 0 7px 18px rgba(58, 33, 22, .13); transition: transform .2s, background .2s; }
 .digital-button:hover { background: var(--color-cream); transform: translateY(-3px); }

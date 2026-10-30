@@ -46,6 +46,9 @@ export function DigitalTechnologyPage() {
         <a className="digital-craft-hero__button" href={BRAND.messenger} target="_blank" rel="noopener noreferrer"><MessengerIcon />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
       </div>
     </section>
+    <section className="digital-craft-feature bg-paper-warm" aria-label="Sản phẩm khắc dấu ấn riêng của Vân Mộc">
+      <img src={image('Vân Mộc che tac rieng.png')} alt="Hai sản phẩm Vân Mộc được khắc tên riêng" />
+    </section>
     <section className="digital-intro bg-paper-sand" id="kham-pha" aria-labelledby="digital-intro-title">
       <SectionDecor variant="warm" showMotif />
       <div className="digital-intro__heading">
