@@ -39,11 +39,13 @@ export function DigitalTechnologyPage() {
   return <div className="digital-page">
     <section className="digital-craft-hero bg-paper-warm" aria-labelledby="digital-craft-title">
       <SectionDecor variant="warm" showMotif />
-      <div className="digital-craft-hero__copy">
-        <p className="digital-craft-hero__eyebrow">DỊCH VỤ KHẮC &amp; ĐÁNH DẤU LASER</p>
-        <h1 id="digital-craft-title">Mỗi ý tưởng, một dấu ấn riêng.</h1>
-        <p className="digital-craft-hero__lead">Cá nhân hoá món đồ theo cách của bạn</p>
-        <a className="digital-craft-hero__button" href={BRAND.messenger} target="_blank" rel="noopener noreferrer"><MessengerIcon />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
+      <div className="digital-craft-hero__inner">
+        <div className="digital-craft-hero__copy">
+          <p className="digital-craft-hero__eyebrow">DỊCH VỤ KHẮC &amp; ĐÁNH DẤU LASER</p>
+          <h1 id="digital-craft-title">Mỗi ý tưởng, một dấu ấn riêng.</h1>
+          <p className="digital-craft-hero__lead">Cá nhân hoá món đồ theo cách của bạn</p>
+          <a className="digital-craft-hero__button" href={BRAND.messenger} target="_blank" rel="noopener noreferrer"><MessengerIcon />Tư vấn qua Messenger<ArrowRight size={16} aria-hidden="true" /></a>
+        </div>
         <img className="digital-craft-hero__image" src={image('Vân Mộc che tac rieng.png')} alt="Hai sản phẩm Vân Mộc được khắc tên riêng" />
       </div>
     </section>

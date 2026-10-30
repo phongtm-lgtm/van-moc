@@ -19,11 +19,12 @@
 
 .story-eyebrow {
   margin: 0 0 1.25rem;
-  color: #9a6b1f;
-  font-size: .75rem;
+  color: #3f2a1a;
+  font-size: .875rem;
   font-weight: 700;
-  letter-spacing: .14em;
+  letter-spacing: .18em;
   line-height: 1.5;
+  text-transform: uppercase;
 }
 
 .story-hero h1 {
